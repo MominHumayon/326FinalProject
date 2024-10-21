@@ -11,18 +11,17 @@
 ## Adithya Anand - Timekeeper
 - **Role**: Manages the timing of all team activities. Making sure we start and end meetings on time. Keep track of upcoming deadlines. 
 - **Top 3 Commits**:
-- 1
-  1. [Commit 1](https://github.com/repo/commit1): Documented the team’s meeting schedule and deadlines in `roles.md`, ensuring clarity for all members.
+- 2
+  1. [Commit 1](https://github.com/MominHumayon/326FinalProject/commit/e0b0077ef2280ee8386ab290bacabb7b9188af5e): Creation of roles.md, and delegating roles to each member of team. 
   2. [Commit 2](https://github.com/repo/commit2): Created a timeline for milestone deliverables, making sure the team stays on track.
   3. [Commit 3](https://github.com/repo/commit3): Added meeting reminders and deadline notifications to the team's Slack channel to keep everyone on schedule.
 
 ## Sameen - Note-Taker
 - **Role**: Records detailed notes during meetings and ensures that action items are clearly communicated. Makes sure to share meeting notes minutes after meeting finishes. 
 - **Top 3 Commits**:
-- 1
   1. [Commit 1](https://github.com/MominHumayon/326FinalProject/commit/5848f8b1fa2a7591ebfa081c4bf2086bafbb04c5): Created the file he is in charge of users.md
-  2. [Commit 2](https://github.com/repo/commit2): Summarized team discussions on feature prioritization and updated the `features.md` file with finalized features.
-  3. [Commit 3](https://github.com/repo/commit3): Updated the `roles.md` file with detailed action items and responsibilities following each meeting.
+  2. [Commit 2](https://github.com/MominHumayon/326FinalProject/commit/eedfbc19e558156ad7b1d542510e12c4990bf5ed): Update to users.md
+  3. [Commit 3](https://github.com/MominHumayon/326FinalProject/commit/96cea395ff31f4e2174ea48a44377db825d5ebc5): Creation and update to personal showcasing work
 
 ## Ahmed - Task Manager
 - **Role**: Responsible for organizing and tracking team tasks. Keeping track of what the other members are doing and making sure they are on task to meet deliverables. 
@@ -43,11 +42,10 @@
 ## Tawsif Azad - Quality Control
 - **Role**: Reviews team submissions and ensures that all deliverables meet the necessary quality standards. This applies to documnents we make not the code we write. 
 - **Top 3 Commits**:
-- NONE
+- 1
   1. [Commit 1](https://github.com/repo/commit1): Reviewed and edited the `problem.md` file to ensure clarity and alignment with the project requirements.
   2. [Commit 2](https://github.com/repo/commit2): Proofread and revised the `features.md` file, ensuring that descriptions were clear and complete.
-  3. [Commit 3](https://github.com/repo/commit3): Conducted a final quality check of all milestone documents before submission to ensure accuracy and completeness.
-
+  3. [Commit 3](https://github.com/MominHumayon/326FinalProject/commit/01898971adfd6364ef0a00b357502fafdb74425b): Update to name on Roles.md
 ## Yusuf - Documentation Lead
 - **Role**: Responsible for overseeing the organization and maintenance of all project documentation. Ensuring documents up to date and orgainized within the REPO.
 - **Top 3 Commits**:
