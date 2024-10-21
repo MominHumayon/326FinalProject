@@ -40,7 +40,7 @@
   2. [Commit 2](https://github.com/repo/commit2): Coordinated communication between team members during the second milestone and relayed critical information about deadlines.
   3. [Commit 3](https://github.com/repo/commit3): Managed Slack updates by setting up automatic reminders for tasks and meetings.
 
-## Twasif Azad - Quality Control
+## Tawsif Azad - Quality Control
 - **Role**: Reviews team submissions and ensures that all deliverables meet the necessary quality standards. This applies to documnents we make not the code we write. 
 - **Top 3 Commits**:
 - NONE
