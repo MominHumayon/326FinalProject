@@ -33,7 +33,7 @@
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/MominHumayon/326FinalProject/commit/c8d0e5e5f7172d2363962240f5d083e8bc004603): Added problem.md and initial description
   2. [Commit 2](https://github.com/MominHumayon/326FinalProject/commit/a52dbaeea9f88fb03ef3adb3bf96e23eadb9d9b2): Added report for work done
-  3. [Commit 3](): None
+  3. [Commit 3](https://github.com/MominHumayon/326FinalProject): Organized our Zoom meeting, create the zoom link and made sure we were on task throughout the meeting. 
      
 ## Tawsif Azad - Quality Control
 - **Role**: Reviews team submissions and ensures that all deliverables meet the necessary quality standards. This applies to documnents we make not the code we write. 
