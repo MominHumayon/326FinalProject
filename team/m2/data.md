@@ -31,15 +31,26 @@
   - `account` (string): The source of spending for a particular expense
 - **Data Source**: Scraped from Umass Get & user input data
 
-### 3. 
+### 3. Dish Entry
+
+- **Description**: Details of a particular food item
+- **Attributes**:
+  - `name` (string): The name of the food item
+  - `cost` (float): The cost of the item, if applicable
+  - `restrictions` (string[]): The restriction categories on this dish
+  - `calories` (number): The amount of calories in a serving of the dish
+  - `nutrition` (object): Various nutritional information, such as fat, cholesterol, carbs, proteins
+  - `allergens` (string[]): The allergens contained in this item
+  - `ingredients` (string[]): The first few ingredients contained in this dish
+  - `location` (string[]): The location where this item may be found
+  - `time` (string[]): The times during which this dish is available
 
 
 ## Data Relationships
 
-- **User to Expense Entry**: One-to-many relationship (a user can have many expense entries).
-- **User to Income Entry**: One-to-many relationship (a user can have many income entries).
-- **User to Savings Goal**: One-to-many relationship (a user can have many savings goals).
-- **Expense Entry to Spending Trend**: Expenses contribute to aggregated spending trend data, which is calculated monthly.
+- **User to Expense Tracker**: One-to-one
+- **Expense Tracker to Expenses**: One-to-many (The expense tracker has many expenses)
+- **User to Dish Entry**: One-to-many relationship (a user can have many income entries).
 
 ## Data Sources
 
