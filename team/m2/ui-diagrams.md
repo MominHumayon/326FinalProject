@@ -4,7 +4,8 @@
 
 The **Personalized Diet Plan** screen is the main interface where users can view their custom diet plans based on their physical stats and dietary preferences. After users input their details, they will see a breakdown of meals for the day, with each meal option sourced from UMass Dining. This screen is designed to offer a clear, personalized experience to guide students on what to eat.
 
-![Personalized Diet Plan Placeholder](https://via.placeholder.com/400x300.png?text=Personalized+Diet+Plan+UI)
+<img width="1229" alt="image" src="https://github.com/user-attachments/assets/b87f486c-e2f9-4585-b496-eeaaa49197ed">
+
 
 On this screen, users can interact with three main elements:
 
@@ -24,7 +25,8 @@ A student looking to maintain their weight and focus on balanced nutrition can l
 
 The **Nutritional Information Search and Comparison** screen allows users to search for specific meals or dishes available at UMass Dining and compare their nutritional values. The goal is to help students make informed decisions about what to eat.
 
-![Nutritional Information Search Placeholder](https://via.placeholder.com/400x300.png?text=Nutritional+Search+UI)
+<img width="688" alt="image" src="https://github.com/user-attachments/assets/06c19d10-a5a5-4bd1-9838-275e75141187">
+
 
 On this screen, users can interact with the following elements:
 
@@ -44,7 +46,8 @@ A student interested in comparing the nutritional content of a burger, salad, an
 
 The **Dietary Restriction Filter** screen lets users input any dietary restrictions, such as vegan, halal, or gluten-free, and filters meal options to meet these criteria.
 
-![Dietary Restriction Filter Placeholder](https://via.placeholder.com/400x300.png?text=Dietary+Restriction+Filter+UI)
+<img width="684" alt="image" src="https://github.com/user-attachments/assets/2993c7a5-f4fa-4289-9b22-9fab815c9d43">
+
 
 On this screen, users can interact with the following elements:
 
@@ -64,7 +67,8 @@ A student with a gluten allergy can select the "Gluten-Free" checkbox, filtering
 
 The **Calorie and Nutrient Intake Tracking** screen provides users with a summary of their daily consumption of calories, proteins, carbohydrates, and fats. This screen helps users monitor their nutrition in relation to their goals.
 
-![Calorie and Nutrient Intake Tracking Placeholder](https://via.placeholder.com/400x300.png?text=Calorie+Tracking+UI)
+<img width="690" alt="image" src="https://github.com/user-attachments/assets/60b02527-2b8f-4f0c-948c-e86b87e036c1">
+
 
 On this screen, users can interact with the following elements:
 
