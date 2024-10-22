@@ -12,7 +12,7 @@
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/MominHumayon/326FinalProject/commit/e0b0077ef2280ee8386ab290bacabb7b9188af5e): Creation of roles.md, and delegating roles to each member of team. 
   2. [Commit 2](https://github.com/MominHumayon/326FinalProject/commit/66a8ad429344edae2d46001a8ece3779f82f293a): Update to roles.md
-  3. [Commit 3](https://github.com/repo/commit3): Added meeting reminders and deadline notifications to the team's Slack channel to keep everyone on schedule.
+  3. [Commit 3](https://github.com/MominHumayon/326FinalProject/commit/6bf548fead6ccc3d77f1ec02820e3b59fa3d2c7b): Near final updates to roles.md
 
 ## Sameen - Note-Taker
 - **Role**: Records detailed notes during meetings and ensures that action items are clearly communicated. Makes sure to share meeting notes minutes after meeting finishes. 
