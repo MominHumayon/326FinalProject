@@ -5,7 +5,7 @@
 - **Top 3 commits**:
   1. [Commit 1](https://github.com/MominHumayon/326FinalProject/commit/109c748f51d5f5023716459582e16aa2a030c6a0): Created the initial GitHub repository
   2. [Commit 2](https://github.com/MominHumayon/326FinalProject/commit/d27a6e10a042294ae1ea685230c17c658bdd044e): Created the m2 folder and the data.md file he is in charge of. 
-  3. [Commit 3](https://github.com/MominHumayon/326FinalProject/commit/965f2cff7901972c405a5076daa1d9148b8d69ed): Added dish entry to data.md
+  3. [Commit 3](https://github.com/MominHumayon/326FinalProject/commit/965f2cff7901972c405a5076daa1d9148b8d69ed): Added types to data.md
 
 ## Adithya Anand - Timekeeper
 - **Role**: Manages the timing of all team activities. Making sure we start and end meetings on time. Keep track of upcoming deadlines. 
