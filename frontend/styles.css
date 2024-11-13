@@ -1,0 +1,66 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f3f3f3; /* Light gray background */
+  }
+  
+  /* Form container styling */
+  #user-profile-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  /* Form title */
+  h1 {
+    font-size: 24px;
+    color: #881c1c; /* UMass burgundy */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Labels */
+  label {
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  /* Input fields and dropdown */
+  input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  /* Button styling */
+  button {
+    background-color: #881c1c; /* UMass burgundy */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background-color: #731717; /* Darker burgundy */
+  }
+  @media (max-width: 600px) {
+    #user-profile-form {
+      width: 90%;
+    }
+  }
+  
