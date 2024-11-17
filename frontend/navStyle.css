@@ -8,9 +8,20 @@
 
 button {
     background-color:lightgray;
+    border-radius:6px;
+    margin:6px;
+    size: 30px;
 }
 
 button:hover {
     color:blue;
     background-color:darkgreen;
+}
+
+body {
+    display:flex;
+}
+
+.view {
+    margin-left: 10px;
 }
