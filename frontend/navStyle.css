@@ -9,3 +9,8 @@
 button {
     background-color:lightgray;
 }
+
+button:hover {
+    color:blue;
+    background-color:darkgreen;
+}

@@ -9,6 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const buttonArr= ["profileButton", "graphButton","diningHallsButton","recommenderButton","mealInfoButton","goalButton","expenseButton"]
     for(let i = 0; i < 7; i++) {
         document.getElementById(buttonArr[i]).addEventListener('click',() => 
-        navigate(buttonArr.substring(0,buttonArr[i].indexOf("Button"))));
+        navigate(buttonArr[i].substring(0,buttonArr[i].indexOf("Button"))));
     }
 });
