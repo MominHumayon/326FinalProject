@@ -1,0 +1,208 @@
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 240px;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    padding: 1.5rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.nav-list {
+    list-style: none;
+    margin-top: 2rem;
+}
+
+.nav-item {
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #555;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-item:hover {
+    background-color: #f0f0f5;
+    color: #000;
+}
+
+.nav-item.active {
+    background-color: #ddd;
+    color: #000;
+}
+
+/* Main content styles */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    font-size: 1.75rem;
+}
+
+/* Goals grid */
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.goal-card {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.goal-title {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+}
+
+.goal-value {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.goal-progress {
+    width: 100%;
+    height: 8px;
+    background: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #4CAF50;
+    border-radius: 4px;
+}
+
+/* Charts section */
+.charts-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 2rem;
+}
+
+.chart-card {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.chart-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+canvas {
+    width: 100%;
+    height: 300px;
+}
+
+.chart-key {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.chart-key div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+}
+
+.chart-key span {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.weekly-nutrient-breakdown {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.weekly-nutrient-breakdown h3 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.weekly-nutrient-breakdown p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.donut-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.nutrient-chart-key {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.nutrient-chart-key div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.key-color {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.calories-color { background-color: #6C757D; }
+.proteins-color { background-color: #868E96; }
+.carbs-color { background-color: #ADB5BD; }
+.fats-color { background-color: #CED4DA; }

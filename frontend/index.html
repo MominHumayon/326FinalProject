@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>      
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMass Dieting Companion</title>    
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5a623;
+            --tertiary-color: #7ed321;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .nutrient-summary {
+            flex: 1;
+            min-width: 300px;
+            margin-right: 20px;
+        }
+
+        .nutrient-card {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .nutrient-card h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress {
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        .calories .progress { background-color: var(--primary-color); }
+        .protein .progress { background-color: var(--secondary-color); }
+        .carbs .progress { background-color: var(--tertiary-color); }
+        .fat .progress { background-color: #9b59b6; }
+
+        .calorie-graph {
+            flex: 2;
+            min-width: 500px;
+            margin-right: 20px;
+        }
+
+        .graph {
+            display: flex;
+            align-items: flex-end;
+            height: 300px;
+            border-bottom: 2px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .bar {
+            flex: 1;
+            margin: 0 2px;
+            background-color: var(--primary-color);
+            transition: height 0.3s ease;
+        }
+
+        .bar:hover {
+            opacity: 0.8;
+        }
+
+        .x-axis {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        .x-axis span {
+            flex: 1;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .meal-list {
+            margin-top: 30px;
+        }
+
+        .meal-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .meal-item:last-child {
+            border-bottom: none;
+        }
+
+        .weekly-nutrient-breakdown {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .weekly-nutrient-breakdown h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .weekly-nutrient-breakdown p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .donut-chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .nutrient-chart-key {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .nutrient-chart-key div {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .key-color {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .calories-color { background-color: #6C757D; }
+        .proteins-color { background-color: #868E96; }
+        .carbs-color { background-color: #ADB5BD; }
+        .fats-color { background-color: #CED4DA; }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                flex-direction: column;
+            }
+
+            .nutrient-summary, .calorie-graph {
+                min-width: 100%;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>UMass Dieting Companion</h1>
+            <p>Calorie and Nutrient Intake Tracking</p>
+        </header>
+        <div class="dashboard">
+            <div class="nutrient-summary">
+                <div class="nutrient-card calories">
+                    <h3>Calories</h3>
+                    <p><strong>1500</strong> / 2000 kcal</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="nutrient-card protein">
+                    <h3>Protein</h3>
+                    <p><strong>65</strong> / 100 g</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 65%;"></div>
+                    </div>
+                </div>
+                <div class="nutrient-card carbs">
+                    <h3>Carbohydrates</h3>
+                    <p><strong>180</strong> / 250 g</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 72%;"></div>
+                    </div>
+                </div>
+                <div class="nutrient-card fat">
+                    <h3>Fat</h3>
+                    <p><strong>55</strong> / 65 g</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 84%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="calorie-graph">
+                <h3>Daily Calorie Intake</h3>
+                <div class="graph">
+                    <div class="bar" style="height: 60%;" title="Monday: 1800 kcal"></div>
+                    <div class="bar" style="height: 75%;" title="Tuesday: 2250 kcal"></div>
+                    <div class="bar" style="height: 50%;" title="Wednesday: 1500 kcal"></div>
+                    <div class="bar" style="height: 80%;" title="Thursday: 2400 kcal"></div>
+                    <div class="bar" style="height: 65%;" title="Friday: 1950 kcal"></div>
+                    <div class="bar" style="height: 40%;" title="Saturday: 1200 kcal"></div>
+                    <div class="bar" style="height: 70%;" title="Sunday: 2100 kcal"></div>
+                </div>
+                <div class="x-axis">
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+                    <span>Sun</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weekly Nutrient Breakdown Donut Chart -->
+        <div class="weekly-nutrient-breakdown">
+            <h3>Weekly Nutrient Breakdown</h3>
+            <p>Average values</p>
+            <div class="donut-chart-container">
+                <canvas id="nutrientDonutChart" width="300" height="300"></canvas>
+            </div>
+            <div class="nutrient-chart-key">
+                <div><span class="key-color calories-color"></span>Calories</div>
+                <div><span class="key-color proteins-color"></span>Proteins</div>
+                <div><span class="key-color carbs-color"></span>Carbs</div>
+                <div><span class="key-color fats-color"></span>Fats</div>
+            </div>
+        </div>
+
+        <div class="meal-list">
+            <h3>Today's Meals</h3>
+            <div class="meal-item">
+                <span>Breakfast - Oatmeal with Berries</span>
+                <span>350 kcal</span>
+            </div>
+            <div class="meal-item">
+                <span>Lunch - Grilled Chicken Salad</span>
+                <span>450 kcal</span>
+            </div>
+            <div class="meal-item">
+                <span>Snack - Apple with Peanut Butter</span>
+                <span>200 kcal</span>
+            </div>
+            <div class="meal-item">
+                <span>Dinner - Salmon with Roasted Vegetables</span>
+                <span>500 kcal</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data for the donut chart
+        const nutrientData = [25, 25, 25, 25]; // Example percentages for Calories, Proteins, Carbs, Fats
+        const nutrientColors = ['#6C757D', '#868E96', '#ADB5BD', '#CED4DA'];
+
+        // Function to draw the donut chart
+        function drawDonutChart() {
+            const canvas = document.getElementById('nutrientDonutChart');
+            const ctx = canvas.getContext('2d');
+
+            if (!ctx) {
+                console.error("Failed to get canvas context for donut chart");
+                return;
+            }
+
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 100;
+            const innerRadius = 50; // Creates the donut effect
+            let startAngle = 0;
+
+            nutrientData.forEach((percentage, index) => {
+                const sliceAngle = (percentage / 100) * 2 * Math.PI;
+                ctx.fillStyle = nutrientColors[index];
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+                ctx.arc(centerX, centerY, innerRadius, startAngle + sliceAngle, startAngle, true);
+                ctx.closePath();
+                ctx.fill();
+                startAngle += sliceAngle;
+            });
+
+            console.log("Donut chart drawn successfully");
+        }
+
+        // Call the function to draw the donut chart
+        drawDonutChart();
+    </script>
+</body>
+</html>
