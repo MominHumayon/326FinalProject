@@ -39,4 +39,4 @@ sequenceDiagram
   Form->>JS: Page Load Event
   JS->>DB: Retrieve Profile Data from IndexedDB
   DB-->>JS: Return Profile Data
-  JS->>Form: Populate Form Fields with Retrieved Data
+  JS->>Form: Populate Form Fields with Retrieved Dat
