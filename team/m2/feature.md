@@ -1,32 +1,44 @@
 # Application Features
 
-## Personalized Diet Plan Calculation
+## User Profile Management 
 
-This feature will allow students to input their physical information such as height, weight, and dietary goals (e.g., bulking, cutting, or maintaining). The application will automatically generate a diet plan using Umass dining meals tailored to their specific needs, ensuring optimal nutritional health. The recommended plan will match the desired calorie intake, carbohydrate levels, and protein uptake based on their provided physical stats and dietary intentions.
+This feature allows students to create a user profile by inputting their personal information, including their first and last name, height, weight, and dietary preferences. The system stores this data in IndexedDB for persistence and uses it to provide personalized dietary recommendations. Users can also log in to their account to access their saved profile or edit their details.
 
-**Assigned to**: TDB
+**Assigned to**: Sameen (Large)
   
-## Dietary Restriction Filter
+## Nutrient/Calorie Graph
 
-This feature will allow users to input any dietary restrictions or food preferences, such as allergies or religious considerations. The application will then filter out any incompatible dishes from the recommendations, offering only meals that meet the user’s specific needs. This ensures that all users have access to safe and personalized meal options.
+This feature provides a visual representation of a student’s daily nutrient and calorie intake. The graph displays consumed versus recommended intake for macronutrients such as protein, carbohydrates, and fats. It helps students track their progress toward their dietary goals and identify areas for improvement.
 
-**Assigned to**: TBD
+**Assigned to**: Yusuf (Large)
 
-## Nutritional Information Search and Comparison
+## Meal Information Layout
 
-This feature will enable users to search for specific dishes or meals and compare their nutritional values. Students can review the macronutrient and caloric breakdowns of dishes to make informed choices that align with their dietary goals. The comparison tool helps students stay aware of their nutritional intake and avoid unhealthy eating habits, as well as meet their dietary goals.
+This feature presents information about UMass dining meals in a structured and user-friendly layout. Students can browse available meals, view their nutritional breakdowns, and select options that meet their preferences or dietary goals.
 
-**Assigned to**: TBD
+**Assigned to**: Momin (Large)
 
-## Meal Nutritional Breakdown Display
+## Dining Location Meal Layout with Timeline
 
-This feature will provide detailed nutritional breakdowns for each meal, giving users an in-depth look at their food choices. Students can access information such as calories, protein, carbohydrates, fats, vitamins, and minerals for each dish. This breakdown allows students to make conscious choices about their meals, reinforcing healthier eating habits.
+This feature provides students with meal options available at specific dining locations, organized by meal times (breakfast, lunch, and dinner). The timeline functionality ensures that students can easily plan their meals according to the time of day and dining hall schedule.
 
-**Assigned to**: TBD
+**Assigned to**: Aareb (Medium)
 
-## Calorie and Nutrient Intake Tracking
+## Meal Reccommender
 
-This feature will enable students to log and track their daily calorie intake and specific nutrient intake, such as how much protein, carbohydrates, and fats they have consumed. The app will summarize this information for the day, helping students monitor their progress toward their dietary goals. This feature provides real-time updates to encourage students to stay consistent with their nutrition plans.
+This feature recommends meals from UMass dining menus based on students’ dietary goals, preferences, and restrictions. By using the user’s profile data and inputted goals (e.g., bulking, cutting, maintaining), the app suggests meals optimized for their desired outcomes.
 
-**Assigned to**: TBD
+**Assigned to**: Ahmed (Large)
+
+## Dining Dollar/Swipe/UCard Debit Tracker
+
+This feature helps students track their dining dollar balance, meal swipes, and UCard debit spending. The app provides a real-time overview of their usage and remaining balance, enabling students to manage their resources effectively throughout the semester.
+
+**Assigned to**: Adithya (Medium)
+
+## Goal Tracker 
+
+This feature helps students set and monitor their dietary goals, such as daily calorie intake, macronutrient consumption, or weight targets. The app provides visual progress tracking and feedback, encouraging students to stay on track with their health and fitness goals.
+
+**Assigned to**: Tawsif (Medium)
 
