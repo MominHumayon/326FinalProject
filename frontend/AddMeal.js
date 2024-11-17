@@ -106,7 +106,9 @@ const nutrition = [
 const healthful = [1,2,3,4];
 const ingredients = [["John Cena, Mao Zedong, Yusuf Raza"], ["Sameen Shaik, Aareb Chowdhury, Harambe"], ["Peanut, Matthew Perry, Youre Mother"], ["Stallion", "Monke", "Controller"]];
 const diet = [["Halal"],["Vegetarian"],["Whole Grain"],["Plant Based"]];
-console.log("hello");
+const properties = ["fat","carbs","prot"];
+const font = new FontFace("Apple", "url(apple-chancery-webfont.woff)");
+document.fonts.add(font);
 for (let i = 0; i < 4; i++) {
     mealArr[i] = new Meal(mealNames[i]);
     console.log(mealArr[i]);
@@ -121,5 +123,69 @@ for (let i = 0; i <4; i++) {
     const elem = document.getElementById("m" + (i+1));
     const foodImg = document.createElement("img");
     foodImg.setAttribute("src","./" + (i+1) + ".jpg");
+    foodImg.classList.add("foodPic");
+    const mealInfo = document.createElement("div");
+    mealInfo.classList.add("info");
+    const firstLine = document.createElement("span");
+    const name = document.createElement("span");
+    name.innerText = mealArr[i].name;
+    name.style.textDecoration = "underline";
+    name.style.fontWeight = "bold";
+    name.style.color = "#346e43";
+    name.style.fontFamily = "Apple";
+
+
+    const cals = document.createElement("span");
+    cals.innerText = "Calories: " + mealArr[i].nutInfo["cals"];
+    cals.style.fontStyle = "italic";
+    cals.style.color = "#306584";
+    cals.style.fontFamily = "Georgia";
+    firstLine.appendChild(name);
+    firstLine.appendChild(cals);
+    firstLine.classList.add("oppositeEnd");
+    mealInfo.appendChild(firstLine);
+    const secondLine = document.createElement("div");
+
+    const allergyDisplay = document.createTextNode("Allergens: " + allergies[i].reduce((acc, str) => acc+ ", " + str,"").substring(2));
+    secondLine.appendChild(allergyDisplay);
+    secondLine.appendChild(document.createElement("br"));
+    secondLine.appendChild(document.createElement("br"));
+
+    const dietDisplay = document.createTextNode("Diet: " + diet[i].reduce((acc,str) => acc + ", " + str, "").substring(2));
+    secondLine.appendChild(dietDisplay);
+    const nutTable = document.createElement("table");
+    nutTable.style.border = "1px solid purple";
+    secondLine.appendChild(nutTable);
+    secondLine.classList.add("oppositeEnd2");
+    for(let j = 0; j < 3; j++) {
+        let tr = nutTable.insertRow();
+        for(let k = 0; k <2; k++) {
+            const td = tr.insertCell();
+            td.appendChild(document.createTextNode(k === 0? properties[j] : mealArr[i].nutInfo[properties[j]]));
+            td.style.border = '1px solid black';
+        }
+    }
+
+    const healthBar = document.createElement("div");
+    healthBar.style.margin = "30px";
+    healthBar.style.marginTop = "10px";
+    const healthText = document.createElement("p");
+    healthText.textContent = "Healthfulness: ";
+    healthText.style.justifySelf = "center";
+    healthBar.classList.add("healthBar");
+    for (let j = 0; j < 7; j++) {
+        const cell = document.createElement("div");
+        cell.style.backgroundColor = j < mealArr[i].health ? "green" : "silver";
+        cell.style.border = "1px solid black";
+        healthBar.appendChild(cell);
+    }
+    const thirdLine = document.createElement("p");
+    thirdLine.textContent = "Ingredients: " + mealArr[i].ingredients.reduce((acc,str) => acc + ", " + str, "").substring(2);
+    thirdLine.style.justifySelf = "center";
+    mealInfo.appendChild(secondLine);
+    mealInfo.appendChild(healthText);
+    mealInfo.appendChild(healthBar);
+    mealInfo.appendChild(thirdLine);
     elem.appendChild(foodImg);
+    elem.appendChild(mealInfo);
 }
