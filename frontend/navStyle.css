@@ -1,0 +1,11 @@
+#bar {
+    justify-self: left;
+    width: 150px;
+    height: 100vh;
+    border-right: thick double #000000;
+    background-color: cyan;
+}
+
+button {
+    background-color:lightgray;
+}
