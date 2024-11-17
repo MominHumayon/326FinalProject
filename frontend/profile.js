@@ -92,6 +92,8 @@ document.getElementById('user-profile-form').addEventListener('submit', function
   const transaction = db.transaction(['profile'], 'readwrite');
   const objectStore = transaction.objectStore('profile');
   objectStore.put(profileData);
+
+  loadUserProfile();
   alert('Profile saved successfully!');
 });
 
@@ -110,3 +112,13 @@ function loadUserProfile() {
     }
   };
 }
+document.getElementById('login-button').addEventListener('click', function() {
+  const firstNameInput = document.getElementById('first-name');
+  const lastNameInput = document.getElementById('last-name');
+
+  if (firstNameInput.value.trim() !== '' && lastNameInput.value.trim() !== '') {
+    window.location.href = 'next-page.html'; // replace with the actual next page URL
+  } else {
+    alert('Please fill out both first and last name fields to proceed.');
+  }
+});
