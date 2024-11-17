@@ -5,6 +5,9 @@ const swipe_dec = document.querySelector("#swipe_section .dec");
 const ucard_inc = document.querySelector("#ucard_section .inc");
 const ucard_dec = document.querySelector("#ucard_section .dec");
 
+const historyButton = document.getElementById("history");
+const historyOverlay = document.getElementById("history_overlay")
+
 // Function to load values from localStorage or set defaults
 function loadValues() {
     const storedSwipes = localStorage.getItem("swipes");
@@ -33,6 +36,11 @@ ucard_dec.addEventListener("click", () => {
     ucard.textContent = parseInt(ucard.textContent) - 1;
     localStorage.setItem("ucard", ucard.textContent);
 });
+
+
+historyButton.addEventListener("click", () => {
+    historyOverlay.classList.toggle("hidden");
+})
 
 // Load values from localStorage when the page loads
 loadValues();
