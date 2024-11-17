@@ -109,6 +109,8 @@ const diet = [["Halal"],["Vegetarian"],["Whole Grain"],["Plant Based"]];
 const properties = ["fat","carbs","prot"];
 const font = new FontFace("Apple", "url(apple-chancery-webfont.woff)");
 document.fonts.add(font);
+const font2 = new FontFace("Schoolbook", "url(C059-Roman.otf)");
+document.fonts.add(font2);
 for (let i = 0; i < 4; i++) {
     mealArr[i] = new Meal(mealNames[i]);
     console.log(mealArr[i]);
@@ -153,8 +155,11 @@ for (let i = 0; i <4; i++) {
 
     const dietDisplay = document.createTextNode("Diet: " + diet[i].reduce((acc,str) => acc + ", " + str, "").substring(2));
     secondLine.appendChild(dietDisplay);
+    secondLine.style.fontFamily = "Schoolbook";
     const nutTable = document.createElement("table");
     nutTable.style.border = "1px solid purple";
+    nutTable.style.marginTop = "15px";
+    nutTable.style.marginBottom = "0px";
     secondLine.appendChild(nutTable);
     secondLine.classList.add("oppositeEnd2");
     for(let j = 0; j < 3; j++) {
@@ -170,6 +175,7 @@ for (let i = 0; i <4; i++) {
     healthBar.style.margin = "30px";
     healthBar.style.marginTop = "10px";
     const healthText = document.createElement("p");
+    healthText.style.marginTop = "0px";
     healthText.textContent = "Healthfulness: ";
     healthText.style.justifySelf = "center";
     healthBar.classList.add("healthBar");
