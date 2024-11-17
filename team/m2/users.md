@@ -25,7 +25,6 @@ Finally, students with dietary restrictions (such as gluten intolerance or lacto
 ### Nutritional Guidance
 1. **Personalized Plans**
    - Caloric intake calculations
-   - Macronutrient tracking
    - Dietary restriction filtering
    - Goal-based recommendations
 
