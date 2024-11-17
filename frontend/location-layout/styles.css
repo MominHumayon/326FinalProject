@@ -44,6 +44,7 @@ header .controls input {
 }
 
 .meal-card {
+    display: block;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -51,6 +52,13 @@ header .controls input {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
     padding: 1rem;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.3s ease;
+}
+
+.meal-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .meal-card img {

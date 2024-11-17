@@ -152,8 +152,9 @@ function displayMeals() {
 
     if (meals && meals.length > 0) {
         meals.forEach((meal) => {
-            const card = document.createElement("div");
+            const card = document.createElement("a");
             card.className = "meal-card";
+            card.href = `dummy URL`; // insert URL from Momin's meal information section
 
             // Placeholder image
             const img = document.createElement("img");
