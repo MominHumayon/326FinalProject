@@ -57,3 +57,69 @@ class Meal {
     }
 
 }
+
+const mealArr = new Array(6);;
+const mealNames = ["Cheese Pizza", "Turkey Breast", "Black Bean Burger", "Vegetable Sushi Roll"];
+const allergies = [["Milk","Gluten","Soy","Corn","Wheat"],["Corn"],["Soy", "Corn"],["Sesame"]];
+const nutrition = [
+    {
+    "servingSize": "1",
+    "cals" :150,
+    "fat": 10,
+    "chol": 20,
+    "sodium": 5,
+    "carbs":15,
+    "sugar":4,
+    "prot":6
+    },
+    {
+    "servingSize": "1",
+    "cals" :350,
+    "fat": 20,
+    "chol": 35,
+    "sodium": 10,
+    "carbs":24,
+    "sugar":1,
+    "prot":13
+    },
+    {
+        "servingSize": "3",
+        "cals" :250,
+        "fat": 10,
+        "chol": 9,
+        "sodium": 11,
+        "carbs":13,
+        "sugar":0,
+        "prot":5
+    },
+    {
+        "servingSize": "2",
+        "cals" :250,
+        "fat": 10,
+        "chol": 25,
+        "sodium": 10,
+        "carbs":16,
+        "sugar":0,
+        "prot":10
+    }
+]
+const healthful = [1,2,3,4];
+const ingredients = [["John Cena, Mao Zedong, Yusuf Raza"], ["Sameen Shaik, Aareb Chowdhury, Harambe"], ["Peanut, Matthew Perry, Youre Mother"], ["Stallion", "Monke", "Controller"]];
+const diet = [["Halal"],["Vegetarian"],["Whole Grain"],["Plant Based"]];
+console.log("hello");
+for (let i = 0; i < 4; i++) {
+    mealArr[i] = new Meal(mealNames[i]);
+    console.log(mealArr[i]);
+    mealArr[i].addAllergyInfo(allergies[i])
+        .addNutInfo(nutrition[i])
+            .addHealth(healthful[i])
+                .addIngredients(ingredients[i])
+                    .addDietInfo(diet[i]);
+}
+
+for (let i = 0; i <4; i++) {
+    const elem = document.getElementById("m" + (i+1));
+    const foodImg = document.createElement("img");
+    foodImg.setAttribute("src","./" + (i+1) + ".jpg");
+    elem.appendChild(foodImg);
+}

@@ -1,0 +1,10 @@
+.mealContainer {
+    display:grid;
+    grid-template-columns: repeat(2, auto);
+    align-content: center;
+}
+
+.mealDisplay {
+    height: 125 px;
+    width: 200 px;
+}
