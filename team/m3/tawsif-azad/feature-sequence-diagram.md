@@ -1,3 +1,5 @@
+```mermaid
+
 sequenceDiagram
   participant User
   participant UI as Calorie and Nutrient Goal Intake Tracking UI
