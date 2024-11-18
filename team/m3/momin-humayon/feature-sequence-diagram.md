@@ -14,8 +14,8 @@ sequenceDiagram
   participant DB as IndexedDB
 
 
-  User->>Form: Reloads the Page
-  Form->>JS: Page Load Event
-  JS->>DB: Retrieve Profile Data from IndexedDB
-  DB-->>JS: Return Profile Data
-  JS->>Form: Populate Form Fields with Retrieved Dat
+  User->>Din: Enter date, time, location into Dining Hall selector
+  Din->>JS: Search Event Triggered
+  JS->>DB: Request Meal Data
+  DB ->> JS: Return Meals
+  JS -->> Disp: Render meal picture & information
