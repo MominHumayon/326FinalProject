@@ -40,5 +40,11 @@ This feature helps students track their dining dollar balance, meal swipes, and 
 
 This feature helps students set and monitor their dietary goals, such as daily calorie intake, macronutrient consumption, or weight targets. The app provides visual progress tracking and feedback, encouraging students to stay on track with their health and fitness goals.
 
-**Assigned to**: Tawsif (Medium)
+**Assigned to**: Tawsif (Large)
+
+## Nav Bar
+
+Side bar with buttons to switch between feature views
+
+**Assigned to**: Momin (Medium)
 
