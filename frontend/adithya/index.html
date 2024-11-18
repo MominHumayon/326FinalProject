@@ -4,6 +4,9 @@
     <title>Debit_Tracker</title>
     <link rel="stylesheet" href="styles.css" />
     <script type="module" src="script.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
   </head>
   <body>
     <div class="container">
@@ -34,7 +37,7 @@
 
         <div id="history_overlay" class="hidden">
             <h2 class="title">Usage History</h2>
-            <p>This will include a graph or detailed past usage data.</p>
+            <canvas id="historyChart" width="400" height="200"></canvas>
         </div>
     </div>
       
