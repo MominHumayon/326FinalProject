@@ -1,3 +1,8 @@
+# Calorie and Nutrient Goal Intake Tracking Sequence Diagram
+
+This sequence diagram illustrates the interactions between the user, the UI, JavaScript logic, and IndexedDB in the Calorie and Nutrient Goal Intake Tracking feature. It outlines how user actions trigger events that update goals, save meal data, and display weekly calorie and nutrient intake insights.
+
+
 ```mermaid
 
 sequenceDiagram
