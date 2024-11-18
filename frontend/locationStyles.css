@@ -1,5 +1,5 @@
 /* General styles */
-body {
+#aareb body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -9,25 +9,25 @@ body {
     text-align: center;
 }
 
-header {
+#aareb header {
     background-color: #881c1c;
     color: white;
     padding: 1rem;
 }
 
-header h1 {
+#aareb header h1 {
     margin-bottom: 0.5rem;
 }
 
-header .controls {
+#aareb header .controls {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
     gap: 1rem;
 }
 
-header .controls select,
-header .controls input {
+#aareb header .controls select,
+#aareb header .controls input {
     padding: 0.5rem;
     font-size: 1rem;
     border-radius: 5px;
