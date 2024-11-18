@@ -34,7 +34,7 @@ class Meal {
     }
 
     addDietInfo(arr) {
-        this.detInfo = arr;
+        this.dietInfo = arr;
         return this;
     }
 
@@ -148,7 +148,17 @@ for (let i = 0; i <4; i++) {
     cals.style.fontStyle = "italic";
     cals.style.color = "#306584";
     cals.style.fontFamily = "Georgia";
+
+
+    const icons = document.createElement("span");
+    for (let j = 0; j < mealArr[i].dietInfo.length; j++) {
+        const img = document.createElement("img");
+        img.src = "./dietIcons/" + mealArr[i].dietInfo[j] + ".png";
+        icons.appendChild(img);
+    }
+
     firstLine.appendChild(name);
+    firstLine.appendChild(icons);
     firstLine.appendChild(cals);
     firstLine.classList.add("oppositeEnd");
 
@@ -194,7 +204,7 @@ for (let i = 0; i <4; i++) {
     healthText.style.justifySelf = "center";
     healthBar.classList.add("healthBar");
 
-    
+
     for (let j = 0; j < 7; j++) {
         const cell = document.createElement("div");
         cell.style.backgroundColor = j < mealArr[i].health ? "green" : "silver";
