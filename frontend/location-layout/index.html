@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dining Hall Meals</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>UMass Dieting Plan - Dining Hall Meals</h1>
+        <p>Select a dining hall, date, and time of day to view the meals offered.</p>
+        <div class="controls">
+            <select id="dining-hall-select">
+                <option value="">Select a Dining Hall</option>
+            </select>
+            <input type="date" id="date-picker" />
+            <select id="time-of-day-select">
+                <option value="">Select Time of Day</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+            </select>
+        </div>
+    </header>
+    <main>
+        <section id="meal-display" class="meal-cards"></section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
