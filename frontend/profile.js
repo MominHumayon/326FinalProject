@@ -117,7 +117,8 @@ document.getElementById('login-button').addEventListener('click', function() {
   const lastNameInput = document.getElementById('last-name');
 
   if (firstNameInput.value.trim() !== '' && lastNameInput.value.trim() !== '') {
-    window.location.href = 'next-page.html'; // replace with the actual next page URL
+    document.querySelectorAll(".view").forEach(elem => elem.style.display = "none");
+    document.getElementById("diningHalls").style.display = "block"; // replace with the actual next page URL
   } else {
     alert('Please fill out both first and last name fields to proceed.');
   }

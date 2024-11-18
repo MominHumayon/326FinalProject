@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         else {
             nav.style.display = "block"; 
-            hideButton.style.left = "145px";
+            hideButton.style.left = "130px";
             hideButton.innerText = "<";
             document.getElementById("hideWrapper").style.borderRight = "none";
         }
