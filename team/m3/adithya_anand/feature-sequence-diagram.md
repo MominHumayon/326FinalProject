@@ -10,24 +10,36 @@ real data once the backend is fully implemented.
 ## Sequence Diagram
 ```mermaid
 sequenceDiagram
-    participant User
-    participant Browser
-    participant IndexedDB
+  participant User
+  participant Form as User Profile Form
+  participant JS as JavaScript
+  participant DB as IndexedDB
 
-    User->>Browser: Loads the webpage
-    Browser->>IndexedDB: Check for stored swipe and UCard data
-    alt Data Exists
-        IndexedDB-->>Browser: Return stored data
-        Browser->>Browser: Display swipes and UCard balance on UI
-    else Data Does Not Exist
-        Browser->>Browser: Use default values (400 swipes, 20 UCard)
-        Browser->>IndexedDB: Save default values to IndexedDB
+  alt User Clicks "Sign Up"
+    User->>Form: Fills in First Name, Last Name, Height, Weight, and Dietary Preferences
+    User->>Form: Clicks "Save Profile"
+    Form->>JS: Submit Event Triggered
+    JS->>DB: Save Profile Data in IndexedDB
+    DB-->>JS: Data Saved Confirmation
+    JS->>User: Show "Profile saved successfully" message
+  end
+
+  alt User Clicks "Log In"
+    User->>Form: Fills in First Name and Last Name
+    User->>Form: Clicks "Log In"
+    Form->>JS: Log In Event Triggered
+    JS->>Form: Validate First Name and Last Name
+    JS->>DB: Search IndexedDB for Matching Name
+    DB-->>JS: Return Match Status
+    alt Match Found
+      JS->>User: Redirect to Next Page
+    else No Match Found
+      JS->>User: Show "User not found" message
     end
+  end
 
-    User->>Browser: Increment or decrement swipes/UCard balance
-    Browser->>Browser: Update the UI with new values
-    Browser->>IndexedDB: Save updated values to IndexedDB
-
-    User->>Browser: Click "History" button
-    Browser->>Browser: Toggle to display history view
-    Browser->>Browser: Display swipe and UCard usage over the past 14 days (dummy data)
+  User->>Form: Reloads the Page
+  Form->>JS: Page Load Event
+  JS->>DB: Retrieve Profile Data from IndexedDB
+  DB-->>JS: Return Profile Data
+  JS->>Form: Populate Form Fields with Retrieved Dat
