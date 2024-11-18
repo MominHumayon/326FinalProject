@@ -63,21 +63,32 @@ A student with a gluten allergy can select the "Gluten-Free" checkbox, filtering
 
 ---
 
-## Calorie and Nutrient Intake Tracking Screen
+## Goal Tracking Screen
 
-The **Calorie and Nutrient Intake Tracking** screen provides users with a summary of their daily consumption of calories, proteins, carbohydrates, and fats. This screen helps users monitor their nutrition in relation to their goals.
+The **Goal Tracking Screen** allows users to select a dietary goal (bulking, cutting, or maintenance) and provides a detailed overview of their current progress toward meeting their nutrition targets. Users can monitor their calorie, protein, carbohydrate, and fat intake in real time and compare their intake to their daily and weekly goals.
 
-<img width="690" alt="image" src="https://github.com/user-attachments/assets/60b02527-2b8f-4f0c-948c-e86b87e036c1">
+<img width="1226" alt="Screenshot 2024-11-17 at 8 11 42 PM" src="https://github.com/user-attachments/assets/f883da98-dbfe-44f6-b8e2-121d6c91be45">
+
+<img width="1203" alt="Screenshot 2024-11-17 at 8 11 59 PM" src="https://github.com/user-attachments/assets/84940edb-214b-4adc-bd0b-7e3084aa61f4">
 
 
-On this screen, users can interact with the following elements:
+### Elements:
+1. **Goal Selection Dropdown**: Users can select their dietary goal (e.g., Bulking, Cutting, Maintenance) from a dropdown menu. The app dynamically updates the nutrient targets based on the selected goal.
+2. **Daily Nutrient Summary**: 
+   - Displays current intake values for calories, proteins, carbohydrates, and fats.
+   - Progress bars visually show how close the user is to meeting their daily goals.
+   - Example: “Calories: 700 / 2500 kcal” with a progress bar showing 28% completion for a bulking goal.
+3. **Weekly Calorie Intake Graph**: 
+   - A bar chart illustrating the user's daily calorie intake over the week.
+   - Each bar has a label displaying the calorie amount for that day.
+   - A horizontal line indicates the weekly average calorie intake.
+4. **Weekly Nutrient Breakdown**: 
+   - Two side-by-side donut charts show the user's current nutrient distribution versus the recommended distribution based on their goal.
+   - A legend explains the colors representing calories, proteins, carbs, and fats, making it easy to understand the comparison.
 
-1. **Daily Summary Graph**: A bar chart at the top shows the user’s total intake of calories, proteins, carbs, and fats for the day.
-2. **Meal List**: Below the graph, users can view a list of meals they’ve consumed that day, with a breakdown of each meal’s contribution to their total intake.
-3. **Progress Indicators**: Progress bars for each nutrient show how close the user is to meeting their target intake for the day.
+### Use Case:
+A UMass student who is focused on cutting can select the "Cutting" goal from the dropdown menu to see updated nutrient targets. They can then use the daily and weekly visualizations to track their progress and adjust their diet accordingly to stay on track with their goal.
 
-This screen is designed to help users stay on track with their nutrition goals by giving them a clear, real-time overview of their intake.
 
-**Use Case**:
 
-A student tracking their protein intake for muscle gain can use this screen to see how much protein they’ve consumed throughout the day and how close they are to hitting their goal.
+
