@@ -7,10 +7,11 @@
 }
 
 button {
-    background-color:lightgray;
+    background-color:rgb(119, 201, 119);
     border-radius:6px;
     margin:6px;
-    size: 30px;
+    padding: 10px;
+    cursor: pointer;
 }
 
 button:hover {
@@ -30,4 +31,5 @@ body {
     position:absolute;
     left:145px;
     top:50vh;
+    padding: 5px;
 }

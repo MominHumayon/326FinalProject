@@ -24,9 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById("hideWrapper").style.height = "100vh";
             document.getElementById("hideWrapper").style.width = "0px";
             document.getElementById("hideWrapper").style.borderRight = "thick double #000000";
-            document.getElementById("hideWrapper").style.padding = "0px";
-            document.getElementById("hideWrapper").style.margin = "0px";
-
         }
         else {
             nav.style.display = "block"; 
