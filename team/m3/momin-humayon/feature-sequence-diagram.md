@@ -5,6 +5,7 @@ This feature provides a display for each meal. It includes a picture, name, calo
 
 ## Sequence Diagram
 ```mermaid
+Sequence Diagram
   participant User
   participant UI as User Interface
   participant JS as JavaScript
