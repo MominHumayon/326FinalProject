@@ -111,6 +111,8 @@ const font = new FontFace("Apple", "url(apple-chancery-webfont.woff)");
 document.fonts.add(font);
 const font2 = new FontFace("Schoolbook", "url(C059-Roman.otf)");
 document.fonts.add(font2);
+
+
 for (let i = 0; i < 4; i++) {
     mealArr[i] = new Meal(mealNames[i]);
     console.log(mealArr[i]);
@@ -126,8 +128,12 @@ for (let i = 0; i <4; i++) {
     const foodImg = document.createElement("img");
     foodImg.setAttribute("src","./" + (i+1) + ".jpg");
     foodImg.classList.add("foodPic");
+
+
     const mealInfo = document.createElement("div");
     mealInfo.classList.add("info");
+
+
     const firstLine = document.createElement("span");
     const name = document.createElement("span");
     name.innerText = mealArr[i].name;
@@ -145,23 +151,31 @@ for (let i = 0; i <4; i++) {
     firstLine.appendChild(name);
     firstLine.appendChild(cals);
     firstLine.classList.add("oppositeEnd");
-    mealInfo.appendChild(firstLine);
-    const secondLine = document.createElement("div");
 
+
+    mealInfo.appendChild(firstLine);
+
+
+    const secondLine = document.createElement("div");
     const allergyDisplay = document.createTextNode("Allergens: " + allergies[i].reduce((acc, str) => acc+ ", " + str,"").substring(2));
     secondLine.appendChild(allergyDisplay);
     secondLine.appendChild(document.createElement("br"));
     secondLine.appendChild(document.createElement("br"));
-
     const dietDisplay = document.createTextNode("Diet: " + diet[i].reduce((acc,str) => acc + ", " + str, "").substring(2));
     secondLine.appendChild(dietDisplay);
     secondLine.style.fontFamily = "Schoolbook";
+
+
     const nutTable = document.createElement("table");
     nutTable.style.border = "1px solid purple";
     nutTable.style.marginTop = "15px";
     nutTable.style.marginBottom = "0px";
+
+
     secondLine.appendChild(nutTable);
     secondLine.classList.add("oppositeEnd2");
+
+
     for(let j = 0; j < 3; j++) {
         let tr = nutTable.insertRow();
         for(let k = 0; k <2; k++) {
@@ -179,6 +193,8 @@ for (let i = 0; i <4; i++) {
     healthText.textContent = "Healthfulness: ";
     healthText.style.justifySelf = "center";
     healthBar.classList.add("healthBar");
+
+    
     for (let j = 0; j < 7; j++) {
         const cell = document.createElement("div");
         cell.style.backgroundColor = j < mealArr[i].health ? "green" : "silver";
