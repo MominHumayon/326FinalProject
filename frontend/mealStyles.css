@@ -1,30 +1,30 @@
-.mealContainer {
+ .mealContainer {
     display:grid;
     grid-template-columns: repeat(2, 600px);
     justify-self: center;
     gap:25px;
 }
 
-.mealDisplay {
+ .mealDisplay {
    border: thick double #2c798d;
    background-color: #eae4e4;
    height: 550px;
 }
 
-.foodPic {
+ .foodPic {
     width:100%;
     height:50%;
     border-bottom: thick double #69c0e3;
 }
 
 
-.info {
+ .info {
     border: 2mm ridge rgba(143, 146, 92, 0.3);
     padding:5px;
     height: 44%;
 }
 
-.oppositeEnd {
+ .oppositeEnd {
     display: flex;
     justify-content: space-between;
     margin-top:5px;
@@ -32,12 +32,12 @@
     font-size:larger;
 }
 
-.oppositeEnd2 {
+ .oppositeEnd2 {
     display: flex;
     justify-content: space-between;
 }
 
-.healthBar {
+ .healthBar {
     display:grid;
     grid-template-columns:repeat(7,auto);
     height: 30px;

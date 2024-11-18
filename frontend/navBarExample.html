@@ -5,27 +5,34 @@
     <script type="module" src="./navigationBar.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="profileStyle.css">
+    <script type="module" src="AddMeal.js"></script>
+    <link href="mealStyles.css" rel="stylesheet"/>
 </head>
 <body>
-    <nav id = "bar">
-        <button id = "profileButton">profile</button>
-        <br><br>
-        <button id = "graphButton">graph</button>
-        <br><br>
-        <button id = "diningHallsButton">dining halls</button>
-        <br><br>
-        <button id = "recommenderButton">recommender</button>
-        <br><br>
-        <button id = "mealInfoButton">meal information</button>
-        <br><br>
-        <button id = "goalButton">goals</button>
-        <br><br>
-        <button id = "expenseButton">expenses</button>
-    </nav>
-    <div id = "hideWrapper">
-        <button id = "hide"><</button>
+    <div id = "momin">
+        <div id = "navigationStyle">
+        <nav id = "bar">
+            <button id = "profileButton">profile</button>
+            <br><br>
+            <button id = "graphButton">graph</button>
+            <br><br>
+            <button id = "diningHallsButton">dining halls</button>
+            <br><br>
+            <button id = "recommenderButton">recommender</button>
+            <br><br>
+            <button id = "mealInfoButton">meal information</button>
+            <br><br>
+            <button id = "goalButton">goals</button>
+            <br><br>
+            <button id = "expenseButton">expenses</button>
+        </nav>
+        <div id = "hideWrapper">
+            <button id = "hide"><</button>
+        </div>
+      </div>
     </div>
+
 
     <div id="profile" class = "view" style="display:block;">
         <div id = "sameen">
@@ -65,7 +72,7 @@
               <button type="button" id="login-button">Login</button>
             </form>
           </div>
-          <script src="profile.js"></script>
+          <script type = "module" src="profile.js"></script>
         </div>
     </div>
     <div id="graph" class = "view" style="display:none">
@@ -77,8 +84,18 @@
     <div id="recommender" class = "view" style="display:none">
         Penguins
     </div>
+
+
+    
     <div id="mealInfo" class = "view" style="display:none">
-        Piazza
+        <div class = "momin2">
+            <div class="mealContainer" id = "container">
+                <div class="mealDisplay" id="m1"></div>
+                <div class="mealDisplay" id="m2"></div>
+                <div class="mealDisplay" id="m3"></div>
+                <div class="mealDisplay" id="m4"></div>
+            </div>
+        </div>
     </div>
     <div id="goal" class = "view" style="display:none">
         Tim Richards
