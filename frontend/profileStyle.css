@@ -1,5 +1,5 @@
 /* General body styling */
-body {
+#sameen {
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
@@ -10,7 +10,7 @@ body {
 }
 
 /* Form container styling */
-#user-profile-form {
+#sameen #user-profile-form {
   background-color: white;
   padding: 20px;
   border-radius: 8px;
@@ -20,7 +20,7 @@ body {
 }
 
 /* Form title */
-h1 {
+#sameen h1 {
   font-size: 24px;
   color: #881c1c; /* UMass burgundy */
   text-align: center;
@@ -28,14 +28,14 @@ h1 {
 }
 
 /* Labels */
-label {
+#sameen label {
   font-size: 16px;
   color: #333;
   margin-top: 10px;
 }
 
 /* Input fields and dropdown */
-input, select, button {
+#sameen input, #sameen select, #sameen button {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
@@ -45,7 +45,7 @@ input, select, button {
 }
 
 /* Button styling */
-button {
+#sameen button {
   background-color: #881c1c; /* UMass burgundy */
   color: white;
   font-size: 16px;
@@ -55,7 +55,7 @@ button {
   margin-top: 20px;
 }
 
-button:hover {
+#sameen button:hover {
   background-color: #731717; /* Darker burgundy */
 }
 @media (max-width: 600px) {

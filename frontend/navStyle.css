@@ -1,4 +1,4 @@
-#bar {
+#navigationStyle #bar {
     justify-self: left;
     width: 150px;
     height: 100vh;
@@ -6,7 +6,7 @@
     background-color: cyan;
 }
 
-button {
+#navigationStyle button {
     background-color:rgb(119, 201, 119);
     border-radius:6px;
     margin:6px;
@@ -14,7 +14,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+#navigationStyle button:hover {
     color:blue;
     background-color:darkgreen;
     border: solid yellow;
@@ -24,11 +24,11 @@ body {
     display:flex;
 }
 
-.view {
+#navigationStyle .view {
     margin-left: 10px;
 }
 
-#hide {
+#navigationStyle #hide {
     position:absolute;
     left:145px;
     top:50vh;

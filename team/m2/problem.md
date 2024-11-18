@@ -49,19 +49,18 @@ UMass Dieting Companion will be a web-based platform that bridges the gap betwee
    - Dietary restriction filtering
    - Location-based recommendations
 
-4. **Accessibility Features**
-   - Mobile-responsive design
-   - Offline capability for basic features
-   - Integration with calendar apps for meal planning
-   - Push notifications for meal reminders
+4. **Student Debit Tracking**
+   - Tracks and displays the remaining meal swipes and UCard balance for students.
+   - Provides real-time updates when swipes or UCard balance is incremented or decremented.
+   - Stores the swipe and UCard usage history for the past two weeks.
+   - Allows users to view detailed usage trends through a history chart for better financial planning.
 
 ## Technical Implementation
 
 The application will:
-- Source data directly from UMass Dining API
+- Source data directly from UMass Dining App
 - Implement secure user authentication
 - Store user preferences and dietary information
-- Use machine learning for personalized recommendations
 - Comply with FERPA and data privacy requirements
 
 ## Success Metrics
