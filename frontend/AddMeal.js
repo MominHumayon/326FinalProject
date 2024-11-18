@@ -155,11 +155,13 @@ for (let i = 0; i <4; i++) {
         const img = document.createElement("img");
         img.src = "./dietIcons/" + mealArr[i].dietInfo[j] + ".png";
         icons.appendChild(img);
+        img.style.height = "95%";
     }
 
     firstLine.appendChild(name);
     firstLine.appendChild(icons);
     firstLine.appendChild(cals);
+    firstLine.style.height = "10%";
     firstLine.classList.add("oppositeEnd");
 
 
@@ -198,6 +200,7 @@ for (let i = 0; i <4; i++) {
     const healthBar = document.createElement("div");
     healthBar.style.margin = "30px";
     healthBar.style.marginTop = "10px";
+    healthBar.style.marginBottom = "10px";
     const healthText = document.createElement("p");
     healthText.style.marginTop = "0px";
     healthText.textContent = "Healthfulness: ";
