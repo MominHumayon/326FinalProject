@@ -16,6 +16,8 @@ sequenceDiagram
 
   User->>Din: Enter date, time, location into Dining Hall selector
   Din->>JS: Search Event Triggered
-  JS->>DB: Request Meal Data
+  JS->>DB: Request Profile Preferences
+  DB -->>JS: Return User Preferences
+  JS ->> DB: Request Meal Data based on search & preferences
   DB -->> JS: Return Meals
   JS -->> Disp: Render meal picture & information
