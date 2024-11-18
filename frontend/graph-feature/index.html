@@ -115,92 +115,92 @@
     </style>
 </head>
 <body>
+    <div id = "yusuf">
+        <header>
+            <h1>UMass Dining Companion - Calorie Tracker</h1>
+        </header>
 
-    <header>
-        <h1>UMass Dining Companion - Calorie Tracker</h1>
-    </header>
+        <div class="container">
 
-    <div class="container">
+            <div class="graph-container">
 
-        <div class="graph-container">
+                <!-- Pie Chart -->
+                <div class="graph">
+                    <h2>Daily Calorie Breakdown</h2>
+                    <canvas id="pieChart" width="300" height="300"></canvas>
+                </div>
 
-            <!-- Pie Chart -->
-            <div class="graph">
-                <h2>Daily Calorie Breakdown</h2>
-                <canvas id="pieChart" width="300" height="300"></canvas>
+                <!-- Bar Graph -->
+                <div class="graph">
+                    <h2>Weekly Calorie Intake</h2>
+                    <canvas id="barChart" width="300" height="300"></canvas>
+                    <p class="average" id="averageCalories">Average Calories per Week: 0 kcal</p>
+                </div>
+
             </div>
 
-            <!-- Bar Graph -->
-            <div class="graph">
-                <h2>Weekly Calorie Intake</h2>
-                <canvas id="barChart" width="300" height="300"></canvas>
-                <p class="average" id="averageCalories">Average Calories per Week: 0 kcal</p>
+            <!-- Calorie Input -->
+            <div class="input-container">
+                <h2>Enter Your Daily Macronutrient Intake</h2>
+                <div class="input-group">
+                    <label for="protein-input">Protein (%)</label>
+                    <input type="number" id="protein-input" name="protein-input" min="0" max="100" value="50">
+                </div>
+                <div class="input-group">
+                    <label for="carbs-input">Carbohydrates (%)</label>
+                    <input type="number" id="carbs-input" name="carbs-input" min="0" max="100" value="30">
+                </div>
+                <div class="input-group">
+                    <label for="fats-input">Fats (%)</label>
+                    <input type="number" id="fats-input" name="fats-input" min="0" max="100" value="20">
+                </div>
+                <button onclick="updatePieChart()">Update Daily Chart</button>
+            </div>
+
+            <div class="input-container">
+                <h2>Enter Your Weekly Calorie Intake</h2>
+                <div class="input-group">
+                    <label for="monday-input">Monday (kcal)</label>
+                    <input type="number" id="monday-input" name="monday-input" value="2000">
+                </div>
+                <div class="input-group">
+                    <label for="tuesday-input">Tuesday (kcal)</label>
+                    <input type="number" id="tuesday-input" name="tuesday-input" value="2200">
+                </div>
+                <div class="input-group">
+                    <label for="wednesday-input">Wednesday (kcal)</label>
+                    <input type="number" id="wednesday-input" name="wednesday-input" value="2100">
+                </div>
+                <div class="input-group">
+                    <label for="thursday-input">Thursday (kcal)</label>
+                    <input type="number" id="thursday-input" name="thursday-input" value="2300">
+                </div>
+                <div class="input-group">
+                    <label for="friday-input">Friday (kcal)</label>
+                    <input type="number" id="friday-input" name="friday-input" value="2200">
+                </div>
+                <div class="input-group">
+                    <label for="saturday-input">Saturday (kcal)</label>
+                    <input type="number" id="saturday-input" name="saturday-input" value="2500">
+                </div>
+                <div class="input-group">
+                    <label for="sunday-input">Sunday (kcal)</label>
+                    <input type="number" id="sunday-input" name="sunday-input" value="2000">
+                </div>
+                <button onclick="updateBarChart()">Update Weekly Chart</button>
             </div>
 
         </div>
 
-        <!-- Calorie Input -->
-        <div class="input-container">
-            <h2>Enter Your Daily Macronutrient Intake</h2>
-            <div class="input-group">
-                <label for="protein-input">Protein (%)</label>
-                <input type="number" id="protein-input" name="protein-input" min="0" max="100" value="50">
-            </div>
-            <div class="input-group">
-                <label for="carbs-input">Carbohydrates (%)</label>
-                <input type="number" id="carbs-input" name="carbs-input" min="0" max="100" value="30">
-            </div>
-            <div class="input-group">
-                <label for="fats-input">Fats (%)</label>
-                <input type="number" id="fats-input" name="fats-input" min="0" max="100" value="20">
-            </div>
-            <button onclick="updatePieChart()">Update Daily Chart</button>
+        <div class="footer">
+            &copy; 2023 UMass Dining Companion
         </div>
 
-        <div class="input-container">
-            <h2>Enter Your Weekly Calorie Intake</h2>
-            <div class="input-group">
-                <label for="monday-input">Monday (kcal)</label>
-                <input type="number" id="monday-input" name="monday-input" value="2000">
-            </div>
-            <div class="input-group">
-                <label for="tuesday-input">Tuesday (kcal)</label>
-                <input type="number" id="tuesday-input" name="tuesday-input" value="2200">
-            </div>
-            <div class="input-group">
-                <label for="wednesday-input">Wednesday (kcal)</label>
-                <input type="number" id="wednesday-input" name="wednesday-input" value="2100">
-            </div>
-            <div class="input-group">
-                <label for="thursday-input">Thursday (kcal)</label>
-                <input type="number" id="thursday-input" name="thursday-input" value="2300">
-            </div>
-            <div class="input-group">
-                <label for="friday-input">Friday (kcal)</label>
-                <input type="number" id="friday-input" name="friday-input" value="2200">
-            </div>
-            <div class="input-group">
-                <label for="saturday-input">Saturday (kcal)</label>
-                <input type="number" id="saturday-input" name="saturday-input" value="2500">
-            </div>
-            <div class="input-group">
-                <label for="sunday-input">Sunday (kcal)</label>
-                <input type="number" id="sunday-input" name="sunday-input" value="2000">
-            </div>
-            <button onclick="updateBarChart()">Update Weekly Chart</button>
-        </div>
+        <!-- Include Chart.js Library -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+        <!-- Include External JavaScript File -->
+        <script src="script.js"></script>
     </div>
-
-    <div class="footer">
-        &copy; 2023 UMass Dining Companion
-    </div>
-
-    <!-- Include Chart.js Library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Include External JavaScript File -->
-    <script src="script.js"></script>
-
 </body>
 </html>
