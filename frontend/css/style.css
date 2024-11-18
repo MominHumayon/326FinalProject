@@ -1,4 +1,11 @@
-/* Base styles */
+:root {
+    --primary-color: #881c1c; /* UMass Amherst Maroon */
+    --secondary-color: #a83232; /* Lighter shade of maroon */
+    --background-color: #f8f9fa;
+    --text-color: #333;
+    --border-color: #e0e0e0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -9,22 +16,22 @@
 body {
     display: flex;
     min-height: 100vh;
-    background-color: #f4f4f9;
-    color: #333;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 /* Sidebar styles */
 .sidebar {
     width: 240px;
     background-color: #ffffff;
-    border-right: 1px solid #ddd;
+    border-right: 1px solid var(--border-color);
     padding: 1.5rem;
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
+    color: var(--primary-color);
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
@@ -48,12 +55,12 @@ body {
 
 .nav-item:hover {
     background-color: #f0f0f5;
-    color: #000;
+    color: var(--primary-color);
 }
 
 .nav-item.active {
-    background-color: #ddd;
-    color: #000;
+    background-color: var(--border-color);
+    color: var(--primary-color);
 }
 
 /* Main content styles */
@@ -70,6 +77,7 @@ body {
 
 .header h1 {
     font-size: 1.75rem;
+    color: var(--primary-color);
 }
 
 /* Goals grid */
@@ -84,12 +92,12 @@ body {
     background: #f9f9f9;
     border-radius: 10px;
     padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .goal-title {
     font-size: 1rem;
-    color: #888;
+    color: var(--secondary-color);
     margin-bottom: 0.5rem;
 }
 
@@ -97,6 +105,7 @@ body {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1rem;
+    color: var(--primary-color);
 }
 
 .goal-progress {
@@ -109,7 +118,7 @@ body {
 
 .progress-bar {
     height: 100%;
-    background: #4CAF50;
+    background: var(--primary-color);
     border-radius: 4px;
 }
 
@@ -124,12 +133,13 @@ body {
     background: #f9f9f9;
     border-radius: 10px;
     padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .chart-title {
     font-size: 1.25rem;
     margin-bottom: 1rem;
+    color: var(--primary-color);
 }
 
 canvas {
@@ -158,6 +168,7 @@ canvas {
     border-radius: 50%;
 }
 
+/* Weekly Nutrient Breakdown */
 .weekly-nutrient-breakdown {
     margin-top: 30px;
     text-align: left;
@@ -166,6 +177,7 @@ canvas {
 .weekly-nutrient-breakdown h3 {
     font-size: 1.5rem;
     margin-bottom: 5px;
+    color: var(--primary-color);
 }
 
 .weekly-nutrient-breakdown p {
@@ -202,7 +214,7 @@ canvas {
     border-radius: 50%;
 }
 
-.calories-color { background-color: #6C757D; }
-.proteins-color { background-color: #868E96; }
-.carbs-color { background-color: #ADB5BD; }
-.fats-color { background-color: #CED4DA; }
+.calories-color { background-color: #881c1c; } /* Maroon */
+.proteins-color { background-color: #a83232; } /* Lighter maroon */
+.carbs-color { background-color: #c44d4d; } /* Soft maroon */
+.fats-color { background-color: #d77373; } /* Light maroon */
