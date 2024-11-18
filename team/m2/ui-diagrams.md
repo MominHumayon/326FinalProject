@@ -1,65 +1,175 @@
- UI Diagrams
+UI Diagrams
+## User Profile Screen
 
-## Personalized Diet Plan Screen
+The **User Profile** screen enables users to input and manage their personal details such as name, height, weight, and dietary preferences. This information is crucial for creating personalized meal recommendations and tracking nutritional goals.
 
-The **Personalized Diet Plan** screen is the main interface where users can view their custom diet plans based on their physical stats and dietary preferences. After users input their details, they will see a breakdown of meals for the day, with each meal option sourced from UMass Dining. This screen is designed to offer a clear, personalized experience to guide students on what to eat.
+### Key Elements:
+1. **Input Fields**:
+   - **First Name**: A text field for the user to enter their first name.
+   - **Last Name**: A text field for the user to enter their last name.
+   - **Height**: Split input fields for feet and inches to record the user's height.
+   - **Weight**: A field to input weight in pounds.
+2. **Dietary Preferences**:
+   - A dropdown menu that allows users to select dietary restrictions or preferences (e.g., Vegetarian, Halal, None).
+3. **Save Profile Button**:
+   - A prominent maroon button that saves the user's input data when clicked.
+4. **Login Button**:
+   - An additional maroon button for users to log in, positioned below the profile save functionality.
 
-<img width="1229" alt="image" src="https://github.com/user-attachments/assets/b87f486c-e2f9-4585-b496-eeaaa49197ed">
-
-
-On this screen, users can interact with three main elements:
-
-1. **Meal Plan Overview**: At the top of the screen, users will see a list of meal options for breakfast, lunch, and dinner, each tailored to meet their dietary goals.
-2. **Nutritional Breakdown**: Next to each meal, a card displays calories, proteins, carbohydrates, and fats, allowing users to quickly assess the nutritional content.
-3. **Update Plan Button**: A prominent button labeled "Update Plan" allows users to modify their dietary preferences and recalculate their meal plan.
-
-This screen is designed to be the central hub of the user’s dietary management, offering a personalized breakdown of meal options that align with their nutrition goals.
-
-**Use Case**:
-
-A student looking to maintain their weight and focus on balanced nutrition can log in to the app and see meal suggestions for the day, complete with a breakdown of proteins, carbs, and fats for each meal. If they need to adjust their goals or update their physical stats, they can do so by clicking the "Update Plan" button.
-
----
-
-## Nutritional Information Search and Comparison Screen
-
-The **Nutritional Information Search and Comparison** screen allows users to search for specific meals or dishes available at UMass Dining and compare their nutritional values. The goal is to help students make informed decisions about what to eat.
-
-<img width="688" alt="image" src="https://github.com/user-attachments/assets/06c19d10-a5a5-4bd1-9838-275e75141187">
-
-
-On this screen, users can interact with the following elements:
-
-1. **Search Bar**: A search bar at the top allows users to input a dish name or select from a dropdown of popular UMass Dining meals.
-2. **Comparison Table**: Below the search bar, users can view a table comparing up to three meals, displaying calories, proteins, carbohydrates, and fats for each.
-3. **Add to Meal Plan Button**: Users can add their selected meal to their personalized diet plan by clicking the “Add to Plan” button next to the meal.
-
-This screen helps users easily compare meal options and make choices that align with their dietary needs.
-
-**Use Case**:
-
-A student interested in comparing the nutritional content of a burger, salad, and pasta dish can search for these meals, review their calories and macros, and select the best option for their dietary goals. They can then add it to their personalized plan for the day.
+### Use Case:
+A new user setting up their profile for the first time can fill in their personal information and dietary preferences. Once the data is saved, the system can generate tailored meal plans and recommendations based on their unique nutritional needs.
 
 ---
+## UMass Dining Companion - Calorie Tracker
 
-## Dietary Restriction Filter Screen
+The **UMass Dining Companion - Calorie Tracker** interface is designed to provide users with an easy way to monitor their daily and weekly calorie intake. Users can input their macronutrient percentages and view detailed graphs that update based on their entries.
 
-The **Dietary Restriction Filter** screen lets users input any dietary restrictions, such as vegan, halal, or gluten-free, and filters meal options to meet these criteria.
+![Screenshot 2024-11-17 at 10 50 03 PM](https://github.com/user-attachments/assets/99cfcc44-1881-4a47-b06e-e66c9982a217)
+![Screenshot 2024-11-17 at 10 50 21 PM](https://github.com/user-attachments/assets/cae1ac67-c62e-42f3-a4bd-6dd850502b0a)
 
-<img width="684" alt="image" src="https://github.com/user-attachments/assets/2993c7a5-f4fa-4289-9b22-9fab815c9d43">
 
 
-On this screen, users can interact with the following elements:
+### Key Elements of the Screen:
 
-1. **Restriction Checkboxes**: Users can select their dietary restrictions (e.g., vegan, gluten-free, halal) using checkboxes.
-2. **Filtered Meal Options**: Below the checkboxes, the screen displays meal options that adhere to the selected restrictions, ensuring compatibility with the user's dietary needs.
-3. **Save Preferences Button**: A button at the bottom allows users to save their preferences, which will be applied across all meal suggestions.
+1. **Daily Calorie Breakdown**:
+   - Users can enter their macronutrient percentages (Protein, Carbohydrates, Fats) to understand the proportion of each macronutrient in their daily diet.
+   - A button labeled "Update Daily Chart" is provided to refresh the daily nutrient breakdown graph based on the input.
 
-This screen ensures users can safely and easily filter out dishes that do not meet their dietary requirements.
+2. **Weekly Calorie Intake**:
+   - Users can log their calorie intake for each day of the week (Monday to Sunday).
+   - The interface calculates and displays the **Average Calories per Week** for easy tracking.
+   - A button labeled "Update Weekly Chart" allows users to update the weekly calorie intake graph.
 
-**Use Case**:
+### Use Case:
 
-A student with a gluten allergy can select the "Gluten-Free" checkbox, filtering out meals that contain gluten. They can then save their preferences and view only safe meal options from UMass Dining.
+This feature helps students track their nutrition by logging calorie and macronutrient intake, making it easy to adjust dietary habits and stay informed about their overall calorie consumption.
+
+---
+## Meal Information Cards
+
+The **Meal Information Cards** are designed to present detailed information about meal options, including their nutritional content, dietary restrictions, and ingredients. These cards provide a visual and textual overview of each meal, making it easy for users to choose meals that align with their dietary needs and preferences.
+
+![Screenshot 2024-11-17 at 10 51 58 PM](https://github.com/user-attachments/assets/093090fa-8c1e-4fc7-9b80-2c559869fa83)
+
+### Key Elements of the Meal Cards:
+
+1. **Meal Image**:
+   - A large, high-quality image of the meal is displayed at the top of each card, giving users a visual representation of the dish.
+
+2. **Meal Name and Details**:
+   - The name of the meal is displayed in an italicized, colored font (e.g., *Cheese Pizza*, *Turkey Breast*).
+   - Below the name, allergens are listed clearly (e.g., *Milk, Gluten, Soy, Corn, Wheat*).
+   - The dietary restriction of the meal is specified (e.g., *Halal*, *Vegetarian*).
+
+3. **Calorie Count**:
+   - The total calorie count for the meal is shown on the top-right side of the card in a stylized font (e.g., *Calories: 150*).
+
+4. **Macronutrient Breakdown**:
+   - The breakdown of fat, carbohydrates, and protein is displayed in small, bordered boxes with the nutrient values (e.g., *fat: 10, carbs: 15, prot: 6*).
+
+5. **Healthfulness Bar**:
+   - A horizontal bar chart at the bottom indicates the healthfulness of the meal. The bar is divided into segments, with some segments colored green to indicate the meal's healthfulness level.
+
+6. **Ingredients**:
+   - The ingredients used in the meal are listed at the very bottom of the card, providing transparency about what is in the dish (e.g., *John Cena, Mao Zedong, Yusuf Raza*).
+
+### Use Case:
+
+These meal cards are useful for students who want to quickly assess whether a meal fits their dietary needs and preferences, with clear indicators for healthfulness, allergens, and macronutrient content.
+---
+## Dining Hall Meals Screen
+
+The **Dining Hall Meals Screen** provides users with a simple and interactive interface to view meal options available at selected UMass dining halls based on the chosen date and time of day. The goal is to help students make informed decisions about their meals.
+
+![Screenshot 2024-11-17 at 10 54 29 PM](https://github.com/user-attachments/assets/f7a4be3c-fc0d-48ea-9287-3ed88f7691eb)
+
+### Key Elements of the Screen:
+
+1. **Header Section**:
+   - A bold maroon header at the top displays the title: *UMass Dieting Plan - Dining Hall Meals*.
+   - A subtitle provides instructions for the user: *Select a dining hall, date, and time of day to view the meals offered*.
+
+2. **Selection Options**:
+   - **Dining Hall Dropdown**: Allows users to select their preferred dining hall (e.g., *Worcester Dining Hall*).
+   - **Date Picker**: A date input field enables users to select the date for which they want to view meal options.
+   - **Time of Day Dropdown**: A dropdown menu provides options such as *Breakfast*, *Lunch*, or *Dinner*.
+
+3. **Meal Cards**:
+   - Each meal is displayed in a card format, which includes:
+     - **Image Placeholder**: A gray placeholder (200 x 150) for the meal image.
+     - **Meal Name**: Displayed in bold maroon text (e.g., *Steak*, *Mashed Potatoes*).
+     - **Calories**: The total calorie content is shown below the meal name (e.g., *600 cal*).
+     - **Macronutrient Details**: Below the calorie count, the protein, fat, and carbohydrate content are listed (e.g., *Protein: 40g, Fat: 30g, Carbs: 10g*).
+
+### Use Case:
+
+This screen is useful for students who want to plan their meals in advance, ensuring they are aware of the nutritional content of the available options. By selecting their dining hall, date, and meal time, they can easily browse through and choose meals that fit their dietary needs.
+
+
+---
+## Swipe and UCard Balance Tracker
+
+### UI Components:
+
+1. **Swipe Balance Box**:
+   - Displays the total number of meal swipes available.
+   - Includes decrement ("-") and increment ("+") buttons to manually adjust the swipe balance.
+   - Centered, clear typography with a maroon-themed background.
+
+2. **UCard Balance Box**:
+   - Shows the available UCard dollar balance.
+   - Features "-" and "+" buttons to adjust the UCard balance.
+   - Similar styling as the Swipe Balance Box for consistency.
+
+3. **Check History Button**:
+   - A button styled with a dark background and bold text, placed below the balance boxes.
+   - Clicking this button allows the user to view the history of their swipes and UCard usage.
+
+---
+## Usage History Graph
+
+### UI Components:
+
+1. **Graph Box**:
+   - Displays a line graph comparing the usage of meal swipes and UCard dollars over a 14-day period.
+   - The graph includes labeled axes: "Usage" on the y-axis and "Days" on the x-axis.
+   - Two legends, "Swipes" and "UCard Dollars," are color-coded and placed above the graph for easy reference.
+
+2. **Check History Button**:
+   - A bold, blue-outlined button located beneath the graph.
+   - Clicking this button provides detailed insights into the user’s swipe and UCard dollar history.
+
+![Screenshot 2024-11-17 at 10 56 49 PM](https://github.com/user-attachments/assets/c7a2ec11-0258-4f6d-b803-71f1b9eafd4a)
+
+![Screenshot 2024-11-17 at 10 56 57 PM](https://github.com/user-attachments/assets/14cd22fb-3f90-47c0-a289-5670e5060f7e)
+
+
+
+
+---
+## UMass Dining - Meal Recommender Screen
+
+The **UMass Dining - Meal Recommender** screen provides personalized meal suggestions for users based on their dietary preferences and nutritional needs. This UI is designed to enhance the dining experience by offering a variety of meal options available at different campus dining locations.
+
+![Screenshot 2024-11-17 at 10 37 27 PM](https://github.com/user-attachments/assets/6e4a6a4c-6b1e-4879-8f80-5e3c004a6a05)
+
+![Screenshot 2024-11-17 at 10 37 56 PM](https://github.com/user-attachments/assets/9f8e5b56-7b9e-42f0-b203-f633b131ccd6)
+
+
+
+### Key Features:
+1. **Your Preferences**: Users can select and save dietary options such as Vegetarian, Plant-Based, Halal, and more, which will filter meal recommendations to match their preferences.
+2. **Today's Recommendations**: A list of recommended meals is displayed, each with:
+   - The dining location where it is available.
+   - A detailed description of the meal, including preparation style and primary ingredients.
+   - A nutritional breakdown highlighting calories, protein, and carbohydrates.
+   - Labels for dietary compatibility (e.g., Vegetarian, Local, Sustainable).
+   - A carbon rating indicating the environmental impact of the meal.
+3. **Nutrition Summary**: Users can view their daily intake and remaining nutritional goals, such as total calories, protein, and carbs.
+4. **Sustainability and Sourcing Labels**: Meals feature additional information about sourcing practices, such as being locally sourced or antibiotic-free, to promote informed choices.
+
+### Use Case:
+A student who prioritizes sustainable dining and a high-protein diet can use this screen to select meals that align with their environmental values and dietary goals, ensuring a nutritious and eco-friendly dining experience.
 
 ---
 
