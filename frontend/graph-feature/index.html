@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UMass Dining Companion - Calorie Tracker</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            color: #000000;
+        }
+
+        header {
+            background-color: #881c1c; /* UMass Amherst Maroon */
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #881c1c;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* Graph Containers */
+        .graph-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .graph {
+            width: 45%;
+            margin: 20px 0;
+        }
+
+        .graph canvas {
+            background-color: #f5f5f5;
+            border: 1px solid #dddddd;
+            /* Set fixed size for the graphs */
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+        }
+
+        .average {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Input Styles */
+        .input-container {
+            margin: 20px 0;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .input-group input[type="number"] {
+            padding: 5px;
+            width: 100%;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .input-container button {
+            padding: 8px 12px;
+            font-size: 14px;
+            background-color: #881c1c;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .input-container button:hover {
+            background-color: #700f0f;
+        }
+
+        /* Footer Styles */
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #881c1c;
+            color: #ffffff;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 800px) {
+            .graph {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>UMass Dining Companion - Calorie Tracker</h1>
+    </header>
+
+    <div class="container">
+
+        <div class="graph-container">
+
+            <!-- Pie Chart -->
+            <div class="graph">
+                <h2>Daily Calorie Breakdown</h2>
+                <canvas id="pieChart" width="300" height="300"></canvas>
+            </div>
+
+            <!-- Bar Graph -->
+            <div class="graph">
+                <h2>Weekly Calorie Intake</h2>
+                <canvas id="barChart" width="300" height="300"></canvas>
+                <p class="average" id="averageCalories">Average Calories per Week: 0 kcal</p>
+            </div>
+
+        </div>
+
+        <!-- Calorie Input -->
+        <div class="input-container">
+            <h2>Enter Your Daily Macronutrient Intake</h2>
+            <div class="input-group">
+                <label for="protein-input">Protein (%)</label>
+                <input type="number" id="protein-input" name="protein-input" min="0" max="100" value="50">
+            </div>
+            <div class="input-group">
+                <label for="carbs-input">Carbohydrates (%)</label>
+                <input type="number" id="carbs-input" name="carbs-input" min="0" max="100" value="30">
+            </div>
+            <div class="input-group">
+                <label for="fats-input">Fats (%)</label>
+                <input type="number" id="fats-input" name="fats-input" min="0" max="100" value="20">
+            </div>
+            <button onclick="updatePieChart()">Update Daily Chart</button>
+        </div>
+
+        <div class="input-container">
+            <h2>Enter Your Weekly Calorie Intake</h2>
+            <div class="input-group">
+                <label for="monday-input">Monday (kcal)</label>
+                <input type="number" id="monday-input" name="monday-input" value="2000">
+            </div>
+            <div class="input-group">
+                <label for="tuesday-input">Tuesday (kcal)</label>
+                <input type="number" id="tuesday-input" name="tuesday-input" value="2200">
+            </div>
+            <div class="input-group">
+                <label for="wednesday-input">Wednesday (kcal)</label>
+                <input type="number" id="wednesday-input" name="wednesday-input" value="2100">
+            </div>
+            <div class="input-group">
+                <label for="thursday-input">Thursday (kcal)</label>
+                <input type="number" id="thursday-input" name="thursday-input" value="2300">
+            </div>
+            <div class="input-group">
+                <label for="friday-input">Friday (kcal)</label>
+                <input type="number" id="friday-input" name="friday-input" value="2200">
+            </div>
+            <div class="input-group">
+                <label for="saturday-input">Saturday (kcal)</label>
+                <input type="number" id="saturday-input" name="saturday-input" value="2500">
+            </div>
+            <div class="input-group">
+                <label for="sunday-input">Sunday (kcal)</label>
+                <input type="number" id="sunday-input" name="sunday-input" value="2000">
+            </div>
+            <button onclick="updateBarChart()">Update Weekly Chart</button>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        &copy; 2023 UMass Dining Companion
+    </div>
+
+    <!-- Include Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Include External JavaScript File -->
+    <script src="script.js"></script>
+
+</body>
+</html>
