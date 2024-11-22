@@ -19,10 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (counter %2 === 0) {
             nav.style.display = "none"; 
             hideButton.style.position = "absolute";
-            hideButton.style.left = "5px";
+            hideButton.style.left = "2px";
             hideButton.innerText = ">";
             document.getElementById("hideWrapper").style.height = "100vh";
             document.getElementById("hideWrapper").style.width = "0px";
+            document.getElementById("hideWrapper").style.paddingRight = "15px";
             document.getElementById("hideWrapper").style.borderRight = "thick double #000000";
         }
         else {
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hideButton.style.left = "130px";
             hideButton.innerText = "<";
             document.getElementById("hideWrapper").style.borderRight = "none";
+            document.getElementById("hideWrapper").style.paddingRight = "0px";
         }
         counter++;
     });

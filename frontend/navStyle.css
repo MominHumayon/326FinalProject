@@ -3,19 +3,21 @@
     width: 150px;
     height: 100vh;
     border-right: thick double #000000;
-    background-color: cyan;
+    background-color: maroon;
 }
 
 #navigationStyle button {
-    background-color:rgb(119, 201, 119);
+    background-color:maroon;
     border-radius:6px;
+    color:white;
     margin:6px;
     padding: 10px;
     cursor: pointer;
+    font-weight:600;
 }
 
 #navigationStyle button:hover {
-    color:blue;
+    color:cyan;
     background-color:darkgreen;
     border: solid yellow;
 }
