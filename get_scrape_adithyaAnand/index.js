@@ -15,13 +15,13 @@ async function help(){
 
     await page.goto('https://get.cbord.com/umass/full/prelogin.php');
     //  const b = (await page.$$("//*[text()='Click here to login']"))[0];
-    const b = await page.evaluateHandle(() =>
+    const login = await page.evaluateHandle(() =>
         Array.from(document.querySelectorAll("a")).find(
             el => el.textContent.trim() === "Click here to login"
         )
     );
-    if (b) {
-        await b.click(); // Click the login link
+    if (login) {
+        await login.click(); // Click the login link
         console.log("Login button clicked.");
     } else {
         console.error("Login link not found.");
@@ -75,13 +75,46 @@ async function help(){
 
         console.log("Login process completed.");
 
-        // Scrape the values we need
+        // Scrape the UCard Swipes and UCard debit balance
         const data = await page.evaluate(() => {
             return Array.from(document.querySelectorAll('td.last-child.balance'))
                 .map(element => element.textContent.trim());
         });
     
         console.log('Scraped Data:', data);
+
+        // Scrape the history of UCard Swipes and UCard balance changes over the past 7 days. 
+        await page.goto('https://get.cbord.com/umass/full/history.php', {
+            waitUntil: 'networkidle2' // Ensure the page is fully loaded
+        });
+        console.log("Navigated to the transaction history page.");
+
+        // Wait for the historyTable div to load
+        await page.waitForSelector('#historyTable', { timeout: 15000 });
+        console.log("historyTable is loaded.");
+        
+        const populateLast7Days = () => {
+            const today = new Date();
+            const daysObject = {};
+        
+            const options = { year: 'numeric', month: 'long', day: 'numeric' }; // Format: "December 10, 2024"
+            const formatter = new Intl.DateTimeFormat('en-US', options);
+        
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(today); // Create a copy of the current date
+                date.setDate(today.getDate() - i); // Subtract days
+                const formattedDate = formatter.format(date); // Format to "Month Day, Year"
+                daysObject[formattedDate] = null; // Initialize value (can be updated later)
+            }
+        
+            return daysObject;
+        };
+        
+        const last7Days = populateLast7Days();
+
+        
+
+
     } catch (error) {
         console.error("Error during Microsoft login:", error);
     }
