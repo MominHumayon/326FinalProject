@@ -83,34 +83,35 @@ async function help(){
     
         console.log('Scraped Data:', data);
 
-        // Scrape the history of UCard Swipes and UCard balance changes over the past 7 days. 
-        await page.goto('https://get.cbord.com/umass/full/history.php', {
-            waitUntil: 'networkidle2' // Ensure the page is fully loaded
-        });
-        console.log("Navigated to the transaction history page.");
+        // Scrape the history of UCard Swipes and UCard balance changes over the past 7 days. (Not implmented, will add if I have the time. Ended up being harder than expected)
+        // await page.goto('https://get.cbord.com/umass/full/history.php', {
+        //     waitUntil: 'networkidle2' // Ensure the page is fully loaded
+        // });
+        // console.log("Navigated to the transaction history page.");
 
-        // Wait for the historyTable div to load
-        await page.waitForSelector('#historyTable', { timeout: 15000 });
-        console.log("historyTable is loaded.");
+        // // Wait for the historyTable div to load
+        // await page.waitForSelector('#historyTable', { timeout: 15000 });
+        // console.log("historyTable is loaded.");
         
-        const populateLast7Days = () => {
-            const today = new Date();
-            const daysObject = {};
+        // const populateLast7Days = () => {
+        //     const today = new Date();
+        //     const daysObject = {};
         
-            const options = { year: 'numeric', month: 'long', day: 'numeric' }; // Format: "December 10, 2024"
-            const formatter = new Intl.DateTimeFormat('en-US', options);
+        //     const options = { year: 'numeric', month: 'long', day: 'numeric' }; // Format: "December 10, 2024"
+        //     const formatter = new Intl.DateTimeFormat('en-US', options);
         
-            for (let i = 0; i < 7; i++) {
-                const date = new Date(today); // Create a copy of the current date
-                date.setDate(today.getDate() - i); // Subtract days
-                const formattedDate = formatter.format(date); // Format to "Month Day, Year"
-                daysObject[formattedDate] = null; // Initialize value (can be updated later)
-            }
+        //     for (let i = 0; i < 7; i++) {
+        //         const date = new Date(today); // Create a copy of the current date
+        //         date.setDate(today.getDate() - i); // Subtract days
+        //         const formattedDate = formatter.format(date); // Format to "Month Day, Year"
+        //         daysObject[formattedDate] = null; // Initialize value (can be updated later)
+        //     }
         
-            return daysObject;
-        };
+        //     return daysObject;
+        // };
         
-        const last7Days = populateLast7Days();
+        // const last7Days = populateLast7Days();
+        // console.log(last7Days);
 
         
 
