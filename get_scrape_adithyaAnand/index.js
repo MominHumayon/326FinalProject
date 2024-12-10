@@ -32,22 +32,22 @@ async function help(){
     // Wait for navigation
     await page.waitForNavigation({ waitUntil: 'networkidle2' });
 
-    // Preform Microsoft Login
+    // Preform Microsoft Login, semi manual. Automatic = email and password fill, Manual = password page navigation and 2FA
     try {
         // Step 1: Enter email
-        // await page.waitForSelector('input[type="email"]', { timeout: 10000 });
-        // await page.type('input[type="email"]', 'adithyaanand@umass.edu');
-        // await page.click('input[type="submit"]');
-        // page.waitForNavigation({ waitUntil: 'networkidle2' });
-        // console.log("Email submitted.");
+        await page.waitForSelector('input[type="email"]', { timeout: 10000 });
+        await page.type('input[type="email"]', 'adithyaanand@umass.edu');
+        await page.click('input[type="submit"]');
+        page.waitForNavigation({ waitUntil: 'networkidle2' });
+        console.log("Email submitted.");
 
 
-        // // Step 2: Wait for password input
-        // await page.waitForSelector('input[type="password"]', { timeout: 10000 });
-        // await page.type('input[type="password"]', 'Katytexas!7');
-        // await page.click('input#idSIButton9[value="Next"]');
-        // page.waitForNavigation({ waitUntil: 'networkidle2' });
-        // console.log("Password submitted and sign-in button clicked.");
+        // Step 2: Wait for password input, issue is I cant find out how to click the submit button on the password page. So after this manual control from user. 
+        await page.waitForSelector('input[type="password"]', { timeout: 10000 });
+        await page.type('input[type="password"]', 'Katytexas!7');
+        await page.click('input[type="submit"]');
+        page.waitForNavigation({ waitUntil: 'networkidle2' });
+        console.log("Password submitted and sign-in button clicked.");
 
 
         // console.log("Password submitted.");
@@ -60,7 +60,7 @@ async function help(){
 
 
         // Navigate to Microsoft login
-        console.log("Navigated to Microsoft login page.");
+        // console.log("Navigated to Microsoft login page.");
         console.log("Please complete the login manually.");
 
         // Allow the user to complete the login manually
@@ -75,6 +75,13 @@ async function help(){
 
         console.log("Login process completed.");
 
+        // Scrape the values we need
+        const data = await page.evaluate(() => {
+            return Array.from(document.querySelectorAll('td.last-child.balance'))
+                .map(element => element.textContent.trim());
+        });
+    
+        console.log('Scraped Data:', data);
     } catch (error) {
         console.error("Error during Microsoft login:", error);
     }
