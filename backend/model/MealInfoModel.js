@@ -129,7 +129,7 @@ class _SQLiteMealModel {
   }
 
   async update(newInfo) {
-    const mealu = await Meal.findByPk(name);
+    const mealu = await Meal.findByPk(newInfo.name);
     if (!mealu) {
       return null;
     }
@@ -148,7 +148,5 @@ class _SQLiteMealModel {
     return mealName;
   }
 }
-
-new _SQLiteMealModel().init()
 
 export default _SQLiteMealModel;
