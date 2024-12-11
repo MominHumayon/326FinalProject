@@ -29,7 +29,7 @@ const Meal = sequelize.define("Meal", {
     type:DataTypes.ARRAY,
     allowNull:false,
   },
-  healthfullness: {
+  healthfulness: {
     type:DataTypes.INTEGER,
     allowNull:false,
   },
@@ -58,10 +58,15 @@ const Meal = sequelize.define("Meal", {
   halls: {
     type: DataTypes.ARRAY,
     allowNull: false,
+  },
+
+  carbon: {
+    type: DataTypes.STRING,
+    allowNull:false,
   }
 });
 
-class _SQLiteTaskModel {
+class _SQLiteMealModel {
   constructor() {}
 
   async init(fresh = false) {
@@ -94,6 +99,7 @@ class _SQLiteTaskModel {
             dates:["12-11-24"],
             selected:["false"],
             halls:[["Worcester","Franklin"]],
+            carbon: "A",
             image:null,
             mime:null
         }
@@ -106,8 +112,20 @@ class _SQLiteTaskModel {
     return await Meal.create(mealInfo);
   }
 
-  async read(name) {
-      return await Meal.findByPk(name);
+  async read(searchObj) {
+    const params = [searchObj.dates,searchObj.allergens,searchObj.ingredients,searchObj.halls,searchObj.carbon];
+    const paramNames = ["dates","allergenInfo","ingredients","halls","carbon"];
+    let foundMeals = await Meal.findAll();
+    for (let i = 0; i < 5; i++) {
+        if (i < 4 && params[i].length > 0) {
+            foundMeals = foundMeals.filter(x => searchObj.params[i].every(elem => x.paramNames[i].includes(elem)));
+        }
+        else if (searchObj.carbon !== "A") {
+            foundMeals = foundMeals.filter(x => x.carbon === searchObj.carbon);
+        }
+    }
+    return foundMeals;
+        
   }
 
   async update(newInfo) {
@@ -120,17 +138,17 @@ class _SQLiteTaskModel {
     return mealu;
   }
 
-  async delete(meal = null) {
-    if (meal === null) {
+  async delete(mealName = null) {
+    if (mealName === null) {
       await Meal.destroy({ truncate: true });
       return;
     }
 
-    await Meal.destroy({ where: { name: meal.name } });
-    return meal;
+    await Meal.destroy({ where: { name: mealName.name } });
+    return mealName;
   }
 }
 
-const SQLiteTaskModel = new _SQLiteTaskModel();
+new _SQLiteMealModel().init()
 
-export default SQLiteTaskModel;
+export default _SQLiteMealModel;
