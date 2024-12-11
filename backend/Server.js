@@ -1,6 +1,6 @@
 // Server.js
 import express from "express";
-import TaskRoutes from "./routes/TaskRoutes.js";
+import MealRoutes from "./routes/MealRoutes.js";
 
 class Server {
   constructor() {

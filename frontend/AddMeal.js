@@ -36,6 +36,12 @@ class Meal {
             if (obj[key] < 0.0) {
                 throw new Error("Missing value for " + key);
             }
+
+            if (typeof(obj[key]) === "string" && key !== "servingSize" && key !== "cals") {
+                const regex = "[mg]";
+                obj[key] = obj[key].substring(0,obj[key].search(regex));
+                obj[key] = parseFloat(obj[key]);
+            }
         }
         this.nutritionInfo = obj;
         return this;
@@ -79,6 +85,7 @@ class Meal {
             throw new Error("Carbon rating must be 1 character");
         }
         this.carbon = str;
+        return this;
     }
 
     addSelected(arr) {
@@ -86,6 +93,7 @@ class Meal {
             throw new Error("arr must be an array of booleans");
         }
         this.selected = arr;
+        return this;
     }
 
 }
@@ -135,11 +143,14 @@ const nutrition = [
         "prot":10
     }
 ];
+
+
 const healthful = [1,2,3,4];
 const ingredients = [["John Cena, Mao Zedong, Yusuf Raza"], ["Sameen Shaik, Aareb Chowdhury, Harambe"], ["Peanut, Matthew Perry, Youre Mother"], ["Stallion", "Monke", "Controller"]];
 const diet = [["Halal"],["Vegetarian"],["Whole Grain"],["Plant Based"]];
 const properties = ["fat","carbs","prot"];
 
+/*
 
 for (let i = 0; i < 4; i++) {
     mealArr[i] = new Meal(mealNames[i]);
@@ -252,3 +263,6 @@ for (let i = 0; i <4; i++) {
     elem.appendChild(foodImg);
     elem.appendChild(mealInfo);
 }
+    */
+
+export default Meal;

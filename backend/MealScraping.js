@@ -16,10 +16,21 @@ const url = 'https://umassdining.com/locations-menus/worcester/menu'; // Replace
   const meals = elem.querySelectorAll(".lightbox-nutrition");
   const times = ["lunch_menu", "dinner_menu","breakfast_menu"];
   const mealArr = new Array<Meal>(50);
+
+  let obj = {};
   
-
-
-
-  
-
-  console.log(meals.length);
+  for (let i = 0; i < meals.length; i++) {
+    obj = new Meal(meals[i].querySelector("a").textContent);
+    const currentMeal = meals[i].querySelector("a");
+    obj.addNutInfo({
+      "servingSize": currentMeal.getAttribute("data-serving-size"),
+      "cals" :parseInt(currentMeal.getAttribute("data-calories")),
+      "fat": currentMeal.getAttribute("data-total-fat"),
+      "chol":currentMeal.getAttribute("data-cholesterol"),
+      "sodium":currentMeal.getAttribute("data-sodium"),
+      "carbs":currentMeal.getAttribute("data-total-carb"),
+      "sugar":currentMeal.getAttribute("data-sugars"),
+      "prot":currentMeal.getAttribute("data-protein"),
+    });
+    console.log((obj.nutritionInfo.cals));
+  }
