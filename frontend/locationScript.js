@@ -30,9 +30,12 @@ function displayMeals() {
     }
 
     const meals = diningHalls[selectedHall]?.[selectedDate]?.[selectedTime];
+    const mealarray = all.filter(meal => {
+        meal.hall == selectedHall && meal.date == selectedDate
+    });
 
-    if (meals && meals.length > 0) {
-        meals.forEach((meal) => {
+    if (mealarray && mealarray.length > 0) {
+        mealarray.forEach((meal) => {
             const card = document.createElement("a");
             card.className = "meal-card";
             card.href = `dummy URL`; // insert URL from Momin's meal information section

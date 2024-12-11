@@ -128,6 +128,7 @@ async function imgScrape(mealName) {
     const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
     
+    // replaces whitespace with + because URL cannot contain whitespace
     const query = mealName.replace(' ', '+');
     await page.goto(`https://images.search.yahoo.com/search/images;?p=${query}`);
     await page.waitForSelector('img');
@@ -143,8 +144,8 @@ async function imgScrape(mealName) {
 
 import Base64Converter from "./base64.js"
 
+// update each meal in database with image
 meals.forEach(m => {
-    diningHalls[m.hall][m.date][m.time].push(m);
     
     (async () => {
         const imageUrl = await imgScrape(m.name);
@@ -158,6 +159,7 @@ meals.forEach(m => {
             mimetype: blob.type
         }
         
+        // change meal data with "PATCH"
         const res = await fetch("/v1/mealStore", {
             method: "PATCH",
             headers: {
