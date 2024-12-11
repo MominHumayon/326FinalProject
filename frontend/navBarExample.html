@@ -737,7 +737,7 @@
     </div>
 
 
-    <div id="goal" class = "view" style="display:none">
+    {% comment %} <div id="goal" class = "view" style="display:none">
         <div id ="tawsif">
             <div class="container">
                 <header>
@@ -919,7 +919,186 @@
             updateGoals();
             document.getElementById('goalMenu').addEventListener('change', updateGoals);
         </script>
+    </div> {% endcomment %}
+
+    <div id="goal" class="view" style="display:none">
+        <div id="tawsif">
+            <div class="container">
+                <header>
+                    <h1>UMass Dieting Companion</h1>
+                    <p>Calorie and Nutrient Intake Tracking</p>
+                </header>
+    
+                <!-- Goal Selection -->
+                <div class="goal-selection">
+                    <label for="goalMenu">Select Your Goal: </label>
+                    <select id="goalMenu">
+                        <option value="bulking">Bulking</option>
+                        <option value="cutting">Cutting</option>
+                        <option value="maintenance">Maintenance</option>
+                    </select>
+                </div>
+    
+                <div class="dashboard">
+                    <div class="nutrient-summary">
+                        <div class="nutrient-card calories">
+                            <h3>Calories</h3>
+                            <p><strong id="calorie-amount">0</strong> / <span id="calorie-goal">0</span> kcal</p>
+                            <div class="progress-bar">
+                                <div class="progress" id="calorie-progress" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                        <div class="nutrient-card protein">
+                            <h3>Protein</h3>
+                            <p><strong id="protein-amount">0</strong> / <span id="protein-goal">0</span> g</p>
+                            <div class="progress-bar">
+                                <div class="progress" id="protein-progress" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                        <div class="nutrient-card carbs">
+                            <h3>Carbohydrates</h3>
+                            <p><strong id="carb-amount">0</strong> / <span id="carb-goal">0</span> g</p>
+                            <div class="progress-bar">
+                                <div class="progress" id="carb-progress" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                        <div class="nutrient-card fat">
+                            <h3>Fat</h3>
+                            <p><strong id="fat-amount">0</strong> / <span id="fat-goal">0</span> g</p>
+                            <div class="progress-bar">
+                                <div class="progress" id="fat-progress" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- Weekly Calorie Graph -->
+                    <div class="calorie-graph">
+                        <h3>Weekly Calorie Intake</h3>
+                        <div class="graph" id="weekly-graph"></div>
+                        <div class="average-label" id="weekly-average">Weekly Average: 0 kcal</div>
+                    </div>
+                </div>
+    
+                <!-- Weekly Nutrient Breakdown -->
+                <div class="weekly-nutrient-breakdown">
+                    <h3>Weekly Nutrient Breakdown</h3>
+                    <p>Current vs. Recommended</p>
+                    <div class="donut-chart-container">
+                        <div>
+                            <canvas id="currentNutrientDonutChart" width="150" height="150"></canvas>
+                            <p style="text-align: center;">Current</p>
+                        </div>
+                        <div>
+                            <canvas id="recommendedNutrientDonutChart" width="150" height="150"></canvas>
+                            <p style="text-align: center;">Recommended</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <script>
+            const nutrientColors = ['#881c1c', '#a83232', '#c44d4d', '#9b59b6'];
+    
+            // Fetch user goals from backend
+            async function fetchGoals(userId) {
+                const response = await fetch(`http://localhost:5000/api/goals/${userId}`);
+                return await response.json();
+            }
+    
+            // Fetch weekly nutrition data from backend
+            async function fetchWeeklyData(userId) {
+                const response = await fetch(`http://localhost:5000/api/nutrition/${userId}/week`);
+                return await response.json();
+            }
+    
+            // Update progress bars
+            function updateProgressBars(currentIntake, goalData) {
+                document.getElementById('calorie-amount').textContent = currentIntake.calories;
+                document.getElementById('protein-amount').textContent = currentIntake.protein;
+                document.getElementById('carb-amount').textContent = currentIntake.carbs;
+                document.getElementById('fat-amount').textContent = currentIntake.fat;
+    
+                document.getElementById('calorie-progress').style.width = (currentIntake.calories / goalData.calories * 100) + '%';
+                document.getElementById('protein-progress').style.width = (currentIntake.protein / goalData.protein * 100) + '%';
+                document.getElementById('carb-progress').style.width = (currentIntake.carbs / goalData.carbs * 100) + '%';
+                document.getElementById('fat-progress').style.width = (currentIntake.fat / goalData.fat * 100) + '%';
+            }
+    
+            // Update weekly graph
+            function updateWeeklyGraph(data) {
+                const graphContainer = document.getElementById('weekly-graph');
+                graphContainer.innerHTML = '';
+                let totalCalories = 0;
+    
+                data.forEach(day => {
+                    const bar = document.createElement('div');
+                    bar.className = 'bar';
+                    bar.style.height = `${(day.calories / 2500) * 100}%`; // Assume 2500 as max for visualization
+                    bar.title = `${day.date}: ${day.calories} kcal`;
+                    bar.innerHTML = `<span class="bar-label">${day.calories}</span>`;
+                    graphContainer.appendChild(bar);
+                    totalCalories += day.calories;
+                });
+    
+                const averageCalories = totalCalories / data.length;
+                document.getElementById('weekly-average').textContent = `Weekly Average: ${averageCalories.toFixed(2)} kcal`;
+            }
+    
+            // Update charts
+            function drawDonutChart(canvasId, data, colors) {
+                const canvas = document.getElementById(canvasId);
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return;
+    
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const radius = Math.min(canvas.width, canvas.height) / 2;
+                const innerRadius = radius * 0.5;
+                let startAngle = 0;
+    
+                data.forEach((percentage, index) => {
+                    const sliceAngle = (percentage / 100) * 2 * Math.PI;
+                    ctx.fillStyle = colors[index];
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+                    ctx.arc(centerX, centerY, innerRadius, startAngle + sliceAngle, startAngle, true);
+                    ctx.closePath();
+                    ctx.fill();
+                    startAngle += sliceAngle;
+                });
+            }
+    
+            async function updateDashboard(userId) {
+                const goals = await fetchGoals(userId);
+                const weeklyData = await fetchWeeklyData(userId);
+    
+                // Assume current intake is today's data
+                const currentIntake = weeklyData[weeklyData.length - 1]?.nutrition || {
+                    calories: 0, protein: 0, carbs: 0, fat: 0
+                };
+    
+                updateProgressBars(currentIntake, goals);
+                updateWeeklyGraph(weeklyData);
+    
+                // Draw charts
+                const currentPercentages = calculatePercentages(currentIntake);
+                const recommendedPercentages = calculatePercentages(goals);
+    
+                drawDonutChart('currentNutrientDonutChart', currentPercentages, nutrientColors);
+                drawDonutChart('recommendedNutrientDonutChart', recommendedPercentages, nutrientColors);
+            }
+    
+            document.getElementById('goalMenu').addEventListener('change', () => {
+                const selectedGoal = document.getElementById('goalMenu').value;
+                updateDashboard('user123'); // Replace 'user123' with the actual userId
+            });
+    
+            // Initial dashboard update
+            updateDashboard('user123'); // Replace 'user123' with the actual userId
+        </script>
     </div>
+    
 
 
     <div id="expense" class = "view" style="display:none">
