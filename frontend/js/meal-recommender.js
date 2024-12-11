@@ -1,165 +1,115 @@
-// Constants
-const DINING_LOCATIONS = {
-    worcester: "Worcester Dining Commons",
-    frank: "Franklin Dining Commons",
-    hamp: "Hampshire Dining Commons",
-    berk: "Berkshire Dining Commons"
-};
-
-// Sample meal data with diverse options
-const SAMPLE_MEALS = [
-    {
-        name: "Worcester Stir Fry Bowl",
-        location: DINING_LOCATIONS.worcester,
-        calories: 550,
-        protein: 35,
-        carbs: 45,
-        fat: 20,
-        isVegetarian: true,
-        isPlantBased: false,
-        isLocal: true,
-        isSustainable: true,
-        isHalal: true,
-        isWholeGrain: false,
-        isAntibioticFree: true,
-        carbonRating: 'A',
-        image: "/api/placeholder/60/60",
-        description: "Fresh vegetables and your choice of protein stir-fried to perfection"
-    },
-    {
-        name: "Franklin Local Harvest Bowl",
-        location: DINING_LOCATIONS.frank,
-        calories: 480,
-        protein: 22,
-        carbs: 65,
-        fat: 18,
-        isVegetarian: true,
-        isPlantBased: true,
-        isLocal: true,
-        isSustainable: true,
-        isHalal: true,
-        isWholeGrain: true,
-        isAntibioticFree: true,
-        carbonRating: 'A',
-        image: "/api/placeholder/60/60",
-        description: "Locally sourced quinoa bowl with roasted seasonal vegetables and tahini dressing"
-    },
-    {
-        name: "Hampshire Grilled Chicken",
-        location: DINING_LOCATIONS.hamp,
-        calories: 420,
-        protein: 38,
-        carbs: 12,
-        fat: 25,
-        isVegetarian: false,
-        isPlantBased: false,
-        isLocal: true,
-        isSustainable: true,
-        isHalal: true,
-        isWholeGrain: false,
-        isAntibioticFree: true,
-        carbonRating: 'B',
-        image: "/api/placeholder/60/60",
-        description: "Antibiotic-free chicken breast with herbs from our campus garden"
-    },
-    {
-        name: "Berkshire Beef Burger",
-        location: DINING_LOCATIONS.berk,
-        calories: 650,
-        protein: 45,
-        carbs: 35,
-        fat: 38,
-        isVegetarian: false,
-        isPlantBased: false,
-        isLocal: true,
-        isSustainable: false,
-        isHalal: true,
-        isWholeGrain: false,
-        isAntibioticFree: true,
-        carbonRating: 'D',
-        image: "/api/placeholder/60/60",
-        description: "Local grass-fed beef burger with artisanal toppings"
-    },
-    {
-        name: "Plant-Based Power Bowl",
-        location: DINING_LOCATIONS.worcester,
-        calories: 520,
-        protein: 24,
-        carbs: 72,
-        fat: 22,
-        isVegetarian: true,
-        isPlantBased: true,
-        isLocal: true,
-        isSustainable: true,
-        isHalal: true,
-        isWholeGrain: true,
-        isAntibioticFree: true,
-        carbonRating: 'A',
-        image: "/api/placeholder/60/60",
-        description: "Protein-rich chickpeas, quinoa, and local vegetables with tahini dressing"
-    },
-    {
-        name: "Sustainable Seafood Plate",
-        location: DINING_LOCATIONS.frank,
-        calories: 450,
-        protein: 32,
-        carbs: 35,
-        fat: 20,
-        isVegetarian: false,
-        isPlantBased: false,
-        isLocal: false,
-        isSustainable: true,
-        isHalal: true,
-        isWholeGrain: false,
-        isAntibioticFree: true,
-        carbonRating: 'B',
-        image: "/api/placeholder/60/60",
-        description: "Sustainably sourced cod with seasonal vegetables"
-    },
-    // Add more sample meals as needed
-];
-
 class UIManager {
     constructor() {
+        console.log('Initializing UIManager...');
+        // Initialize state
+        this.currentLocation = 'worcester';
+        this.currentPeriod = this.getCurrentMealPeriod();
+        this.baseUrl = 'http://localhost:4000'; // Add base URL
+        
+        // Setup UI
         this.setupEventListeners();
-        // Load initial recommendations immediately
+        this.setupLocationSelector();
         this.loadInitialRecommendations();
     }
 
+    getCurrentMealPeriod() {
+        const hour = new Date().getHours();
+        if (hour < 11) return 'breakfast';
+        if (hour < 15) return 'lunch';
+        if (hour < 21) return 'dinner';
+        return 'latenight';
+    }
+
+    setupLocationSelector() {
+        console.log('Setting up location selector...');
+        const locationSelector = document.getElementById('location-selector');
+        if (locationSelector) {
+            // Clear existing options
+            locationSelector.innerHTML = '';
+            
+            // Add options for each dining location
+            const locations = {
+                worcester: "Worcester Dining Commons",
+                frank: "Franklin Dining Commons",
+                hamp: "Hampshire Dining Commons",
+                berk: "Berkshire Dining Commons"
+            };
+
+            Object.entries(locations).forEach(([id, name]) => {
+                const option = document.createElement('option');
+                option.value = id;
+                option.textContent = name;
+                locationSelector.appendChild(option);
+            });
+
+            locationSelector.value = this.currentLocation;
+            locationSelector.addEventListener('change', (e) => {
+                console.log('Location changed to:', e.target.value);
+                this.currentLocation = e.target.value;
+                this.updateRecommendations();
+            });
+        } else {
+            console.error('Location selector not found in DOM');
+        }
+    }
+
     setupEventListeners() {
-        // Listen for changes in dietary preferences
+        console.log('Setting up event listeners...');
+        
+        // Period selector
+        const periodSelector = document.getElementById('period-selector');
+        if (periodSelector) {
+            periodSelector.value = this.currentPeriod;
+            periodSelector.addEventListener('change', (e) => {
+                console.log('Period changed to:', e.target.value);
+                this.currentPeriod = e.target.value;
+                this.updateRecommendations();
+            });
+        }
+
+        // Dietary preferences
         document.querySelectorAll('input[name="dietary"]').forEach(input => {
             input.addEventListener('change', () => this.updateRecommendations());
         });
 
-        // Listen for changes in sourcing preferences
+        // Sourcing preferences
         document.querySelectorAll('input[name="sourcing"]').forEach(input => {
             input.addEventListener('change', () => this.updateRecommendations());
         });
 
-        // Listen for changes in carbon rating
+        // Carbon rating
         document.querySelectorAll('input[name="carbon"]').forEach(input => {
             input.addEventListener('change', () => this.updateRecommendations());
         });
-
-        // Listen for form submission
-        const form = document.querySelector('.preferences-card form');
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.updateRecommendations();
-            });
-        }
     }
 
-    async loadInitialRecommendations() {
-        const defaultPreferences = {
-            dietaryPreferences: [],
-            sourcingPreferences: [],
-            carbonRating: 'none'
-        };
-        
-        this.displayRecommendations(this.generateRecommendations(SAMPLE_MEALS, defaultPreferences));
+    async fetchMenuData() {
+        try {
+            const url = `${this.baseUrl}/api/menus/${this.currentLocation}/${this.currentPeriod}`;
+            console.log('Fetching from URL:', url);
+
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                },
+                mode: 'cors'
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            console.log('Received data:', data);
+            return data;
+        } catch (error) {
+            console.error('Fetch error details:', {
+                message: error.message,
+                stack: error.stack
+            });
+            throw error;
+        }
     }
 
     async getPreferences() {
@@ -205,17 +155,42 @@ class UIManager {
         return filteredMeals.slice(0, 3); // Return top 3 recommendations
     }
 
+    async loadInitialRecommendations() {
+        console.log('Loading initial recommendations...');
+        await this.updateRecommendations();
+    }
+
     async updateRecommendations() {
+        console.log('Starting updateRecommendations...');
         const container = document.getElementById('meal-recommendations');
-        if (!container) return;
+        if (!container) {
+            console.error('Container not found');
+            return;
+        }
 
         try {
+            container.innerHTML = '<div class="loading">Loading recommendations...</div>';
+            
+            console.log('Fetching menu data...');
+            const menuItems = await this.fetchMenuData();
+            console.log('Got menu items:', menuItems);
+            
+            console.log('Getting preferences...');
             const preferences = await this.getPreferences();
-            const recommendations = this.generateRecommendations(SAMPLE_MEALS, preferences);
+            console.log('Got preferences:', preferences);
+            
+            console.log('Generating recommendations...');
+            const recommendations = this.generateRecommendations(menuItems, preferences);
+            console.log('Generated recommendations:', recommendations);
+            
             this.displayRecommendations(recommendations);
         } catch (error) {
-            console.error('Error updating recommendations:', error);
-            container.innerHTML = '<div class="error">Error loading recommendations</div>';
+            console.error('Error in updateRecommendations:', error);
+            container.innerHTML = `
+                <div class="error">
+                    <p>Error loading recommendations: ${error.message}</p>
+                    <p>Please check the console for more details.</p>
+                </div>`;
         }
     }
 
@@ -237,12 +212,12 @@ class UIManager {
         container.innerHTML = recommendations.map(meal => `
             <div class="meal-card">
                 <div class="meal-card-header">
-                    <img src="${meal.image}" alt="${meal.name}" class="meal-image">
+                    <img src="/api/placeholder/60/60" alt="${meal.name}" class="meal-image">
                     <div class="meal-info">
                         <div class="meal-name">${meal.name}</div>
                         <div class="meal-location">
                             <i class="fas fa-map-marker-alt"></i>
-                            ${meal.location}
+                            ${meal.category || 'Main Menu'}
                         </div>
                     </div>
                 </div>
@@ -287,71 +262,6 @@ class UIManager {
 
 // Initialize when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing application...');
     new UIManager();
 });
-
-// Add necessary styles
-const styles = `
-    .meal-card {
-        background: white;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .meal-image {
-        width: 80px;
-        height: 80px;
-        border-radius: 8px;
-        object-fit: cover;
-    }
-
-    .meal-badges {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-top: 1rem;
-    }
-
-    .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.25rem;
-        padding: 0.25rem 0.75rem;
-        border-radius: 1rem;
-        font-size: 0.8rem;
-        background-color: var(--light-gray);
-        color: var(--umass-gray);
-    }
-
-    .carbon-badge {
-        padding: 0.25rem 0.75rem;
-        border-radius: 1rem;
-        font-weight: bold;
-    }
-
-    .rating-a { background: #2ecc71; color: white; }
-    .rating-b { background: #27ae60; color: white; }
-    .rating-c { background: #f1c40f; color: black; }
-    .rating-d { background: #e67e22; color: white; }
-    .rating-e { background: #e74c3c; color: white; }
-
-    .no-results {
-        text-align: center;
-        padding: 2rem;
-        color: var(--umass-gray);
-    }
-
-    .error {
-        color: #dc3545;
-        text-align: center;
-        padding: 1rem;
-        background: #fce8e8;
-        border-radius: 8px;
-    }
-`;
-
-const styleSheet = document.createElement('style');
-styleSheet.textContent = styles;
-document.head.appendChild(styleSheet);
