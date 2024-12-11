@@ -39,7 +39,7 @@ function displayMeals() {
 
             // Placeholder image
             const img = document.createElement("img");
-            img.src = "https://via.placeholder.com/200x150"; // Placeholder image URL
+            img.src = meal.image; // Placeholder image URL
             img.alt = meal.name;
 
             // Meal details

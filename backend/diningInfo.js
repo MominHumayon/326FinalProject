@@ -1,8 +1,4 @@
-/*
-meals.forEach(m => {
-    diningHalls[m.hall][m.date][m.time].push(m);
-});
-*/
+
 const diningHalls = {
     "Worcester Dining Hall": {
         "2024-11-16": {
@@ -131,21 +127,45 @@ const puppeteer = require('puppeteer');
 async function imgScrape(mealName) {
     const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
-
+    
     const query = mealName.replace(' ', '+');
     await page.goto(`https://images.search.yahoo.com/search/images;?p=${query}`);
     await page.waitForSelector('img');
-
+    
     const firstImgURL = await page.evaluate(() => {
         const firstImg = document.querySelector('img'); // Get the first <img> element
         return firstImg ? firstImg.src : null; // Return its src attribute
     });
-
+    
     await browser.close();
     return firstImgURL; // Return the image URL
 }
 
-(async () => {
-    const imageUrl = await imgScrape('vietnamese pho');
-    console.log(imageUrl);
-})();
+import Base64Converter from "./base64.js"
+
+meals.forEach(m => {
+    diningHalls[m.hall][m.date][m.time].push(m);
+    
+    (async () => {
+        const imageUrl = await imgScrape(m.name);
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        const base64 = await Base64Converter.convertFileToBase64(blob);
+        
+        const newInfo = {
+            name: m.name,
+            image: await base64,
+            mimetype: blob.type
+        }
+        
+        const res = await fetch("/v1/mealStore", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+              },
+            body: JSON.stringify(newInfo),
+        });
+        
+    })();
+    
+});
