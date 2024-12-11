@@ -32,5 +32,10 @@ const url = 'https://umassdining.com/locations-menus/worcester/menu'; // Replace
       "sugar":currentMeal.getAttribute("data-sugars"),
       "prot":currentMeal.getAttribute("data-protein"),
     });
-    console.log((obj.nutritionInfo.cals));
+
+    obj.addDietInfo(currentMeal.getAttribute("data-clean-diet-str").split(", ").map(x => x.trim()));
+
+    obj.addAllergyInfo(currentMeal.getAttribute("data-allergens").split(", ").map(x=>x.trim()));
+    
+    obj.addHealth(parseInt(currentMeal.getAttribute("data-healthfulness"))/10);
   }
