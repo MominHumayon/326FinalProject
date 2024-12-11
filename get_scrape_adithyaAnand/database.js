@@ -7,23 +7,28 @@ const sequelize = new Sequelize('database_name', 'username', 'password', {
 });
 
 const UCardTransaction = sequelize.define('UCardTransaction', {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-    },
+    // id: {
+    //     type: DataTypes.INTEGER,
+    //     autoIncrement: true,
+    //     primaryKey: true,
+    // },
     userEmail: {
         type: DataTypes.STRING,
-        // allowNull: false,
-        // unique: true, // Ensure uniqueness
-    },
-    swipes: {
-        type: DataTypes.STRING,
-        // allowNull: false,
+        allowNull: false,
+        unique: true, // Ensure uniqueness
+        // primaryKey: true,
     },
     debitBalance: {
         type: DataTypes.STRING, // Store as string to preserve "$10.31" format
-        // allowNull: false,
+        allowNull: true,
+    },
+    diningDollars: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    swipes: {
+        type: DataTypes.STRING,
+        allowNull: true,
     },
 }, {
     timestamps: true, // Adds createdAt and updatedAt fields
