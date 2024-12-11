@@ -126,3 +126,26 @@ const diningHalls = {
     },
 };
 
+const puppeteer = require('puppeteer');
+
+async function imgScrape(mealName) {
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+
+    const query = mealName.replace(' ', '+');
+    await page.goto(`https://images.search.yahoo.com/search/images;?p=${query}`);
+    await page.waitForSelector('img');
+
+    const firstImgURL = await page.evaluate(() => {
+        const firstImg = document.querySelector('img'); // Get the first <img> element
+        return firstImg ? firstImg.src : null; // Return its src attribute
+    });
+
+    await browser.close();
+    return firstImgURL; // Return the image URL
+}
+
+(async () => {
+    const imageUrl = await imgScrape('vietnamese pho');
+    console.log(imageUrl);
+})();
