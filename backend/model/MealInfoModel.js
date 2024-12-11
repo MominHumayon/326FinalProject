@@ -44,11 +44,6 @@ const Meal = sequelize.define("Meal", {
     allowNull:false,
   },
 
-  selected: {
-    type:DataTypes.ARRAY,
-    allowNull:false,
-  },
-
   image: {
     type: DataTypes.STRING,
     allowNull: true,
@@ -104,7 +99,6 @@ class _SQLiteMealModel {
             healthfulness: 2,
             ingredients: ["You're Mother"],
             dates:["12-11-24"],
-            selected:["false"],
             halls:[["Worcester","Franklin"]],
             carbon: "A",
             image:null,

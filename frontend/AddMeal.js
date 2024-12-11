@@ -76,7 +76,12 @@ class Meal {
     }
 
     addMealTimes(arr) {
-        this.mealTimes = arr;
+        this.mealTime = arr;
+        return this;
+    }
+
+    addDates(arr) {
+        this.dates = arr;
         return this;
     }
 
@@ -85,14 +90,6 @@ class Meal {
             throw new Error("Carbon rating must be 1 character");
         }
         this.carbon = str;
-        return this;
-    }
-
-    addSelected(arr) {
-        if (typeof(arr[0]) !== Boolean) {
-            throw new Error("arr must be an array of booleans");
-        }
-        this.selected = arr;
         return this;
     }
 
