@@ -11,9 +11,6 @@ A comprehensive web application for UMass Dining services that helps students tr
 - [Project Structure](#project-structure)
 - [Development Guidelines](#development-guidelines)
 - [API Documentation](#api-documentation)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
