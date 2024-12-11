@@ -60,7 +60,7 @@ document.getElementById('login-button').addEventListener('click', async function
       const user = await response.json();
       alert(`Welcome, ${user.firstName} ${user.lastName}!`);
       // Redirect to the next page
-      window.location.href = '/meal-recommender.html'; // Replace with your actual next page URL
+      window.location.href = 'http://127.0.0.1:5501/frontend/graph-feature/graph.html'; // Replace with your actual next page URL
     } else {
       alert('User not found. Please create a profile.');
     }

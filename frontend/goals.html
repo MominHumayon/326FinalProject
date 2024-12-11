@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMass Dieting Companion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/frontend/header.css">
+    <style>
+        :root {
+            --umass-maroon: #881c1c;
+            --light-maroon: #a83232;
+            --lighter-maroon: #c44d4d;
+            --accent-purple: #9b59b6;
+            --background-color: #f5f5f5;
+            --card-background: #ffffff;
+            --text-color: #333333;
+            --border-radius: 8px;
+            --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            color: var(--umass-maroon);
+            margin-bottom: 0.5rem;
+        }
+
+        .goal-selection {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        select {
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            margin-left: 0.5rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .nutrient-summary {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .nutrient-card {
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .nutrient-card h3 {
+            margin-bottom: 1rem;
+            color: var(--umass-maroon);
+        }
+
+        .progress-bar {
+            background: #f0f0f0;
+            border-radius: 10px;
+            height: 10px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .progress {
+            background: var(--umass-maroon);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .calorie-graph {
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .graph {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            gap: 1rem;
+            padding: 1rem 0;
+            position: relative;
+            margin: 1rem 0;
+        }
+
+        .bar {
+            flex: 1;
+            background: var(--umass-maroon);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: height 0.3s ease;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+        }
+
+        .average-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-purple);
+        }
+
+        .x-axis {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .weekly-nutrient-breakdown {
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+
+        .donut-chart-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .nutrient-chart-key {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .key-color {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .calories-color { background: var(--umass-maroon); }
+        .proteins-color { background: var(--light-maroon); }
+        .carbs-color { background: var(--lighter-maroon); }
+        .fats-color { background: var(--accent-purple); }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .donut-chart-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nutrient-chart-key {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header placeholder -->
+<div id="header-placeholder"></div>
+
+    <div class="container">
+        <header>
+            <h1>UMass Dieting Companion</h1>
+            <p>Calorie and Nutrient Intake Tracking</p>
+        </header>
+
+        <div class="goal-selection">
+            <label for="goalMenu">Select Your Goal: </label>
+            <select id="goalMenu">
+                <option value="bulking">Bulking</option>
+                <option value="cutting">Cutting</option>
+                <option value="maintenance">Maintenance</option>
+            </select>
+        </div>
+
+        <div class="dashboard">
+            <div class="nutrient-summary">
+                <div class="nutrient-card calories">
+                    <h3>Calories</h3>
+                    <p><strong id="calorie-amount">700</strong> / <span id="calorie-goal">1800</span> kcal</p>
+                    <div class="progress-bar">
+                        <div class="progress" id="calorie-progress" style="width: 39%;"></div>
+                    </div>
+                </div>
+                <div class="nutrient-card protein">
+                    <h3>Protein</h3>
+                    <p><strong id="protein-amount">50</strong> / <span id="protein-goal">100</span> g</p>
+                    <div class="progress-bar">
+                        <div class="progress" id="protein-progress" style="width: 50%;"></div>
+                    </div>
+                </div>
+                <div class="nutrient-card carbs">
+                    <h3>Carbohydrates</h3>
+                    <p><strong id="carb-amount">90</strong> / <span id="carb-goal">250</span> g</p>
+                    <div class="progress-bar">
+                        <div class="progress" id="carb-progress" style="width: 36%;"></div>
+                    </div>
+                </div>
+                <div class="nutrient-card fat">
+                    <h3>Fat</h3>
+                    <p><strong id="fat-amount">30</strong> / <span id="fat-goal">65</span> g</p>
+                    <div class="progress-bar">
+                        <div class="progress" id="fat-progress" style="width: 46%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calorie-graph">
+                <h3>Weekly Calorie Intake</h3>
+                <div class="graph">
+                    <div class="bar" style="height: 60%;" title="Monday: 1800 kcal"><span class="bar-label">1800</span></div>
+                    <div class="bar" style="height: 75%;" title="Tuesday: 2250 kcal"><span class="bar-label">2250</span></div>
+                    <div class="bar" style="height: 50%;" title="Wednesday: 1500 kcal"><span class="bar-label">1500</span></div>
+                    <div class="bar" style="height: 80%;" title="Thursday: 2400 kcal"><span class="bar-label">2400</span></div>
+                    <div class="bar" style="height: 65%;" title="Friday: 1950 kcal"><span class="bar-label">1950</span></div>
+                    <div class="bar" style="height: 40%;" title="Saturday: 1200 kcal"><span class="bar-label">1200</span></div>
+                    <div class="bar" style="height: 70%;" title="Sunday: 2100 kcal"><span class="bar-label">2100</span></div>
+                    <div class="average-line" style="top: 67%;"></div>
+                </div>
+                <div class="average-label">Weekly Average: 1886 kcal</div>
+                <div class="x-axis">
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+                    <span>Sun</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="weekly-nutrient-breakdown">
+            <h3>Weekly Nutrient Breakdown</h3>
+            <p>Current vs. Recommended</p>
+            <div class="donut-chart-container">
+                <div>
+                    <canvas id="currentNutrientDonutChart" width="150" height="150"></canvas>
+                    <p style="text-align: center;">Current</p>
+                </div>
+                <div>
+                    <canvas id="recommendedNutrientDonutChart" width="150" height="150"></canvas>
+                    <p style="text-align: center;">Recommended</p>
+                </div>
+            </div>
+            <div class="nutrient-chart-key">
+                <div><span class="key-color calories-color"></span>Calories</div>
+                <div><span class="key-color proteins-color"></span>Proteins</div>
+                <div><span class="key-color carbs-color"></span>Carbs</div>
+                <div><span class="key-color fats-color"></span>Fats</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/frontend/header.js"></script>
+    <script>
+        // Load the header
+        fetch('/frontend/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+                initializeHeader();
+            });
+        // Initial data and colors
+        const goals = {
+            bulking: { calories: 2500, protein: 150, carbs: 300, fat: 80 },
+            cutting: { calories: 1800, protein: 180, carbs: 150, fat: 50 },
+            maintenance: { calories: 2000, protein: 130, carbs: 250, fat: 70 }
+        };
+
+        const currentIntake = { calories: 700, protein: 50, carbs: 90, fat: 30 };
+        const nutrientColors = ['#881c1c', '#a83232', '#c44d4d', '#9b59b6'];
+
+        function calculatePercentages({ calories, protein, carbs, fat }) {
+            const total = calories + protein + carbs + fat;
+            return [
+                (calories / total) * 100,
+                (protein / total) * 100,
+                (carbs / total) * 100,
+                (fat / total) * 100
+            ];
+        }
+
+        function drawDonutChart(canvasId, data, colors) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+
+            if (!ctx) return;
+
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(canvas.width, canvas.height) / 2;
+            const innerRadius = radius * 0.5;
+            let startAngle = 0;
+
+            data.forEach((percentage, index) => {
+                const sliceAngle = (percentage / 100) * 2 * Math.PI;
+                ctx.fillStyle = colors[index];
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+                ctx.arc(centerX, centerY, innerRadius, startAngle + sliceAngle, startAngle, true);
+                ctx.closePath();
+                ctx.fill();
+                startAngle += sliceAngle;
+            });
+        }
+
+        function updateGoals() {
+            const goal = document.getElementById('goalMenu').value;
+            const goalData = goals[goal];
+
+            document.getElementById('calorie-goal').textContent = goalData.calories;
+            document.getElementById('protein-goal').textContent = goalData.protein;
+            document.getElementById('carb-goal').textContent = goalData.carbs;
+            document.getElementById('fat-goal').textContent = goalData.fat;
+
+            updateProgressBars(goalData);
+
+            const currentPercentages = calculatePercentages(currentIntake);
+            const recommendedPercentages = calculatePercentages(goalData);
+
+            drawDonutChart('currentNutrientDonutChart', currentPercentages, nutrientColors);
+            drawDonutChart('recommendedNutrientDonutChart', recommendedPercentages, nutrientColors);
+        }
+
+        function updateProgressBars(goalData) {
+            document.getElementById('calorie-amount').textContent = currentIntake.calories;
+            document.getElementById('protein-amount').textContent = currentIntake.protein;
+            document.getElementById('carb-amount').textContent = currentIntake.carbs;
+            document.getElementById('fat-amount').textContent = currentIntake.fat;
+
+            document.getElementById('calorie-progress').style.width = (currentIntake.calories / goalData.calories * 100) + '%';
+            document.getElementById('protein-progress').style.width = (currentIntake.protein / goalData.protein * 100) + '%';
+            document.getElementById('carb-progress').style.width = (currentIntake.carbs / goalData.carbs * 100) + '%';
+            document.getElementById('fat-progress').style.width = (currentIntake.fat / goalData.fat * 100) + '%';
+        }
+
+        // Initial setup
+        updateGoals();
+        document.getElementById('goalMenu').addEventListener('change', updateGoals);
+    </script>
+</body>
+</html>

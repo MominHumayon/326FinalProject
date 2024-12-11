@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UMass Dining - Meal Recommender</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/frontend/header.css">
     <link rel="stylesheet" href="meal-recommender.css">
 </head>
 <body id="ahmed">
+    <!-- Header placeholder -->
+    <div id="header-placeholder"></div>
 
     <section class="hero-section">
         <h1>Personalized Meal Recommendations</h1>
@@ -150,5 +153,17 @@
     </main>
 
     <script src="js/meal-recommender.js"></script>
+    <!-- Scripts -->
+    <script src="/frontend/header.js"></script>
+    <script>
+        // Load the header
+        fetch('/frontend/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+                initializeHeader();
+            });
+    </script>
+    <script src="/frontend/js/meal-recommender.js"></script>
 </body>
 </html>

@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calorie Tracker</title>
+    <!-- Global styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/frontend/header.css">
     <style>
         /* General Styles */
         body {
@@ -12,7 +16,12 @@
             padding: 0;
         }
 
-        header {
+        /* Adjust main content for fixed header */
+        .page-content {
+            padding-top: 64px; /* Height of the header */
+        }
+
+        .content-header {
             background-color: #881c1c;
             color: white;
             text-align: center;
@@ -93,41 +102,70 @@
             padding: 10px;
             margin-top: 20px;
         }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .charts {
+                flex-direction: column;
+            }
+
+            .chart-container {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Calorie Tracker</h1>
-    </header>
-    <div class="container">
-        <h2>Visualize Your Calorie and Macronutrient Intake</h2>
+    <!-- Header placeholder -->
+    <div id="header-placeholder"></div>
 
-        <!-- Dropdown for Week Selection -->
-        <div class="controls">
-            <label for="week-select">Select Week:</label>
-            <select id="week-select">
-                <option value="week1">Week 1</option>
-                <option value="week2">Week 2</option>
-            </select>
+    <!-- Main content -->
+    <div class="page-content">
+        <div class="content-header">
+            <h1>Calorie Tracker</h1>
         </div>
-        
-        <!-- Charts -->
-        <div class="charts">
-            <div class="chart-container">
-                <h3>Macronutrient Breakdown</h3>
-                <canvas id="pieChart"></canvas>
+        <div class="container">
+            <h2>Visualize Your Calorie and Macronutrient Intake</h2>
+
+            <!-- Dropdown for Week Selection -->
+            <div class="controls">
+                <label for="week-select">Select Week:</label>
+                <select id="week-select">
+                    <option value="week1">Week 1</option>
+                    <option value="week2">Week 2</option>
+                </select>
             </div>
-            <div class="chart-container">
-                <h3>Weekly Calorie Intake</h3>
-                <canvas id="barChart"></canvas>
-                <p class="average" id="averageCalories">Average Calories per Week: 0 kcal</p>
+            
+            <!-- Charts -->
+            <div class="charts">
+                <div class="chart-container">
+                    <h3>Macronutrient Breakdown</h3>
+                    <canvas id="pieChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Weekly Calorie Intake</h3>
+                    <canvas id="barChart"></canvas>
+                    <p class="average" id="averageCalories">Average Calories per Week: 0 kcal</p>
+                </div>
             </div>
         </div>
+        <footer>
+            &copy; 2023 Calorie Tracker. All Rights Reserved.
+        </footer>
     </div>
-    <footer>
-        &copy; 2023 Calorie Tracker. All Rights Reserved.
-    </footer>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/frontend/header.js"></script>
+    <script>
+        // Load the header
+        fetch('/frontend/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+                initializeHeader();
+            });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

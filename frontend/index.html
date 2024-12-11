@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMass Dining Navigation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: #881c1c;
+            padding: 0.5rem 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            gap: 1rem;
+        }
+
+        .brand h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: 500;
+        }
+
+        .nav-link i {
+            font-size: 1.1rem;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        #content-frame {
+            margin-top: 64px; /* Height of header */
+            width: 100%;
+            height: calc(100vh - 64px);
+            border: none;
+            background: #f5f5f5;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #881c1c;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-link {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .header {
+                padding: 0.5rem 1rem;
+            }
+
+            .brand h1 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="brand">
+                <i class="fas fa-utensils"></i>
+                <h1>UMass Dining</h1>
+            </a>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="nav-links">
+                <a href="profile.html" class="nav-link" data-page="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="graph-feature/graph.html" class="nav-link" data-page="graph-feature/graph">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Graph</span>
+                </a>
+                <a href="location-layout/location.html" class="nav-link" data-page="location-layout/location">
+                    <i class="fas fa-utensils"></i>
+                    <span>Dining Halls</span>
+                </a>
+                <a href="meal-recommender.html" class="nav-link" data-page="meal-recommender">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Recommender</span>
+                </a>
+                <a href="meal-info.html" class="nav-link" data-page="meal-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Info</span>
+                </a>
+                <a href="goals.html" class="nav-link" data-page="goals">
+                    <i class="fas fa-bullseye"></i>
+                    <span>Goals</span>
+                </a>
+                <a href="adithya/debit.html" class="nav-link" data-page="adithya/debit">
+                    <i class="fas fa-wallet"></i>
+                    <span>Expenses</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <iframe id="content-frame" name="content-frame"></iframe>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinksContainer = document.querySelector('.nav-links');
+            const contentFrame = document.getElementById('content-frame');
+
+            // Handle initial page load
+            const initialPage = window.location.hash.slice(1) || 'profile';
+            loadPage(initialPage);
+
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinksContainer.classList.toggle('show');
+            });
+
+            // Handle navigation clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = link.dataset.page;
+                    loadPage(page);
+                    
+                    // Close mobile menu if open
+                    navLinksContainer.classList.remove('show');
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.nav-links') && !e.target.closest('.mobile-menu-btn')) {
+                    navLinksContainer.classList.remove('show');
+                }
+            });
+
+            function loadPage(page) {
+                // Remove leading slash if present
+                const pageNoSlash = page.replace(/^\//, '');
+                const url = pageNoSlash + '.html';
+                
+                // Update iframe src
+                contentFrame.src = url;
+                
+                // Update active state
+                setActivePage(pageNoSlash);
+                
+                // Update URL hash
+                window.location.hash = pageNoSlash;
+            }
+
+            function setActivePage(page) {
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.dataset.page === page);
+                });
+            }
+
+            // Handle back/forward browser navigation
+            window.addEventListener('hashchange', () => {
+                const page = window.location.hash.slice(1) || 'profile';
+                loadPage(page);
+            });
+
+            // Handle iframe load errors
+            contentFrame.addEventListener('load', function() {
+                try {
+                    contentFrame.contentWindow.document.body;
+                } catch (e) {
+                    contentFrame.srcdoc = `
+                        <html>
+                            <body style="display: flex; align-items: center; justify-content: center; height: 100vh; font-family: Arial; color: #666;">
+                                <div style="text-align: center;">
+                                    <h2>Page Not Found</h2>
+                                    <p>The requested page could not be loaded.</p>
+                                </div>
+                            </body>
+                        </html>
+                    `;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

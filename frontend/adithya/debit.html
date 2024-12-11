@@ -1,40 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Debit_Tracker</title>
-    <link rel="stylesheet" href="debitStyles.css" />
-    <script type="module" src="debitScript.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-    </script>
-  </head>
-  <body>
-    <div id = "adithya">
+    <!-- Global styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/frontend/header.css">
+    <!-- Page specific styles -->
+    <link rel="stylesheet" href="/frontend/debitStyles.css" />
+    <!-- External libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+<body>
+    <!-- Header placeholder -->
+    <div id="header-placeholder"></div>
 
-      <div class="container">
+    <!-- Main content -->
+    <div id="adithya">
+        <div class="container">
             <!-- Top Section -->
-            <!-- 2 medium features right here, 1 for the swipes a student has left, and the other for the UCard balance -->
             <div class="section" id="swipe_section">
-              <h2 class="title">Swipes</h2>
-              <div class="controls">
-                <button class="dec">-</button>
-                <span class="number"></span>
-                <button class="inc">+</button>
-              </div>
+                <h2 class="title">Swipes</h2>
+                <div class="controls">
+                    <button class="dec">-</button>
+                    <span class="number"></span>
+                    <button class="inc">+</button>
+                </div>
             </div>
           
             <!-- Bottom Section -->
             <div class="section" id="ucard_section">
-              <h2 class="title">UCard</h2>
-              <div class="controls">
-                <button class="dec">-</button>
-                <span class="number"></span>
-                <button class="inc">+</button>
-              </div>
+                <h2 class="title">UCard</h2>
+                <div class="controls">
+                    <button class="dec">-</button>
+                    <span class="number"></span>
+                    <button class="inc">+</button>
+                </div>
             </div>
 
-            <!-- button to check history -->
-            <!-- <div class="section" id="history_section"> -->
             <button id="history">Check History</button>
 
             <div id="history_overlay" class="hidden">
@@ -42,6 +46,19 @@
                 <canvas id="historyChart" width="400" height="200"></canvas>
             </div>
         </div>
-      </div>
-  </body>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/frontend/header.js"></script>
+    <script>
+        // Load the header
+        fetch('/frontend/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+                initializeHeader();
+            });
+    </script>
+    <script type="module" src="/frontend/debitScript.js"></script>
+</body>
 </html>
