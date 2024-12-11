@@ -70,7 +70,7 @@ class MealRoutes {
     //   400 - Bad Request: The request was invalid or missing required data
     //   500 - Internal Server Error: The server encountered an error
     this.router.post("/mealStore", async (req, res) => {
-      await MealController.addMeal(req, res);
+      await this.controller.addMeal(req, res);
     });
 
     // DESCRIPTION
@@ -84,11 +84,11 @@ class MealRoutes {
     //   200 - OK: The tasks were cleared successfully
     //   500 - Internal Server Error: The server encountered an error
     this.router.delete("/mealStore", async (req, res) => {
-      await MealController.clearMeals(req, res);
+      await this.controller.clearMeals(req, res);
     });
 
     this.router.patch("/mealStore", async (req, res) => {
-        await MealController.updateMeals(req,res);
+        await this.controller.updateMeals(req,res);
     })
   }
 
