@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 // import {setTimeout} from "node:timers/promises";
 const { promisify } = require('util');
+const { UCardTransaction } = require('./database');
 const setTimeoutPromise = promisify(setTimeout);
 
 
@@ -34,9 +35,12 @@ async function help(){
 
     // Preform Microsoft Login, semi manual. Automatic = email and password fill, Manual = password page navigation and 2FA
     try {
+        const userEmail = 'adithyaanand@umass.edu';
+        const userPassword = 'Katytexas!7';
+
         // Step 1: Enter email
         await page.waitForSelector('input[type="email"]', { timeout: 10000 });
-        await page.type('input[type="email"]', 'adithyaanand@umass.edu');
+        await page.type('input[type="email"]', userEmail);
         await page.click('input[type="submit"]');
         page.waitForNavigation({ waitUntil: 'networkidle2' });
         console.log("Email submitted.");
@@ -44,7 +48,7 @@ async function help(){
 
         // Step 2: Wait for password input, issue is I cant find out how to click the submit button on the password page. So after this manual control from user. 
         await page.waitForSelector('input[type="password"]', { timeout: 10000 });
-        await page.type('input[type="password"]', 'Katytexas!7');
+        await page.type('input[type="password"]', userPassword);
         await page.click('input[type="submit"]');
         page.waitForNavigation({ waitUntil: 'networkidle2' });
         console.log("Password submitted and sign-in button clicked.");
@@ -82,6 +86,26 @@ async function help(){
         });
     
         console.log('Scraped Data:', data);
+
+        const [swipes, debit] = data;
+
+        await UCardTransaction.upsert({
+            userEmail,
+            swipes: parseInt(swipes, 10), // Convert swipes to an integer
+            debit,                // Include debitBalance
+        });
+
+        console.log('Data successfully upserted for user:', userEmail);
+
+        // for (const balance of data){
+        //     const balanceType = /^\$\d+(\.\d{2})?$/.test(balance) ? 'Debit' : 'Swipe';
+        //     await UCardTransaction.create({
+        //         balanceType,
+        //         amount: balance,
+        //     });
+        // }
+        // console.log('Data successfully written to the database.');
+
 
         // Scrape the history of UCard Swipes and UCard balance changes over the past 7 days. (Not implmented, will add if I have the time. Ended up being harder than expected)
         // await page.goto('https://get.cbord.com/umass/full/history.php', {
