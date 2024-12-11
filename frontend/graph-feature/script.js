@@ -5,20 +5,27 @@ let pieChart = new Chart(pieCtx, {
     data: {
         labels: ['Proteins', 'Carbohydrates', 'Fats'],
         datasets: [{
-            data: [50, 30, 20],
-            backgroundColor: [
-                '#881c1c',
-                '#aaaaaa',
-                '#cccccc'
-            ],
+            data: [0, 0, 0],
+            backgroundColor: ['#4caf50', '#2196f3', '#ff9800'],
             borderColor: '#ffffff',
-            borderWidth: 1
-        }]
+            borderWidth: 1,
+        }],
     },
     options: {
         responsive: true,
-        maintainAspectRatio: false
-    }
+        maintainAspectRatio: true,
+        aspectRatio: 1,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    font: {
+                        size: 14,
+                    },
+                },
+            },
+        },
+    },
 });
 
 // Initialize Bar Chart
@@ -26,61 +33,90 @@ let barCtx = document.getElementById('barChart').getContext('2d');
 let barChart = new Chart(barCtx, {
     type: 'bar',
     data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        labels: [],
         datasets: [{
             label: 'Calories',
-            data: [2000, 2200, 2100, 2300, 2200, 2500, 2000],
+            data: [],
             backgroundColor: '#881c1c',
-            borderColor: '#000000',
-            borderWidth: 1
-        }]
+            borderColor: '#ffffff',
+            borderWidth: 1,
+        }],
     },
     options: {
         scales: {
             y: {
-                beginAtZero: true
-            }
+                beginAtZero: true,
+                max: 3000,
+                ticks: {
+                    stepSize: 500,
+                },
+            },
         },
         responsive: true,
-        maintainAspectRatio: false
-    }
+        maintainAspectRatio: true,
+        aspectRatio: 2,
+        plugins: {
+            legend: {
+                display: false,
+            },
+        },
+    },
 });
 
-// Function to Update Pie Chart
-function updatePieChart() {
-    let protein = parseInt(document.getElementById('protein-input').value) || 0;
-    let carbs = parseInt(document.getElementById('carbs-input').value) || 0;
-    let fats = parseInt(document.getElementById('fats-input').value) || 0;
-    let total = protein + carbs + fats;
+// Hardcoded Data for Testing
+const weeklyData = {
+    week1: {
+        pie: [105, 125, 58], // Protein: 105g, Carbs: 125g, Fats: 58g
+        bar: {
+            labels: ['2024-12-10', '2024-12-11'], // Dates
+            data: [800, 900], // Calories per day
+        },
+    },
+    week2: {
+        pie: [90, 140, 70], // Protein: 90g, Carbs: 140g, Fats: 70g
+        bar: {
+            labels: ['2024-12-17', '2024-12-18'], // Dates
+            data: [850, 950], // Calories per day
+        },
+    },
+};
 
-    if (total !== 100) {
-        alert('The total percentage must equal 100%.');
-        return;
+// Update Charts for Selected Week
+function updateChartsForWeek(week) {
+    console.log(`Updating charts for ${week}...`);
+    const data = weeklyData[week];
+
+    if (data) {
+        // Update Pie Chart
+        pieChart.data.datasets[0].data = data.pie;
+        pieChart.update();
+
+        // Update Bar Chart
+        barChart.data.labels = data.bar.labels;
+        barChart.data.datasets[0].data = data.bar.data;
+        barChart.update();
+
+        // Update Average Calories
+        const totalCalories = data.bar.data.reduce((sum, value) => sum + value, 0);
+        const averageCalories = Math.round(totalCalories / data.bar.data.length);
+        document.getElementById('averageCalories').innerText = `Average Calories per Week: ${averageCalories} kcal`;
+
+        console.log(`Charts updated for ${week}.`);
+    } else {
+        console.error(`No data found for ${week}`);
     }
-
-    pieChart.data.datasets[0].data = [protein, carbs, fats];
-    pieChart.update();
 }
 
-// Function to Update Bar Chart
-function updateBarChart() {
-    let monday = parseInt(document.getElementById('monday-input').value) || 0;
-    let tuesday = parseInt(document.getElementById('tuesday-input').value) || 0;
-    let wednesday = parseInt(document.getElementById('wednesday-input').value) || 0;
-    let thursday = parseInt(document.getElementById('thursday-input').value) || 0;
-    let friday = parseInt(document.getElementById('friday-input').value) || 0;
-    let saturday = parseInt(document.getElementById('saturday-input').value) || 0;
-    let sunday = parseInt(document.getElementById('sunday-input').value) || 0;
+// Initialize on Page Load
+window.onload = function () {
+    const weekSelect = document.getElementById('week-select');
 
-    let data = [monday, tuesday, wednesday, thursday, friday, saturday, sunday];
-    barChart.data.datasets[0].data = data;
-    barChart.update();
+    // Set up event listener for week selection
+    weekSelect.addEventListener('change', () => {
+        const selectedWeek = weekSelect.value;
+        updateChartsForWeek(selectedWeek);
+    });
 
-    // Calculate Average Calories
-    let totalCalories = data.reduce((a, b) => a + b, 0);
-    let averageCalories = Math.round(totalCalories / 7);
-    document.getElementById('averageCalories').innerText = `Average Calories per Week: ${averageCalories} kcal`;
-}
-
-// Initial Average Calculation
-updateBarChart();
+    // Default to Week 1 on page load
+    updateChartsForWeek('week1');
+};
