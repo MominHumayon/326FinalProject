@@ -1,125 +1,71 @@
-let db;
-const request = indexedDB.open('UserProfileDB', 1);
 
-request.onupgradeneeded = function(event) {
-  db = event.target.result;
-  db.createObjectStore('profile', { keyPath: 'id' });
-};
 
-request.onsuccess = function(event) {
-  db = event.target.result;
-  loadUserProfile();
-};
+document.getElementById('save-profile-button').addEventListener('click', async function (event) {
+  event.preventDefault(); // Prevent page refresh
 
-request.onerror = function(event) {
-  console.log('Error opening IndexedDB:', event);
-};
+  // Collect user input from the form
+  const firstName = document.getElementById('first-name').value.trim();
+  const lastName = document.getElementById('last-name').value.trim();
+  const heightFeet = document.getElementById('height-feet').value.trim();
+  const heightInches = document.getElementById('height-inches').value.trim();
+  const weight = document.getElementById('weight').value.trim();
+  const diet = document.getElementById('diet').value;
 
-// document.getElementById('user-profile-form').addEventListener('submit', function(event) {
-//   event.preventDefault();
-//   const profileData = {
-//     id: 1,
-//     name: document.getElementById('name').value,
-//     heightFeet: document.getElementById('height-feet').value,
-//     heightInches: document.getElementById('height-inches').value,
-//     weight: document.getElementById('weight').value,
-//     diet: document.getElementById('diet').value,
-//   };
-
-//   const transaction = db.transaction(['profile'], 'readwrite');
-//   const objectStore = transaction.objectStore('profile');
-//   objectStore.put(profileData);
-//   alert('Profile saved successfully!');
-// });
-document.getElementById('user-profile-form').addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  const firstNameInput = document.getElementById('first-name');
-  const lastNameInput = document.getElementById('first-name');
-  const heightFeetInput = document.getElementById('height-feet');
-  const heightInchesInput = document.getElementById('height-inches');
-  const weightInput = document.getElementById('weight');
-  const dietSelect = document.getElementById('diet');
-
-  // Validate inputs
-  if (firstNameInput.value.trim() === '') {
-    alert('Please enter your first name');
+  // Validate fields
+  if (!firstName || !lastName || !heightFeet || !heightInches || !weight) {
+    alert('Please fill out all fields.');
     return;
   }
 
-  if (lastNameInput.value.trim() === '') {
-    alert('Please enter your last name');
-    return;
+  // Create a user object
+  const userData = { firstName, lastName, heightFeet, heightInches, weight, diet };
+
+  try {
+    // Send a POST request to save the profile
+    const response = await fetch('http://localhost:3001/api/user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData),
+    });
+
+    if (response.ok) {
+      alert('Profile saved successfully!');
+    } else {
+      const errorData = await response.json();
+      alert(`Failed to save profile: ${errorData.error}`);
+    }
+  } catch (error) {
+    console.error('Error saving profile:', error);
+    alert('An error occurred while saving your profile.');
   }
-  if (!/^[a-zA-Z]+$/.test(firstNameInput.value.trim()) || !/^[a-zA-Z]+$/.test(lastNameInput.value.trim())) {
-    alert('First and last name must be strings');
-    return;
-  }
-
-  if (heightFeetInput.value === '' || heightInchesInput.value === '') {
-    alert('Please enter your height in feet and inches');
-    return;
-  }
-
-  if (isNaN(heightFeetInput.value) || isNaN(heightInchesInput.value)) {
-    alert('Height must be a number');
-    return;
-  }
-
-  if (weightInput.value === '') {
-    alert('Please enter your weight');
-    return;
-  }
-
-  if (isNaN(weightInput.value)) {
-    alert('Weight must be a number');
-    return;
-  }
-
-
-
-  // If all inputs are valid, save to IndexedDB
-  const profileData = {
-    id: 1,
-    firstName: firstNameInput.value,
-    lastName: lastNameInput.value,
-    heightFeet: heightFeetInput.value,
-    heightInches: heightInchesInput.value,
-    weight: weightInput.value,
-    diet: dietSelect.value,
-  };
-
-  const transaction = db.transaction(['profile'], 'readwrite');
-  const objectStore = transaction.objectStore('profile');
-  objectStore.put(profileData);
-
-  loadUserProfile();
-  alert('Profile saved successfully!');
 });
 
-function loadUserProfile() {
-  const transaction = db.transaction(['profile'], 'readonly');
-  const objectStore = transaction.objectStore('profile');
-  const request = objectStore.get(1);
+document.getElementById('login-button').addEventListener('click', async function (event) {
+  event.preventDefault(); // Prevent page refresh
 
-  request.onsuccess = function(event) {
-    if (request.result) {
-      document.getElementById('name').value = request.result.name;
-      document.getElementById('height-feet').value = request.result.heightFeet;
-      document.getElementById('height-inches').value = request.result.heightInches;
-      document.getElementById('weight').value = request.result.weight;
-      document.getElementById('diet').value = request.result.diet;
+  // Collect first name and last name
+  const firstName = document.getElementById('first-name').value.trim();
+  const lastName = document.getElementById('last-name').value.trim();
+
+  // Ensure both fields are filled
+  if (!firstName || !lastName) {
+    alert('Please enter both first and last names.');
+    return;
+  }
+
+  try {
+    // Send a GET request to verify the user
+    const response = await fetch(`http://localhost:3001/api/user?firstName=${firstName}&lastName=${lastName}`);
+    if (response.ok) {
+      const user = await response.json();
+      alert(`Welcome, ${user.firstName} ${user.lastName}!`);
+      // Redirect to the next page
+      window.location.href = '/meal-recommender.html'; // Replace with your actual next page URL
+    } else {
+      alert('User not found. Please create a profile.');
     }
-  };
-}
-document.getElementById('login-button').addEventListener('click', function() {
-  const firstNameInput = document.getElementById('first-name');
-  const lastNameInput = document.getElementById('last-name');
-
-  if (firstNameInput.value.trim() !== '' && lastNameInput.value.trim() !== '') {
-    document.querySelectorAll(".view").forEach(elem => elem.style.display = "none");
-    document.getElementById("diningHalls").style.display = "block"; // replace with the actual next page URL
-  } else {
-    alert('Please fill out both first and last name fields to proceed.');
+  } catch (error) {
+    console.error('Error logging in:', error);
+    alert('An error occurred while logging in.');
   }
 });
