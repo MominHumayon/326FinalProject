@@ -1,10 +1,10 @@
 // Dummy data for dining halls, meals, and time of day
 const diningHalls = {
     "Worcester Dining Hall": {
-        "2024-11-16": {
+        "2024-12-11": {
             Breakfast: [
-                { name: "Pancakes", calories: 300, protein: "8g", fat: "10g", carbs: "45g" },
-                { name: "Omelet", calories: 250, protein: "12g", fat: "15g", carbs: "10g" },
+                { name: "Pancakes", calories: 300, protein: "8g", fat: "10g", carbs: "45g", img: "https://www.allrecipes.com/thmb/hB7uGW06pqyk6hApOfGxk5kG4SI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/21014-Good-old-Fashioned-Pancakes-mfs_001-1-8fc3e06998fe4fe8b5f2ad6ba7e8ad46.jpg"},
+                { name: "Omelet", calories: 250, protein: "12g", fat: "15g", carbs: "10g", img: "https://www.simplyrecipes.com/thmb/LLhiA8KZ7JZ5ZI0g-1bF1eg-gGM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2018__10__HT-Make-an-Omelet-LEAD-HORIZONTAL-17cd2e469c4a4ccbbd1273a7cae6425c.jpg" },
             ],
             Lunch: [
                 { name: "Grilled Cheese Sandwich", calories: 400, protein: "15g", fat: "20g", carbs: "40g" },
@@ -15,7 +15,7 @@ const diningHalls = {
                 { name: "Roasted Vegetables", calories: 300, protein: "5g", fat: "10g", carbs: "35g" },
             ],
         },
-        "2024-11-17": {
+        "2024-12-12": {
             Breakfast: [
                 { name: "Bagels", calories: 250, protein: "6g", fat: "3g", carbs: "45g" },
                 { name: "Fruit Salad", calories: 150, protein: "2g", fat: "0g", carbs: "35g" },
@@ -31,10 +31,10 @@ const diningHalls = {
         },
     },
     "Berkshire Dining Hall": {
-        "2024-11-16": {
+        "2024-12-11": {
             Breakfast: [
-                { name: "Pancakes", calories: 300, protein: "8g", fat: "10g", carbs: "45g" },
-                { name: "Omelet", calories: 250, protein: "12g", fat: "15g", carbs: "10g" },
+                { name: "Pancakes", calories: 300, protein: "8g", fat: "10g", carbs: "45g", img: "https://www.allrecipes.com/thmb/hB7uGW06pqyk6hApOfGxk5kG4SI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/21014-Good-old-Fashioned-Pancakes-mfs_001-1-8fc3e06998fe4fe8b5f2ad6ba7e8ad46.jpg"},
+                { name: "Omelet", calories: 250, protein: "12g", fat: "15g", carbs: "10g", img: "https://www.simplyrecipes.com/thmb/LLhiA8KZ7JZ5ZI0g-1bF1eg-gGM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2018__10__HT-Make-an-Omelet-LEAD-HORIZONTAL-17cd2e469c4a4ccbbd1273a7cae6425c.jpg" },
             ],
             Lunch: [
                 { name: "Grilled Cheese Sandwich", calories: 400, protein: "15g", fat: "20g", carbs: "40g" },
@@ -45,10 +45,10 @@ const diningHalls = {
                 { name: "Roasted Vegetables", calories: 300, protein: "5g", fat: "10g", carbs: "35g" },
             ],
         },
-        "2024-11-17": {
+        "2024-12-12": {
             Breakfast: [
-                { name: "Bagels", calories: 250, protein: "6g", fat: "3g", carbs: "45g" },
-                { name: "Fruit Salad", calories: 150, protein: "2g", fat: "0g", carbs: "35g" },
+                { name: "Bagels", calories: 250, protein: "6g", fat: "3g", carbs: "45g", img: "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2020-08-how-to-make-bagels%2F2020_howto_bagels_shot14_197" },
+                { name: "Fruit Salad", calories: 150, protein: "2g", fat: "0g", carbs: "35g", img: "https://www.hipmamasplace.com/wp-content/uploads/2021/06/199259152_166663622165057_6223652316946896551_n.jpg" },
             ],
             Lunch: [
                 { name: "Chicken Wrap", calories: 350, protein: "20g", fat: "10g", carbs: "35g" },
@@ -61,7 +61,7 @@ const diningHalls = {
         },
     },
     "Hampshire Dining Hall": {
-        "2024-11-16": {
+        "2024-12-11": {
             Breakfast: [
                 { name: "Pancakes", calories: 300, protein: "8g", fat: "10g", carbs: "45g" },
                 { name: "Omelet", calories: 250, protein: "12g", fat: "15g", carbs: "10g" },
@@ -75,7 +75,7 @@ const diningHalls = {
                 { name: "Roasted Vegetables", calories: 300, protein: "5g", fat: "10g", carbs: "35g" },
             ],
         },
-        "2024-11-17": {
+        "2024-12-12": {
             Breakfast: [
                 { name: "Bagels", calories: 250, protein: "6g", fat: "3g", carbs: "45g" },
                 { name: "Fruit Salad", calories: 150, protein: "2g", fat: "0g", carbs: "35g" },
@@ -91,7 +91,7 @@ const diningHalls = {
         },
     },
     "Franklin Dining Hall": {
-        "2024-11-16": {
+        "2024-12-11": {
             Breakfast: [
                 { name: "Pancakes", calories: 300, protein: "8g", fat: "10g", carbs: "45g" },
                 { name: "Omelet", calories: 250, protein: "12g", fat: "15g", carbs: "10g" },
@@ -105,7 +105,7 @@ const diningHalls = {
                 { name: "Roasted Vegetables", calories: 300, protein: "5g", fat: "10g", carbs: "35g" },
             ],
         },
-        "2024-11-17": {
+        "2024-12-12": {
             Breakfast: [
                 { name: "Bagels", calories: 250, protein: "6g", fat: "3g", carbs: "45g" },
                 { name: "Fruit Salad", calories: 150, protein: "2g", fat: "0g", carbs: "35g" },
@@ -158,7 +158,7 @@ function displayMeals() {
 
             // Placeholder image
             const img = document.createElement("img");
-            img.src = "https://via.placeholder.com/200x150"; // Placeholder image URL
+            img.src = meal.img;
             img.alt = meal.name;
 
             // Meal details

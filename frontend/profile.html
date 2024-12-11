@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - UMass Dining</title>
+    <!-- Global styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/frontend/header.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Add padding for fixed header */
+        .main-content {
+            padding-top: 84px; /* header height + some spacing */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #881c1c;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        input, select {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #881c1c;
+        }
+
+        .height-inputs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .height-inputs input {
+            flex: 1;
+        }
+
+        button {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        #save-profile-button {
+            background-color: #881c1c;
+            color: white;
+            margin-top: 1rem;
+        }
+
+        #save-profile-button:hover {
+            background-color: #6a1616;
+        }
+
+        #login-button {
+            background-color: #f5f5f5;
+            color: #881c1c;
+            border: 1px solid #881c1c;
+        }
+
+        #login-button:hover {
+            background-color: #eee;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main content -->
+    <div class="main-content">
+        <div class="container">
+            <h1>User Profile</h1>
+            <form id="user-profile-form">
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" name="first-name" required>
+
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="last-name" required>
+
+                <label for="height-feet">Height (ft/in):</label>
+                <div class="height-inputs">
+                    <input type="number" id="height-feet" name="height-feet" placeholder="Feet" min="0" required>
+                    <input type="number" id="height-inches" name="height-inches" placeholder="Inches" min="0" max="11" required>
+                </div>
+
+                <label for="weight">Weight (lbs):</label>
+                <input type="number" id="weight" name="weight" placeholder="Pounds" required>
+
+                <label for="diet">Dietary Preferences:</label>
+                <select id="diet" name="diet">
+                    <option value="none">None</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="halal">Halal</option>
+                </select>
+
+                <button type="button" id="save-profile-button">Save Profile</button>
+                <button type="button" id="login-button">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/frontend/header.js"></script>
+    <script>
+        // Load the header
+        fetch('/frontend/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+                initializeHeader();
+            });
+    </script>
+    <script src="/frontend/profile.js"></script>
+</body>
+</html>

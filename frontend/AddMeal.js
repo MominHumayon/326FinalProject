@@ -104,7 +104,7 @@ const nutrition = [
     }
 ]
 const healthful = [1,2,3,4];
-const ingredients = [["John Cena, Mao Zedong, Yusuf Raza"], ["Sameen Shaik, Aareb Chowdhury, Harambe"], ["Peanut, Matthew Perry, Youre Mother"], ["Stallion", "Monke", "Controller"]];
+const ingredients = [["Flour, Wheat, Cheese, Tomato"], ["Turkey, Rosemary Salt"], ["Black Bean Patty, Potato Bun"], ["Cucumber, Rice, Rice Wine, Seaweed"]];
 const diet = [["Halal"],["Vegetarian"],["Whole Grain"],["Plant Based"]];
 const properties = ["fat","carbs","prot"];
 const font = new FontFace("Apple", "url(apple-chancery-webfont.woff)");
