@@ -6,7 +6,9 @@ const sequelize = new Sequelize({
   storage: "mealDatabase.sqlite",
 });
 
-// Define the Task model
+// Define the Meal model
+// name, nutrition, allergens, dietary information, healthfulness, carbon rating, 
+// ingredients, dining hall availability, dates of availability, whether it has been selected, 
 const Meal = sequelize.define("Meal", {
   mealid: {
     type: DataTypes.UUID,
@@ -38,7 +40,7 @@ const Meal = sequelize.define("Meal", {
     allowNull:false,
   },
   dates: {
-    type:DataTypes.DATE,
+    type:DataTypes.STRING,
     allowNull:false,
   },
 
@@ -63,6 +65,11 @@ const Meal = sequelize.define("Meal", {
   carbon: {
     type: DataTypes.STRING,
     allowNull:false,
+  },
+
+  mealTime: {
+    type: DataTypes.STRING,
+    allowNull: false,
   }
 });
 

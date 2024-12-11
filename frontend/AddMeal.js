@@ -2,7 +2,7 @@ class Meal {
 
     constructor(name) {
         this.name = name;
-        this.nutInfo = {
+        this.nutritionInfo = {
             "servingSize": "",
             "cals" :-1,
             "fat": -1,
@@ -13,23 +13,31 @@ class Meal {
             "prot":-1
         };
         this.dietInfo = ["None"];
-        this.allerInfo = ["None"];
+        this.allergenInfo = ["None"];
         this.ingredients = ["None"];
-        this.health = -1;
+        this.healthfulness = -1;
+        this.dates = ["None"];
+        this.selected = [false];
+        this.image = null;
+        this.mime = null;
+        this.halls = [];
+        this.carbon = "";
+        this.mealTime = ["None"];
     }
-
+    
+    
 
     //Nutrition Info: Serving Size, Calories, Fat, Cholesterol, Sodium, Carbs, Sugar, Protein
     addNutInfo(obj) {
         for (let key of Object.keys(obj)) {
-            if (this.nutInfo[key] === undefined) {
+            if (this.nutritionInfo[key] === undefined) {
                 throw new Error("Extra key in nutrition info");
             }
             if (obj[key] < 0.0) {
                 throw new Error("Missing value for " + key);
             }
         }
-        this.nutInfo = obj;
+        this.nutritionInfo = obj;
         return this;
     }
 
@@ -39,7 +47,7 @@ class Meal {
     }
 
     addAllergyInfo(arr) {
-        this.allerInfo = arr;
+        this.allergenInfo = arr;
         return this;
     }
 
@@ -52,8 +60,32 @@ class Meal {
         if (num < 0) {
             throw new Error("Health value must be non-negative");
         }
-        this.health = num;
+        this.healthfulness = num;
         return this;
+    }
+
+    addHalls(arr) {
+        this.halls = arr;
+        return this;
+    }
+
+    addMealTimes(arr) {
+        this.mealTimes = arr;
+        return this;
+    }
+
+    addCarbon(str) {
+        if (str.length > 1) {
+            throw new Error("Carbon rating must be 1 character");
+        }
+        this.carbon = str;
+    }
+
+    addSelected(arr) {
+        if (typeof(arr[0]) !== Boolean) {
+            throw new Error("arr must be an array of booleans");
+        }
+        this.selected = arr;
     }
 
 }
@@ -63,7 +95,7 @@ const mealNames = ["Cheese Pizza", "Turkey Breast", "Black Bean Burger", "Vegeta
 const allergies = [["Milk","Gluten","Soy","Corn","Wheat"],["Corn"],["Soy", "Corn"],["Sesame"]];
 const nutrition = [
     {
-    "servingSize": "1",
+    "servingSize": "2",
     "cals" :150,
     "fat": 10,
     "chol": 20,
@@ -102,15 +134,11 @@ const nutrition = [
         "sugar":0,
         "prot":10
     }
-]
+];
 const healthful = [1,2,3,4];
 const ingredients = [["John Cena, Mao Zedong, Yusuf Raza"], ["Sameen Shaik, Aareb Chowdhury, Harambe"], ["Peanut, Matthew Perry, Youre Mother"], ["Stallion", "Monke", "Controller"]];
 const diet = [["Halal"],["Vegetarian"],["Whole Grain"],["Plant Based"]];
 const properties = ["fat","carbs","prot"];
-const font = new FontFace("Apple", "url(apple-chancery-webfont.woff)");
-document.fonts.add(font);
-const font2 = new FontFace("Schoolbook", "url(C059-Roman.otf)");
-document.fonts.add(font2);
 
 
 for (let i = 0; i < 4; i++) {
@@ -144,7 +172,7 @@ for (let i = 0; i <4; i++) {
 
 
     const cals = document.createElement("span");
-    cals.innerText = "Calories: " + mealArr[i].nutInfo["cals"];
+    cals.innerText = "Calories: " + mealArr[i].nutritionInfo["cals"];
     cals.style.fontStyle = "italic";
     cals.style.color = "#306584";
     cals.style.fontFamily = "Georgia";
@@ -192,7 +220,7 @@ for (let i = 0; i <4; i++) {
         let tr = nutTable.insertRow();
         for(let k = 0; k <2; k++) {
             const td = tr.insertCell();
-            td.appendChild(document.createTextNode(k === 0? properties[j] : mealArr[i].nutInfo[properties[j]]));
+            td.appendChild(document.createTextNode(k === 0? properties[j] : mealArr[i].nutritionInfo[properties[j]]));
             td.style.border = '1px solid black';
         }
     }
@@ -210,7 +238,7 @@ for (let i = 0; i <4; i++) {
 
     for (let j = 0; j < 7; j++) {
         const cell = document.createElement("div");
-        cell.style.backgroundColor = j < mealArr[i].health ? "green" : "silver";
+        cell.style.backgroundColor = j < mealArr[i].healthfulness ? "green" : "silver";
         cell.style.border = "1px solid black";
         healthBar.appendChild(cell);
     }
