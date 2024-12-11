@@ -1,6 +1,6 @@
 // Dummy data for dining halls, meals, and time of day
-
-import { diningHalls } from "../backend/diningInfo";
+ 
+import diningHalls from "../backend/diningInfo";
 
 
 // Populate the dropdown menu with dining halls
