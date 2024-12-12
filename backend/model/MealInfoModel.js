@@ -114,17 +114,32 @@ class _SQLiteMealModel {
   }
 
   async read(searchObj) {
-    const params = [searchObj.dates,searchObj.allergens,searchObj.ingredients,searchObj.halls,searchObj.carbon];
-    const paramNames = ["dates","allergenInfo","ingredients","halls","carbon"];
-    let foundMeals = await Meal.findAll();
-    for (let i = 0; i < 5; i++) {
-        if (i < 4 && params[i].length > 0) {
-            foundMeals = foundMeals.filter(x => searchObj.params[i].every(elem => x.paramNames[i].includes(elem)));
-        }
-        else if (searchObj.carbon !== "A") {
-            foundMeals = foundMeals.filter(x => x.carbon === searchObj.carbon);
-        }
+    if (searchObj.name) {
+      return await Meal.findByPk(searchObj.name);
     }
+
+    let foundMeals = await Meal.findAll();
+    if (searchObj.carbon.length > 0)
+      foundMeals = foundMeals.filter(x => x.carbon === searchObj.carbon);
+    if (searchObj.allergenInfo.length > 0)
+      foundMeals = foundMeals.filter(x => searchObj.allergenInfo.every(elem => x.allergenInfo.includes(elem)));
+    if (searchObj.dietInfo.length > 0)
+      foundMeals = foundMeals.filter(x => searchObj.dietInfo.every(elem => x.dietInfo.includes(elem)));
+    if (searchObj.dates) {
+      if (!searchObj.halls || !searchObj.mealTime)
+        throw new Error("A date search must be accompanied by a dining hall and a meal Time");
+      if (searchObj.halls.length !== searchObj.dates.length || searchObj.mealTime.length !== searchObj.dates.length)
+        throw new Error("The requested dates array must be the same length as the halls and mealTimes array");
+
+      //filter the meals to find any that have a matching date, dining hall, and time of day at the same index
+      foundMeals = foundMeals.filter(curMeal => (
+        curMeal.dates.some((elem,curIndex) => searchObj.dates[0] === elem 
+          && searchObj.mealTime[0] === curMeal.mealTime[curIndex]
+            && searchObj.halls[0] === curMeal.halls[curIndex]
+        )
+      ));
+    }
+
     return foundMeals;
         
   }
@@ -132,7 +147,14 @@ class _SQLiteMealModel {
   async update(newInfo) {
     const mealu = await Meal.findByPk(newInfo.name);
     if (!mealu) {
-      return null;
+      this.create(newInfo);
+      return;
+    }
+
+    if (newInfo.halls) {
+      newInfo.halls = [...mealu.halls, newInfo.halls[0]];
+      newInfo.dates = [...mealu.dates, newInfo.dates[0]];
+      newInfo.mealTime = [...mealu.mealTime, newInfo.mealTime[0]];
     }
 
     await mealu.update(newInfo);
