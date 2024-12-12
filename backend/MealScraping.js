@@ -82,7 +82,42 @@ async function scrapeMeals(url,date,time) {
 
       obj.addMealTimes([time]);
 
-      console.log(obj.name);
+      obj.addIngredients(currentMeal.getAttribute("data-ingredient-list").split(", "));
+
+      let remove = false;
+      for (let j = 0; j< obj.ingredients.length; j++) {
+
+        if (obj.ingredients[j].includes("(") && !remove) {
+          remove = obj.ingredients[j].includes(")") ? false : true;
+          obj.ingredients[j] = obj.ingredients[j].substring(0, obj.ingredients[j].indexOf("(")-1).trim();
+          if (obj.ingredients[j] === "") {
+            obj.ingredients.splice(j,1);
+            j--;
+          }
+        }
+        else if (obj.ingredients[j].includes(")")) {
+          remove = false;
+          obj.ingredients[j] = obj.ingredients[j].substring(obj.ingredients[j].indexOf(")")+1).trim();
+          if (obj.ingredients[j] === "") {
+            obj.ingredients.splice(j,1);
+            j--;
+          }
+        }
+        else if (remove) {
+          obj.ingredients.splice(j,1);
+          j--;
+        }
+      }
+
+      obj.ingredients = obj.ingredients.map(str =>
+        str.includes(":") ? str.substring(str.indexOf(":")+2) :
+          str.includes("[") ? str.substring(0,str.indexOf("[")-1) :
+            str.includes("]") ? str.substring(str.indexOf("]")+1) : str
+
+      ).map(str => str.trim()).filter(str => str.length > 0);
+
+      console.log(obj.ingredients);
+
     }
 }
 
@@ -90,5 +125,5 @@ const url = 'https://umassdining.com/locations-menus/worcester/menu';
 
 
 scrapeMeals(url,"12/11/2024","breakfast");
-scrapeMeals(url,"12/12/2024","breakfast");
+//scrapeMeals(url,"12/12/2024","breakfast");
 
