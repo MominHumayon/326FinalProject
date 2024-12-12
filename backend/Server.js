@@ -1,12 +1,17 @@
 // Server.js
 import express from "express";
 import MealRoutes from "./routes/MealRoutes.js";
+import {scrapeMeals} from "../MealScraping.js";
+import {Events} from "../eventhub/Events.js";
+import EventHub from "../eventhub/EventHub.js";
+
 
 class Server {
   constructor() {
     this.app = express();
     this.configureMiddleware();
     this.setupRoutes();
+    this.eventsManager = EventHub.getInstance();
   }
 
   // Configure middleware for static files and JSON parsing
@@ -15,7 +20,7 @@ class Server {
     this.app.use(express.static("../front-end"));
 
     // Parse JSON bodies, limited to 10mb
-    this.app.use(express.json({ limit: "5mb" }));
+    this.app.use(express.json({ limit: "10mb" }));
 
     // NOTE:
     // These middleware functions are built-in Express middleware. They are

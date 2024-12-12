@@ -1,4 +1,5 @@
 import _SQLiteMealModel from "../model/MealInfoModel.js";
+import {scrapeMeals} from "../MealScraping.js";
 
 class MealController {
     constructor(name) {
@@ -8,11 +9,17 @@ class MealController {
   
     // Get all tasks
     async getMeal(req, res) {
-      const meals = await this.model.read(req.body);
+      let meals;
+      meals = await this.model.read(req.body);
       // The response is an object with a 'tasks' property containing an array of
       // tasks. This could be anything, but we define it as an object with a
       // 'tasks' property to keep the response consistent across different
       // endpoints.
+      let response = {};
+      if (meals.length === 0) {
+        meals = scrapeMeals(req.url,req.body.dates,req.body.mealTime);
+        meals.forEach(x => this.updateMeal({body:x},response));
+      }
       res.json({ meals });
     }
   
@@ -23,7 +30,7 @@ class MealController {
           return res.status(400).json({ error: "Meal is missing information" });
         }
   
-        // Create the new task object with a unique ID
+        // Create the new object with a unique ID
         const task = await this.model.create(req.body);
   
       } catch (error) {
@@ -36,7 +43,7 @@ class MealController {
     }
   
 
-    async updateMeals(req, res) {
+    async updateMeal(req, res) {
         await this.model.update(req.body);
     }
 

@@ -122,9 +122,10 @@ async function scrapeMeals(url,date,time) {
     return mealArr;
 }
 
-const url = 'https://umassdining.com/locations-menus/worcester/menu';
+//const url = 'https://umassdining.com/locations-menus/worcester/menu';
 
 
-scrapeMeals(url,"12/11/2024","breakfast");
+//scrapeMeals(url,"12/11/2024","breakfast");
 //scrapeMeals(url,"12/12/2024","breakfast");
 
+export default scrapeMeals;

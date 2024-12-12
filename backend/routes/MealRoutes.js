@@ -88,7 +88,7 @@ class MealRoutes {
     });
 
     this.router.patch("/mealStore", async (req, res) => {
-        await this.controller.updateMeals(req,res);
+        await this.controller.updateMeal(req,res);
     })
   }
 
