@@ -1,4 +1,6 @@
 import { Sequelize, DataTypes } from "sequelize";
+import {EventHub} from "../eventhub/EventHub.js";
+import {Events} from "../eventhub/Events.js";
 
 // Initialize a new Sequelize instance with SQLite
 const sequelize = new Sequelize({
@@ -110,6 +112,7 @@ class _SQLiteMealModel {
   }
 
   async create(mealInfo) {
+    EventHub.getInstance().publish(Events.newMealScraped,mealInfo.name);
     return await Meal.create(mealInfo);
   }
 

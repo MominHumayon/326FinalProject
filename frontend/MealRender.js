@@ -64,6 +64,7 @@ for (let i = 0; i < 4; i++) {
             .addHealth(healthful[i])
                 .addIngredients(ingredients[i])
                     .addDietInfo(diet[i]);
+    mealArr[i].image = "./" + (i+1) + ".jpg";
 }
 
 function renderMealInfo(mealArr) {
@@ -74,8 +75,7 @@ function renderMealInfo(mealArr) {
         elem.classList.add("mealDisplay");
         document.getElementById("mealContainer").appendChild(elem);
         const foodImg = document.createElement("img");
-        //foodImg.setAttribute("src",mealArr[i].image);
-        foodImg.setAttribute("src","./" + (i+1) + ".jpg");
+        foodImg.setAttribute("src",mealArr[i].image);
         foodImg.classList.add("foodPic");
 
 
@@ -170,7 +170,7 @@ function renderMealInfo(mealArr) {
 
         const addButton = document.createElement("button");
         addButton.textContent = "Add";
-        addButton.addEventListener("click", () => eventManager.publish(Events.MealSelect));
+        addButton.addEventListener("click", () => eventManager.publish(Events.MealSelect,mealArr[i]));
 
         mealInfo.appendChild(secondLine);
         mealInfo.appendChild(healthText);
