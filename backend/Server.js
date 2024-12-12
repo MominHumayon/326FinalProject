@@ -3,7 +3,7 @@ import express from "express";
 import MealRoutes from "./routes/MealRoutes.js";
 import {scrapeMeals} from "../MealScraping.js";
 import {Events} from "../eventhub/Events.js";
-import EventHub from "../eventhub/EventHub.js";
+import {EventHub} from "../eventhub/EventHub.js";
 
 
 class Server {
