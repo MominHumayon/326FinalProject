@@ -51,7 +51,7 @@ async function scrapeMeals(url,date,time) {
 
     
     const meals = elem.querySelectorAll(".lightbox-nutrition");
-
+    const mealArr = [];
     let obj = {};
     
     for (let i = 0; i < meals.length; i++) {
@@ -116,9 +116,10 @@ async function scrapeMeals(url,date,time) {
 
       ).map(str => str.trim()).filter(str => str.length > 0);
 
-      console.log(obj.ingredients);
-
+      mealArr.push(currentMeal);
     }
+
+    return mealArr;
 }
 
 const url = 'https://umassdining.com/locations-menus/worcester/menu';
