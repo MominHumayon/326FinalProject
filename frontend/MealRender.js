@@ -3,7 +3,7 @@ import {Events} from "../eventhub/Events.js";
 import {EventHub} from "../eventhub/EventHub.js";
 
 
-const mealArr = new Array(4);
+const arrMeals = new Array(4);
 const mealNames = ["Cheese Pizza", "Turkey Breast", "Black Bean Burger", "Vegetable Sushi Roll"];
 const allergies = [["Milk","Gluten","Soy","Corn","Wheat"],["Corn"],["Soy", "Corn"],["Sesame"]];
 const nutrition = [
@@ -57,14 +57,14 @@ const properties = ["fat","carbs","prot"];
 const eventManager = EventHub.getInstance();
 
 for (let i = 0; i < 4; i++) {
-    mealArr[i] = new Meal(mealNames[i]);
-    console.log(mealArr[i]);
-    mealArr[i].addAllergyInfo(allergies[i])
+    arrMeals[i] = new Meal(mealNames[i]);
+    console.log(arrMeals[i]);
+    arrMeals[i].addAllergyInfo(allergies[i])
         .addNutInfo(nutrition[i])
             .addHealth(healthful[i])
                 .addIngredients(ingredients[i])
                     .addDietInfo(diet[i]);
-    mealArr[i].image = "./" + (i+1) + ".jpg";
+    arrMeals[i].image = "./" + (i+1) + ".jpg";
 }
 
 function renderMealInfo(mealArr) {
@@ -182,4 +182,4 @@ function renderMealInfo(mealArr) {
     }
 }
 
-renderMealInfo(mealArr);
+renderMealInfo(arrMeals);

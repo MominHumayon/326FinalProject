@@ -11,19 +11,16 @@ class MealController {
     async getMeal(req, res) {
       let meals;
       meals = await this.model.read(req.body);
-      // The response is an object with a 'tasks' property containing an array of
-      // tasks. This could be anything, but we define it as an object with a
-      // 'tasks' property to keep the response consistent across different
-      // endpoints.
+      // The response is an object with a 'meals' property containing an array of meals
       let response = {};
       if (meals.length === 0) {
-        meals = scrapeMeals(req.url,req.body.dates,req.body.mealTime);
+        meals = scrapeMeals(req.body.halls[0],req.body.dates[0],req.body.mealTime[0]);
         meals.forEach(x => this.updateMeal({body:x},response));
       }
       res.json({ meals });
     }
   
-    // Add a new task
+
     async addMeal(req, res) {
       try {
         if (!req.body || !req.body.dates) {
@@ -32,6 +29,7 @@ class MealController {
   
         // Create the new object with a unique ID
         const task = await this.model.create(req.body);
+        return res.status(200);
   
       } catch (error) {
         // Log any unexpected errors and send a server error response

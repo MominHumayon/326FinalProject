@@ -3,6 +3,8 @@ import Meal from "../frontend/AddMeal.js";
 import puppeteer from 'puppeteer';
 
 
+
+//Format date as mm/dd/yyyy string for comparison
 function convertDate(date) {
   const today = new Date(date);
   const yyyy = today.getFullYear();
@@ -17,22 +19,32 @@ function convertDate(date) {
     return formattedDate;
 }
 
-async function scrapeMeals(url,date,time) {
+/**
+ * 
+ * @param {*} location the dining hall to get information from
+ * @param {*} date the mm/dd/yyyy date for which the meal information is desired
+ * @param {*} time the time of day to get information for, either breakfast, lunch, or dinner
+ * 
+ * @returns an array of meal objects
+ */
+async function scrapeMeals(location,date,time) {
 
 
     let elem;
-    // Fetch the HTML content
+    // use puppeteer to scrape from live page if requested date is not today
     if (date !== convertDate(Date.now())) {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
 
+        const url = 'https://umassdining.com/locations-menus/' + location + "/menu";
         await page.goto(url);
 
-        const param = "#" + time + "_menu";
+        //change dropdown menu selected option to requested date
         await page.select('#upcoming-foodpro',date); 
         await new Promise(resolve => setTimeout(resolve,1000));
 
         const content = await page.evaluate(() => document.querySelector(".panel-container").innerHTML);
+
         const parser = new JSDOM(content);
         const doc = parser.window.document
         elem = doc.getElementById(time+"_menu");
@@ -43,17 +55,22 @@ async function scrapeMeals(url,date,time) {
       const response = await fetch(url);
       const html = await response.text();
 
-    // Parse the HTML content
+    // Create a model DOM for the returned html
       const parser = new JSDOM(html);
       const body = parser.window.document;
+
+      //get the menu for the specific time of day
       elem = body.getElementById(time + "_menu");
     }
 
     
+    //get all individual meals
     const meals = elem.querySelectorAll(".lightbox-nutrition");
     const mealArr = [];
     let obj = {};
     
+
+    //parse the meal information
     for (let i = 0; i < meals.length; i++) {
       obj = new Meal(meals[i].querySelector("a").textContent);
       const currentMeal = meals[i].querySelector("a");
@@ -87,6 +104,7 @@ async function scrapeMeals(url,date,time) {
       let remove = false;
       for (let j = 0; j< obj.ingredients.length; j++) {
 
+        //remove ingredients that are inside parentheses
         if (obj.ingredients[j].includes("(") && !remove) {
           remove = obj.ingredients[j].includes(")") ? false : true;
           obj.ingredients[j] = obj.ingredients[j].substring(0, obj.ingredients[j].indexOf("(")-1).trim();
@@ -109,6 +127,7 @@ async function scrapeMeals(url,date,time) {
         }
       }
 
+      //more formatting to remove punctuation
       obj.ingredients = obj.ingredients.map(str =>
         str.includes(":") ? str.substring(str.indexOf(":")+2) :
           str.includes("[") ? str.substring(0,str.indexOf("[")-1) :
@@ -116,16 +135,15 @@ async function scrapeMeals(url,date,time) {
 
       ).map(str => str.trim()).filter(str => str.length > 0);
 
-      mealArr.push(currentMeal);
+      mealArr.push(obj);
+      console.log(obj.name);
     }
 
     return mealArr;
 }
 
-//const url = 'https://umassdining.com/locations-menus/worcester/menu';
 
-
-//scrapeMeals(url,"12/11/2024","breakfast");
-//scrapeMeals(url,"12/12/2024","breakfast");
+//scrapeMeals("worcester","12/12/2024","breakfast");
+//scrapeMeals("worcester","12/13/2024","breakfast");
 
 export default scrapeMeals;

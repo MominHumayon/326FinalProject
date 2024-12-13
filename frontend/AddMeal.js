@@ -47,11 +47,14 @@ class Meal {
         return this;
     }
 
+
+    //dietary information: Vegetarian, Vegan, Halal, Whole Grain, etc
     addDietInfo(arr) {
         this.dietInfo = arr;
         return this;
     }
 
+    //allergens: Soy, Wheat, Gluten, Corn, etc
     addAllergyInfo(arr) {
         this.allergenInfo = arr;
         return this;
@@ -62,6 +65,7 @@ class Meal {
         return this;
     }
 
+    //healthfulness out of 7
     addHealth(num) {
         if (num < 0) {
             throw new Error("Health value must be non-negative");
@@ -70,11 +74,13 @@ class Meal {
         return this;
     }
 
+    //dining halls availability
     addHalls(arr) {
         this.halls = arr;
         return this;
     }
 
+    //meal times availability
     addMealTimes(arr) {
         this.mealTime = arr;
         return this;
@@ -85,6 +91,7 @@ class Meal {
         return this;
     }
 
+    //carbon rating: A, B, C, D, E
     addCarbon(str) {
         if (str.length > 1) {
             throw new Error("Carbon rating must be 1 character");

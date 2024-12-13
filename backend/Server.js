@@ -29,9 +29,9 @@ class Server {
     // also create custom middleware functions.
   }
 
-  // Setup routes by using imported TaskRoutes
+  // Setup routes by using imported MealRoutes
   setupRoutes() {
-    this.app.use("/v1", MealRoutes); // Mount TaskRoutes on the app
+    this.app.use("/v1", MealRoutes);
   }
 
   // Start the server on a specified port

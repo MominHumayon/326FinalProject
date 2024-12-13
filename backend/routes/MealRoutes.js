@@ -35,38 +35,44 @@ class MealRoutes {
     // Define the routes and connect them to controller methods
 
     // DESCRIPTION
-    //   Get meals. This endpoint returns an object with a 'tasks' property
+    //   Get meals. This endpoint returns an object with a 'meals' property
     //   containing an array of meals.
     // REQUEST
-    //   GET /tasks
+    //   GET /mealStore
     // RESPONSE
     //   {
     //     "meals": [ ... ]
     //   }
     // STATUS CODES
     //   200 - OK: The request was successful
+    //   400 - OK: Incomplete meal request
     //   500 - Internal Server Error: The server encountered an error
     this.router.get("/mealStore", async (req, res) => {
       await this.controller.getMeal(req, res)
     });
 
     // DESCRIPTION
-    //   Add a new task. This endpoint creates a new task with the provided
+    //   Add a new meal. This endpoint creates a new meal with the provided
     //   description and returns the created task.
     // REQUEST
-    //   POST /task
+    //   POST /mealStore
     //   {
-    //     "task": "Description of the task"
-    //     "file": "Base64-encoded file data (optional)"
-    //   }
-    // RESPONSE
-    //   {
-    //     "id": generated id,
-    //     "task": "Description of the task",
-    //     "file": "Base64 data"
-    //   }
+    //     "name": "name of the meal"
+    //     "nutritionInfo": Object containing fat, protein, calories, other nutrition facts
+    //     "allergenInfo": Array of allergens such as wheat, corn, soy, etc
+    //     "dietInfo": Array of dietary categories
+    //     "healthfulness": How healthy the meal is out of 7
+    //     "ingredients": Meal ingredients
+    //     "dates": days meal is available
+    //     "image": (optional) picture of food
+    //      "mime": (optional) mime of image for base64 transfer
+    //      "carbon": Meal carbon rating from A-E
+    //      "halls": Dining hall availability of meal
+    //       "mealTime": time of day meal is available
+    //   } 
+
     // STATUS CODES
-    //   200 - OK: The task was created successfully
+    //   200 - OK: The meal was created successfully
     //   400 - Bad Request: The request was invalid or missing required data
     //   500 - Internal Server Error: The server encountered an error
     this.router.post("/mealStore", async (req, res) => {
@@ -74,14 +80,14 @@ class MealRoutes {
     });
 
     // DESCRIPTION
-    //   Clear all tasks. This endpoint deletes all tasks and returns an empty
-    //   response. This operation cannot be undone.
+    //   Clear all meals. This endpoint deletes all meals and returns an empty
+    //   response.
     // REQUEST
-    //   DELETE /tasks
+    //   DELETE /mealStore
     // RESPONSE
     //   { }
     // STATUS CODES
-    //   200 - OK: The tasks were cleared successfully
+    //   200 - OK: The meals were cleared successfully
     //   500 - Internal Server Error: The server encountered an error
     this.router.delete("/mealStore", async (req, res) => {
       await this.controller.clearMeals(req, res);

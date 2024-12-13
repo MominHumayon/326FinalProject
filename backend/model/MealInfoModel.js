@@ -10,7 +10,7 @@ const sequelize = new Sequelize({
 
 // Define the Meal model
 // name, nutrition, allergens, dietary information, healthfulness, carbon rating, 
-// ingredients, dining hall availability, dates of availability, whether it has been selected, 
+// ingredients, dining hall availability, dates of availability, image, times of day availability
 const Meal = sequelize.define("Meal", {
   mealid: {
     type: DataTypes.UUID,
@@ -87,7 +87,7 @@ class _SQLiteMealModel {
             mealid:1,
             name:"placeholder",
             nutritionInfo: {
-                "servingSize": "",
+                "servingSize": "2",
                 "cals" :-1,
                 "fat": -1,
                 "chol":-1,
@@ -112,15 +112,19 @@ class _SQLiteMealModel {
   }
 
   async create(mealInfo) {
-    EventHub.getInstance().publish(Events.newMealScraped,mealInfo.name);
+    if (mealInfo.name != "placeholder")
+      EventHub.getInstance().publish(Events.newMealScraped,mealInfo.name);
     return await Meal.create(mealInfo);
   }
 
   async read(searchObj) {
+
+    //if a specific name is requested, find it and return
     if (searchObj.name) {
       return await Meal.findByPk(searchObj.name);
     }
 
+    //filter meals based on search criteria: carbon rating, allergens, dietary info, dates, halls, times of day
     let foundMeals = await Meal.findAll();
     if (searchObj.carbon.length > 0)
       foundMeals = foundMeals.filter(x => x.carbon === searchObj.carbon);
@@ -128,6 +132,19 @@ class _SQLiteMealModel {
       foundMeals = foundMeals.filter(x => searchObj.allergenInfo.every(elem => x.allergenInfo.includes(elem)));
     if (searchObj.dietInfo.length > 0)
       foundMeals = foundMeals.filter(x => searchObj.dietInfo.every(elem => x.dietInfo.includes(elem)));
+
+    /*
+    * filter by dates, halls, mealTime. These must all be arrays of length 1. For example, search for 
+    * worcester breakfast on 10 Dec 2024. The meal item in the database will have dates, halls, and mealTime
+    * all be the same length. For example, the arrays might look like:
+    * 
+    * dates = ["12/11/2024","12/11/2024","12/12/2024"]
+    * halls = ["worcester","worcester","berkshire"]
+    * mealTime = ["breakfast","lunch","lunch"]
+    * 
+    * This means that this particular meal is available on 12/11/2024 at worcester for breakfast, 
+    * on 12/11/2024 at worcester for lunch, and at 12/12/2024 at berkshire for lunch
+    */ 
     if (searchObj.dates) {
       if (!searchObj.halls || !searchObj.mealTime)
         throw new Error("A date search must be accompanied by a dining hall and a meal Time");
@@ -154,6 +171,7 @@ class _SQLiteMealModel {
       return;
     }
 
+    //append hall,date, and time information to existing info instead of overwriting
     if (newInfo.halls) {
       newInfo.halls = [...mealu.halls, newInfo.halls[0]];
       newInfo.dates = [...mealu.dates, newInfo.dates[0]];
@@ -167,7 +185,7 @@ class _SQLiteMealModel {
   async delete(mealName = null) {
     if (mealName === null) {
       await Meal.destroy({ truncate: true });
-      return;
+      return {success:true};
     }
 
     await Meal.destroy({ where: { name: mealName.name } });
