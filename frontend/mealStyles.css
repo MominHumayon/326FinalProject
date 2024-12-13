@@ -42,3 +42,13 @@
     grid-template-columns:repeat(7,auto);
     height: 30px;
 }
+
+@font-face {
+   font-family: Schoolbook;
+   src: url(C059-Roman.otf);
+ }
+
+ @font-face {
+   font-family: Apple;
+   src: url(apple-chancery-webfont.woff);
+ }
