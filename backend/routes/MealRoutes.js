@@ -53,7 +53,7 @@ class MealRoutes {
 
     // DESCRIPTION
     //   Add a new meal. This endpoint creates a new meal with the provided
-    //   description and returns the created task.
+    //   description.
     // REQUEST
     //   POST /mealStore
     //   {
@@ -93,6 +93,18 @@ class MealRoutes {
       await this.controller.clearMeals(req, res);
     });
 
+
+    // DESCRIPTION
+    //   Update meals. Either (1) add an image to associate with the meal 
+    //   or (2) add a dining hall, date and time of day that the meal is available [must add include all 3 as arrays of length 1]
+    //   
+    // REQUEST
+    //   PATCH /mealStore
+    // RESPONSE
+    //   { }
+    // STATUS CODES
+    //   200 - OK: The meals were cleared successfully
+    //   500 - Internal Server Error: The server encountered an error
     this.router.patch("/mealStore", async (req, res) => {
         await this.controller.updateMeal(req,res);
     })
