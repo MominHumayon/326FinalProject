@@ -1,9 +1,6 @@
 // Server.js
-import express from "express";
-import MealRoutes from "./routes/MealRoutes2.js";
-import {scrapeMeals} from "../MealScraping.js";
-import {Events} from "../eventhub/Events.js";
-import {EventHub} from "../eventhub/EventHub.js";
+const express = require("express");
+const MealRoutes =  require("./routes/MealRoutesMain.js");
 
 
 class Server {
@@ -11,13 +8,10 @@ class Server {
     this.app = express();
     this.configureMiddleware();
     this.setupRoutes();
-    this.eventsManager = EventHub.getInstance();
   }
 
   // Configure middleware for static files and JSON parsing
   configureMiddleware() {
-    // Serve static files from the front-end
-    this.app.use(express.static("../front-end"));
 
     // Parse JSON bodies, limited to 10mb
     this.app.use(express.json({ limit: "10mb" }));
@@ -35,7 +29,7 @@ class Server {
   }
 
   // Start the server on a specified port
-  start(port = 3000) {
+  start(port = 6969) {
     this.app.listen(port, () => {
       console.log(`Server started on port ${port}`);
     });

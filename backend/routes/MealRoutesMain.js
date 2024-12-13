@@ -21,14 +21,14 @@
 // without affecting existing ones, and facilitates testing by allowing each
 // route to be tested independently for correct handling of inputs and
 // outputs.
-import express from "express";
-import MealController from "../controller/MealController.js";
+const express = require("express");
+const MealController = require("../controller/MealController.js");
 
 class MealRoutes {
   constructor() {
     this.router = express.Router();
     this.initializeRoutes();
-    this.controller = new MealController("placeholder");
+    this.controller = new MealController();
   }
 
   initializeRoutes() {

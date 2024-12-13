@@ -1,10 +1,9 @@
-import _SQLiteMealModel from "../model/MealInfoModel.js";
-import {scrapeMeals} from "../MealScraping.js";
+const SQLiteMealModel = require("../model/MealInfoModel.js");
+const scrapeMeals = require("../MealScraping.js");
 
 class MealController {
-    constructor(name) {
-        this.model = new _SQLiteMealModel();
-        name ? this.model.init(false) : this.model.init(true);
+    constructor() {
+        this.model = SQLiteMealModel.init();
     }
   
     async getMeal(req, res) {

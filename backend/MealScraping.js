@@ -1,6 +1,6 @@
-import {JSDOM} from "jsdom";
-import Meal from "../frontend/AddMeal.js";
-import puppeteer from 'puppeteer';
+const {JSDOM} = require("jsdom");
+const Meal =  require("../frontend/AddMeal.js");
+const puppeteer = require('puppeteer');
 
 
 
