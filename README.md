@@ -89,6 +89,11 @@ The application consists of three main components:
 - Manages data synchronization
 - Ensures data accuracy
 
+### 4. Sharing Scraper (Port 6969)
+- Scrapes information from UMass Dining for today and future days
+- Stores Meal information in database
+- Shares meal information with graph and goal tracker features when a meal's "add" button is clicked
+
 ## Setup and Installation
 
 ### Prerequisites
