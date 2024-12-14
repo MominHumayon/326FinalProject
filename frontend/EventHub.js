@@ -42,4 +42,4 @@ export class EventHub {
     }
   }
   
-  
+  export default EventHub;

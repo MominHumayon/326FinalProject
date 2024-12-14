@@ -1,6 +1,6 @@
 import Meal from "./AddMeal.js"
-import {Events} from "../eventhub/Events.js";
-import {EventHub} from "../eventhub/EventHub.js";
+import Events from "./Events.js";
+import EventHub from "./EventHub.js";
 
 
 const arrMeals = new Array(4);

@@ -12,3 +12,4 @@ export const Events = {
     GetMealInfo: 'GetMealInfo',
   };
   
+  export default Events;

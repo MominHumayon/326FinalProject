@@ -15,13 +15,6 @@ app.use(cors());
 
 // Serve static files from frontend directory
 app.use(express.static("../frontend"));
-app.use(express.static("../eventhub"));
-
-/*
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname,'index.html'));
-});
-*/
 
 // Start server
 app.listen(PORT, () => {
