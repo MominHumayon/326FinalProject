@@ -156,16 +156,6 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/frontend/header.js"></script>
-    <script>
-        // Load the header
-        fetch('/frontend/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-                initializeHeader();
-            });
-    </script>
     <script src="script.js"></script>
 </body>
 </html>

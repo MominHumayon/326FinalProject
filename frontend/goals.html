@@ -305,12 +305,6 @@
     <script src="/frontend/header.js"></script>
     <script>
         // Load the header
-        fetch('/frontend/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-                initializeHeader();
-            });
         // Initial data and colors
         const goals = {
             bulking: { calories: 2500, protein: 150, carbs: 300, fat: 80 },

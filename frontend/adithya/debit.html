@@ -49,16 +49,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/frontend/header.js"></script>
-    <script>
-        // Load the header
-        fetch('/frontend/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-                initializeHeader();
-            });
-    </script>
     <script type="module" src="/frontend/debitScript.js"></script>
 </body>
 </html>

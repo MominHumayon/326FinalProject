@@ -152,18 +152,6 @@
         </div>
     </main>
 
-    <script src="js/meal-recommender.js"></script>
-    <!-- Scripts -->
-    <script src="/frontend/header.js"></script>
-    <script>
-        // Load the header
-        fetch('/frontend/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-                initializeHeader();
-            });
-    </script>
     <script src="/frontend/js/meal-recommender.js"></script>
 </body>
 </html>
