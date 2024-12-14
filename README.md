@@ -236,3 +236,10 @@ GET /api/user/preferences
 PUT /api/user/goals
 ```
 
+#### Meal Endpoints
+```
+GET /v1/mealStore
+POST /v1/mealStore
+PATCH /v1/mealStore
+DELETE /v1/mealStore
+```
