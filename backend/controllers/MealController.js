@@ -1,4 +1,4 @@
-const SQLiteMealModel = require("../model/MealInfoModel.js");
+const SQLiteMealModel = require("../models/MealInfoModel.js");
 const scrapeMeals = require("../MealScraping.js");
 
 class MealController {

@@ -22,7 +22,7 @@
 // route to be tested independently for correct handling of inputs and
 // outputs.
 const express = require("express");
-const MealController = require("../controller/MealController.js");
+const MealController = require("../controllers/MealController.js");
 
 class MealRoutes {
   constructor() {
