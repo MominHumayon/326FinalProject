@@ -89,6 +89,11 @@ The application consists of three main components:
 - Manages data synchronization
 - Ensures data accuracy
 
+### 4. Sharing Scraper (Port 6969)
+- Scrapes information from UMass Dining for today and future days
+- Stores Meal information in database
+- Shares meal information with graph and goal tracker features when a meal's "add" button is clicked
+
 ## Setup and Installation
 
 ### Prerequisites
@@ -103,47 +108,22 @@ The application consists of three main components:
 1. Clone all repositories:
 ```bash
 # Main frontend application
-git clone https://github.com/your-username/umass-dining-frontend.git
-
-# Backend API
-git clone https://github.com/your-username/umass-dining-backend.git
-
-# Scraper service
-git clone https://github.com/your-username/umass-dining-scraper.git
+git clone https://github.com/MominHumayon/326FinalProject
 ```
 
 2. Install dependencies for each component:
 ```bash
 # Frontend
-cd umass-dining-frontend
+cd frontend
 npm install
 
 # Backend
-cd ../umass-dining-backend
+cd backend
 npm install
 
 # Scraper
-cd ../umass-dining-scraper
+cd umass-dining-scraper
 npm install
-```
-
-3. Configure environment variables:
-Create `.env` files in each directory:
-
-```env
-# Frontend .env
-PORT=3000
-BACKEND_URL=http://localhost:4000
-SCRAPER_URL=http://localhost:5000
-
-# Backend .env
-PORT=4000
-DATABASE_URL=your_database_url
-JWT_SECRET=your_jwt_secret
-
-# Scraper .env
-PORT=5000
-UPDATE_INTERVAL=3600000
 ```
 
 ## Running the Application
@@ -158,9 +138,15 @@ npm start
 2. Start the Backend Server:
 ```bash
 cd umass-dining-backend
-npm start
+npm start server.js
 # Runs on http://localhost:4000
 ```
+
+3. Start the Sharing Scraper Server:
+```bash
+cd umass-dining-frontend
+npm start mealScrapeServer.js
+# Runs on http://localhost:6969
 
 3. Start the Frontend Server:
 ```bash
@@ -184,19 +170,30 @@ project/
 │   ├── header.js
 │   ├── meal-recommender.html
 │   ├── meal-recommender.css
+│   ├── meal-info.html
+│   ├── AddMeal.js
+│   ├── MealRender.js
 │   ├── profile.html
+|   ├── profileStyle.css
+|   ├── profile.js
 │   ├── goals.html
+│   ├── server.js
 │   ├── location-layout/
 │   ├── graph-feature/
 │   └── adithya/
+├── eventhub/
+│   ├── Events.js
+│   ├── EventHub.js
 ├── backend/
 │   ├── server.js
+│   ├── mealScraping.js
+│   ├── mealScrapeServer.js
 │   ├── routes/
 │   ├── controllers/
 │   └── models/
 └── scraper/
     ├── scraper.js
-    └── utils/
+    └── server.js
 ```
 
 ## Development Guidelines
@@ -239,9 +236,3 @@ GET /api/user/preferences
 PUT /api/user/goals
 ```
 
-#### Tracking Endpoints
-```
-POST /api/tracking/meal
-GET /api/tracking/history
-GET /api/tracking/statistics
-```
