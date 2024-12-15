@@ -94,14 +94,15 @@ const weeklyData = chosenMeals.length > 0 ?
         },
     },
 };
-console.log(chosenMeals.length);
+console.log(chosenMeals);
 if (chosenMeals.length > 0) {
     let thisWeek = 1;
     let tracker = chosenMeals[0];
     for (let count = 1; count < chosenMeals.length; count++) {
-        if ( new Date(chosenMeals[count].date).getTime() - new Date(tracker.date).getTime() > 604799999) {
+        if ( (new Date(chosenMeals[count].date)).getTime() - (new Date(tracker.date)).getTime() > 604799999) {
             tracker = chosenMeals[count];
-            weeklyData["week"+(++thisWeek)] = {
+            thisWeek++;
+            weeklyData["week"+(thisWeek)] = {
                 pie: [chosenMeals[count].protein,chosenMeals[count].carbs,chosenMeals[count].fat],
                 bar: {
                     labels: [chosenMeals[count].date],
@@ -127,7 +128,6 @@ if (chosenMeals.length > 0) {
         }
     }
 }
-localStorage.setItem("graphCommunication",JSON.stringify([]));
 
 // Update Charts for Selected Week
 function updateChartsForWeek(week) {

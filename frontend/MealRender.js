@@ -71,6 +71,7 @@ const healthful = [1,2,3,4];
 const ingredients = [["John Cena, Mao Zedong, Yusuf Raza"], ["Sameen Shaik, Aareb Chowdhury, Harambe"], ["Peanut, Matthew Perry, Youre Mother"], ["Stallion", "Monke", "Controller"]];
 const diet = [["Halal"],["Vegetarian"],["Whole Grain"],["Plant Based"]];
 const properties = ["fat","carbs","prot"];
+const dates = ["2024-12-12","2024-12-13","2024-12-20","2024-12-21"];
 
 for (let i = 0; i < 4; i++) {
     arrMeals[i] = new Meal(mealNames[i]);
@@ -79,7 +80,8 @@ for (let i = 0; i < 4; i++) {
         .addNutInfo(nutrition[i])
             .addHealth(healthful[i])
                 .addIngredients(ingredients[i])
-                    .addDietInfo(diet[i]);
+                    .addDietInfo(diet[i])
+                        .addDates([dates[i]]);
     arrMeals[i].image = "./" + (i+1) + ".jpg";
 }
 
@@ -186,22 +188,24 @@ function renderMealInfo(mealArr) {
 
         const addButton = document.createElement("button");
         addButton.textContent = "Add";
+        addButton.style.padding = "3px";
         let newInfo = {
             "calories": mealArr[i].nutritionInfo.cals, 
             "carbs": mealArr[i].nutritionInfo.carbs,
             "fat": mealArr[i].nutritionInfo.fat, 
             "protein": mealArr[i].nutritionInfo.prot,
-            "date": convertDate(Date.now())
+            "date": mealArr[i].dates,
             };
         let trackNum = 1;
         addButton.addEventListener("click", () => {
             let currentInfo = JSON.parse(localStorage.getItem("graphCommunication"));
             currentInfo.push(newInfo);
-            currentInfo.sort((a,b) => (new Date(a.date)).getTime() - (new Date(b.date).getTime));
+            currentInfo = currentInfo.sort((a,b) => (new Date(a.date[0])).getTime() - (new Date(b.date[0]).getTime));
             localStorage.setItem("graphCommunication",JSON.stringify(currentInfo));
             addButton.textContent = "Added " + trackNum + "!";
             trackNum++;
             addButton.style.backgroundColor = "green";
+            addButton.style.color = "white";
             });
 
         mealInfo.appendChild(secondLine);
