@@ -1,4 +1,5 @@
 // Initialize Pie Chart
+
 let pieCtx = document.getElementById('pieChart').getContext('2d');
 let pieChart = new Chart(pieCtx, {
     type: 'pie',
@@ -63,8 +64,21 @@ let barChart = new Chart(barCtx, {
     },
 });
 
-// Hardcoded Data for Testing
-const weeklyData = {
+const chosenMeals = JSON.parse(localStorage.getItem("graphCommunication"));
+
+// If real meals are not chosen, use hardcoded Data for Testing
+const weeklyData = chosenMeals.length > 0 ?
+{
+    week1: {
+        pie: [chosenMeals[0].protein,chosenMeals[0].carbs,chosenMeals[0].fat],
+        bar: {
+            labels: [chosenMeals[0].date],
+            data: [chosenMeals[0].calories]
+        },
+    }
+}
+ :
+{
     week1: {
         pie: [105, 125, 58], // Protein: 105g, Carbs: 125g, Fats: 58g
         bar: {
@@ -80,6 +94,40 @@ const weeklyData = {
         },
     },
 };
+console.log(chosenMeals.length);
+if (chosenMeals.length > 0) {
+    let thisWeek = 1;
+    let tracker = chosenMeals[0];
+    for (let count = 1; count < chosenMeals.length; count++) {
+        if ( new Date(chosenMeals[count].date).getTime() - new Date(tracker.date).getTime() > 604799999) {
+            tracker = chosenMeals[count];
+            weeklyData["week"+(++thisWeek)] = {
+                pie: [chosenMeals[count].protein,chosenMeals[count].carbs,chosenMeals[count].fat],
+                bar: {
+                    labels: [chosenMeals[count].date],
+                    data: [chosenMeals[count].calories]
+                }
+            };
+        }
+        else {
+            let index = -1;
+            if (weeklyData["week"+thisWeek].bar.labels.includes(chosenMeals[count].date)) {
+                index = weeklyData["week"+thisWeek].bar.labels.indexOf(chosenMeals[count].date);
+            }
+            if (index === -1) {
+                weeklyData["week"+thisWeek].bar.labels.push(chosenMeals[count].date)
+                weeklyData["week"+thisWeek].bar.data.push(chosenMeals[count].calories);
+            }
+            else {
+                weeklyData["week"+thisWeek].bar.data[index] += chosenMeals[count].calories;
+            }
+            weeklyData["week"+thisWeek].pie[0] += chosenMeals[count].protein;
+            weeklyData["week"+thisWeek].pie[1] += chosenMeals[count].carbs;
+            weeklyData["week"+thisWeek].pie[2] += chosenMeals[count].fat;
+        }
+    }
+}
+localStorage.setItem("graphCommunication",JSON.stringify([]));
 
 // Update Charts for Selected Week
 function updateChartsForWeek(week) {

@@ -1,6 +1,23 @@
-import Meal from "./AddMeal.js"
-import Events from "./Events.js";
-import EventHub from "./EventHub.js";
+import Meal from "./AddMeal.js";
+
+
+
+if (localStorage.getItem("graphCommunication") === null) {
+    localStorage.setItem("graphCommunication",JSON.stringify([]));
+}
+function convertDate(date) {
+    const today = new Date(date);
+    const yyyy = today.getFullYear();
+    let mm = today.getMonth() + 1;
+    let dd = today.getDate();
+  
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+  
+    const formattedDate = yyyy + '-' + mm + '-' + dd;
+  
+      return formattedDate;
+  }
 
 
 const arrMeals = new Array(4);
@@ -54,7 +71,6 @@ const healthful = [1,2,3,4];
 const ingredients = [["John Cena, Mao Zedong, Yusuf Raza"], ["Sameen Shaik, Aareb Chowdhury, Harambe"], ["Peanut, Matthew Perry, Youre Mother"], ["Stallion", "Monke", "Controller"]];
 const diet = [["Halal"],["Vegetarian"],["Whole Grain"],["Plant Based"]];
 const properties = ["fat","carbs","prot"];
-const eventManager = EventHub.getInstance();
 
 for (let i = 0; i < 4; i++) {
     arrMeals[i] = new Meal(mealNames[i]);
@@ -170,7 +186,19 @@ function renderMealInfo(mealArr) {
 
         const addButton = document.createElement("button");
         addButton.textContent = "Add";
-        addButton.addEventListener("click", () => eventManager.publish(Events.MealSelect,mealArr[i]));
+        let currentInfo = JSON.parse(localStorage.getItem("graphCommunication"));
+        let newInfo = {
+            "calories": mealArr[i].nutritionInfo.cals, 
+            "carbs": mealArr[i].nutritionInfo.carbs,
+            "fat": mealArr[i].nutritionInfo.fat, 
+            "protein": mealArr[i].nutritionInfo.prot,
+            "date": convertDate(Date.now())
+            };
+        addButton.addEventListener("click", () => {
+            currentInfo.push(newInfo);
+            currentInfo.sort((a,b) => (new Date(a.date)).getTime() - (new Date(b.date).getTime));
+            localStorage.setItem("graphCommunication",JSON.stringify(currentInfo))
+            });
 
         mealInfo.appendChild(secondLine);
         mealInfo.appendChild(healthText);

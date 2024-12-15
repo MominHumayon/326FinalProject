@@ -16,6 +16,7 @@ app.use(cors());
 // Serve static files from frontend directory
 app.use(express.static("../frontend"));
 
+
 // Start server
 app.listen(PORT, () => {
     console.log(`Frontend server running at http://localhost:${PORT}`);

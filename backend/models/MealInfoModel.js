@@ -1,6 +1,4 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const EventHub = require("../frontend/EventHub.js");
-const Events =  require("../frontend/Events.js");
 
 // Initialize a new Sequelize instance with SQLite
 const sequelize = new Sequelize({
