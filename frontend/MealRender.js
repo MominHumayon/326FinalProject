@@ -186,7 +186,6 @@ function renderMealInfo(mealArr) {
 
         const addButton = document.createElement("button");
         addButton.textContent = "Add";
-        let currentInfo = JSON.parse(localStorage.getItem("graphCommunication"));
         let newInfo = {
             "calories": mealArr[i].nutritionInfo.cals, 
             "carbs": mealArr[i].nutritionInfo.carbs,
@@ -194,10 +193,15 @@ function renderMealInfo(mealArr) {
             "protein": mealArr[i].nutritionInfo.prot,
             "date": convertDate(Date.now())
             };
+        let trackNum = 1;
         addButton.addEventListener("click", () => {
+            let currentInfo = JSON.parse(localStorage.getItem("graphCommunication"));
             currentInfo.push(newInfo);
             currentInfo.sort((a,b) => (new Date(a.date)).getTime() - (new Date(b.date).getTime));
-            localStorage.setItem("graphCommunication",JSON.stringify(currentInfo))
+            localStorage.setItem("graphCommunication",JSON.stringify(currentInfo));
+            addButton.textContent = "Added " + trackNum + "!";
+            trackNum++;
+            addButton.style.backgroundColor = "green";
             });
 
         mealInfo.appendChild(secondLine);
