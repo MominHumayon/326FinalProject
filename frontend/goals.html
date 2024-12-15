@@ -135,8 +135,9 @@
         .average-line {
             position: absolute;
             width: 100%;
-            height: 2px;
-            background: var(--accent-purple);
+            bottom:60%;
+            border-top-color: var(--accent-purple);
+            border-top-style:dotted;
         }
 
         .x-axis {
@@ -257,16 +258,16 @@
             <div class="calorie-graph">
                 <h3>Weekly Calorie Intake</h3>
                 <div class="graph">
-                    <div class="bar" style="height: 60%;" title="Monday: 1800 kcal"><span class="bar-label">1800</span></div>
-                    <div class="bar" style="height: 75%;" title="Tuesday: 2250 kcal"><span class="bar-label">2250</span></div>
-                    <div class="bar" style="height: 50%;" title="Wednesday: 1500 kcal"><span class="bar-label">1500</span></div>
-                    <div class="bar" style="height: 80%;" title="Thursday: 2400 kcal"><span class="bar-label">2400</span></div>
-                    <div class="bar" style="height: 65%;" title="Friday: 1950 kcal"><span class="bar-label">1950</span></div>
-                    <div class="bar" style="height: 40%;" title="Saturday: 1200 kcal"><span class="bar-label">1200</span></div>
-                    <div class="bar" style="height: 70%;" title="Sunday: 2100 kcal"><span class="bar-label">2100</span></div>
-                    <div class="average-line" style="top: 67%;"></div>
+                    <div class="bar" style="height: 70%;" title="Sunday" id="SundayBar"><span class="bar-label" id="Sunday">2100</span></div>
+                    <div class="bar" style="height: 60%;" title="Monday" id="MondayBar"><span class="bar-label" id="Monday">1800</span></div>
+                    <div class="bar" style="height: 75%;" title="Tuesday" id="TuesdayBar"><span class="bar-label" id="Tuesday">2250</span></div>
+                    <div class="bar" style="height: 50%;" title="Wednesday" id="WednesdayBar"><span class="bar-label" id="Wednesday">1500</span></div>
+                    <div class="bar" style="height: 80%;" title="Thursday" id="ThursdayBar"><span class="bar-label" id="Thursday">2400</span></div>
+                    <div class="bar" style="height: 65%;" title="Friday" id="FridayBar"><span class="bar-label" id="Friday">1950</span></div>
+                    <div class="bar" style="height: 40%;" title="Saturday" id="SaturdayBar"><span class="bar-label" id="Saturday">1200</span></div>
+                    <div class="average-line" id="average-line"></div>
                 </div>
-                <div class="average-label">Weekly Average: 1886 kcal</div>
+                <div class="average-label" id="average-label">Weekly Average: 1886 kcal</div>
                 <div class="x-axis">
                     <span>Mon</span>
                     <span>Tue</span>
@@ -305,13 +306,72 @@
     <script>
         // Load the header
         // Initial data and colors
+
+        Date.prototype.getWeek = function (dowOffset) {
+        /*getWeek() was developed by Nick Baicoianu at MeanFreePath: http://www.meanfreepath.com */
+
+            dowOffset = typeof(dowOffset) == 'number' ? dowOffset : 0; //default dowOffset to zero
+            var newYear = new Date(this.getFullYear(),0,1);
+            var day = newYear.getDay() - dowOffset; //the day of week the year begins on
+            day = (day >= 0 ? day : day + 7);
+            var daynum = Math.floor((this.getTime() - newYear.getTime() - 
+            (this.getTimezoneOffset()-newYear.getTimezoneOffset())*60000)/86400000) + 1;
+            var weeknum;
+            //if the year starts before the middle of a week
+            if(day < 4) {
+                weeknum = Math.floor((daynum+day-1)/7) + 1;
+                if(weeknum > 52) {
+                    nYear = new Date(this.getFullYear() + 1,0,1);
+                    nday = nYear.getDay() - dowOffset;
+                    nday = nday >= 0 ? nday : nday + 7;
+                    /*if the next year starts before the middle of
+                    the week, it is week #1 of that year*/
+                    weeknum = nday < 4 ? 1 : 53;
+                }
+            }
+            else {
+                weeknum = Math.floor((daynum+day-1)/7);
+            }
+            return weeknum;
+        };
         const goals = {
             bulking: { calories: 2500, protein: 150, carbs: 300, fat: 80 },
             cutting: { calories: 1800, protein: 180, carbs: 150, fat: 50 },
             maintenance: { calories: 2000, protein: 130, carbs: 250, fat: 70 }
         };
-
-        const currentIntake = { calories: 700, protein: 50, carbs: 90, fat: 30 };
+        let graphCommunication = JSON.parse(localStorage.getItem("graphCommunication"));
+        console.log(graphCommunication.length);
+        const curWeek = new Date(Date.now()).getWeek(0);
+        if (graphCommunication !== null) {
+            graphCommunication = graphCommunication.filter(x => new Date(x.date).getWeek(0) === curWeek);
+        }
+        const currentIntake = graphCommunication.length > 0 ? {
+            calories: graphCommunication.reduce((acc,item) => acc+item.calories,0),
+            protein: graphCommunication.reduce((acc,item) => acc+item.protein,0),
+            carbs: graphCommunication.reduce((acc,item) => acc+item.carbs,0),
+            fat: graphCommunication.reduce((acc,item) => acc+item.fat,0),
+        } : { calories: 700, protein: 50, carbs: 90, fat: 30 };
+        const daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        if (graphCommunication !== null && graphCommunication.length > 0 ) {
+            daysOfWeek.forEach(x => document.getElementById(x).textContent = 0);
+            graphCommunication.forEach(obj => {
+                const elem = document.getElementById(daysOfWeek[new Date(obj.date[0]).getDay()]);
+                elem.textContent = parseInt(elem.textContent)+obj.calories;
+                }
+            );
+            let avgCalories = 0
+            for(let count = 0; count < 7; count++) {
+                const elem = document.getElementById(daysOfWeek[count]);
+                avgCalories += parseInt(elem.textContent);
+                const desiredHeight = (parseInt(elem.textContent) / 3000.0) * 100;
+                console.log(desiredHeight);
+                document.getElementById(daysOfWeek[count] +"Bar").style.height = "" + desiredHeight + "%";
+            }
+            document.getElementById("average-label").textContent = "Weekly Average: " + Math.floor(avgCalories/7) +  " kcal";
+            avgCalories = avgCalories / 7.0 /3000.0 * 100 + 7;
+            console.log(avgCalories);
+            document.getElementById("average-line").style.bottom = "" + avgCalories + "%";
+        }
         const nutrientColors = ['#881c1c', '#a83232', '#c44d4d', '#9b59b6'];
 
         function calculatePercentages({ calories, protein, carbs, fat }) {

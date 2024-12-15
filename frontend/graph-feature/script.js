@@ -65,9 +65,9 @@ let barChart = new Chart(barCtx, {
 });
 
 const chosenMeals = JSON.parse(localStorage.getItem("graphCommunication"));
-
+console.log(chosenMeals.length);
 // If real meals are not chosen, use hardcoded Data for Testing
-const weeklyData = chosenMeals.length > 0 ?
+const weeklyData = (chosenMeals !== null && chosenMeals.length > 0) ?
 {
     week1: {
         pie: [chosenMeals[0].protein,chosenMeals[0].carbs,chosenMeals[0].fat],
@@ -95,7 +95,7 @@ const weeklyData = chosenMeals.length > 0 ?
     },
 };
 console.log(chosenMeals);
-if (chosenMeals.length > 0) {
+if (chosenMeals !== null && chosenMeals.length > 0) {
     let thisWeek = 1;
     let tracker = chosenMeals[0];
     for (let count = 1; count < chosenMeals.length; count++) {
